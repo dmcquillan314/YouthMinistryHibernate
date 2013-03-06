@@ -32,6 +32,7 @@ public interface UserService {
      *
      * @param  int User Id
      */
+    public User getUserByName(String username);
     public User getUserById(Long id);
     public User getUserByIdWithGroups(Long id);
     /**

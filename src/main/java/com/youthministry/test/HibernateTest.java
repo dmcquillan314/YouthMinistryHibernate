@@ -19,7 +19,7 @@ import com.youthministry.service.UserService;
 public class HibernateTest {
 
 	public static void InitData() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("config-spring-hibernate.xml");
+		/*ApplicationContext context = new ClassPathXmlApplicationContext("config-spring-hibernate.xml");
 		UserService userService = (UserService) context.getBean("UserService");
 		for(int j = 0; j < 10; j++) {
 			UserProfile userProf = new UserProfile();
@@ -39,7 +39,7 @@ public class HibernateTest {
 			userService.addUser(user);
 		}	
 		User u = userService.getUserById((long) 1);
-		System.out.println(u.getUsername());
+		System.out.println(u.getUsername());*/
 	}
 
 	public static void main(String[] args) {

@@ -1,35 +1,29 @@
 package com.youthministry.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="roles")
 public class Role {
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long roleId;
-	private String roleName;
-	private String roleDesc;
-	
-	public Long getRoleId() {
-		return roleId;
-	}
-	public void setRoleId(Long roleId) {
-		this.roleId = roleId;
-	}
-	public String getRoleName() {
-		return roleName;
-	}
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
-	}
-	public String getRoleDesc() {
-		return roleDesc;
-	}
-	public void setRoleDesc(String roleDesc) {
-		this.roleDesc = roleDesc;
-	}
 
+	@Id
+	@GeneratedValue
+	private Long id;
+	
+	private String name;
+	
+	@Column(name="role", unique=true, nullable=false)
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 }

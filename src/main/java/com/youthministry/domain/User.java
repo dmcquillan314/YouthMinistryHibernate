@@ -1,19 +1,27 @@
 package com.youthministry.domain;
  
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
  
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.userdetails.UserDetails;
+
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements UserDetails,Serializable{
 	@Id
 	@GeneratedValue
 	@Column(name="USER_ID")
@@ -26,8 +34,9 @@ public class User {
 	@OneToOne(cascade=CascadeType.ALL)
 	private UserProfile userProfile;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	private Role role;
+	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	@Column(name="roles",unique=false)
+	private Collection<Role> roles = new ArrayList<Role>();
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	private Collection<Group> groups = new ArrayList<Group>();
@@ -36,11 +45,11 @@ public class User {
 		
 	}
 	
-	public User(String username, String password, UserProfile userProfile, Role role) {
+	public User(String username, String password, UserProfile userProfile, Set<Role> roles) {
 		this.username = username;
 		this.password = password;
 		this.userProfile = userProfile;
-		this.role = role;
+		this.roles = roles;
 	}
 	
 	public Long getUserId() {
@@ -51,6 +60,7 @@ public class User {
 		this.userId = userId;
 	}
 	
+	@Override
 	public String getUsername() {
 		return username;
 	}
@@ -59,6 +69,7 @@ public class User {
 		this.username = username;
 	}
 
+	@Override
 	public String getPassword() {
 		return password;
 	}
@@ -75,12 +86,12 @@ public class User {
 		this.userProfile = userProfile;
 	}
 	
-	public Role getRole() {
-		return role;
+	public Collection<Role> getRoles() {
+		return roles;
 	}
 	
-	public void setRole(Role role) {
-		this.role = role;
+	public void setRoles(Collection<Role> roles) {
+		this.roles = roles;
 	}
 
 	public Collection<Group> getGroups() {
@@ -89,6 +100,41 @@ public class User {
 
 	public void setGroups(Collection<Group> groups) {
 		this.groups = groups;
+	}
+	
+	@Override
+	public Collection<GrantedAuthority> getAuthorities() {
+
+		ArrayList l1 = new ArrayList();
+
+		for (Role role : roles) {
+			l1.add(new GrantedAuthorityImpl(role.getName()));
+		}
+		return l1;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 	
 }
