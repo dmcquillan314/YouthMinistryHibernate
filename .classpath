@@ -7,6 +7,9 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="postgresql-9.2-1002.jdbc4.jar"/>
+	<classpathentry kind="lib" path="commons-dbcp-1.4-javadoc.jar"/>
+	<classpathentry kind="lib" path="commons-dbcp-1.4-sources.jar"/>
+	<classpathentry kind="lib" path="commons-dbcp-1.4.jar"/>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
 		<attributes>
 			<attribute name="optional" value="true"/>

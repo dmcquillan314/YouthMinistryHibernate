@@ -23,11 +23,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			/WEB-INF/spring-mvc-servlet.xml,
-			/WEB-INF/spring/config-spring-hibernate.xml,
-			/WEB-INF/spring/spring-security.xml,
-			/WEB-INF/spring/spring-social.xml,
-			/WEB-INF/spring/spring-social-security.xml
+			/WEB-INF/root-context.xml
 		</param-value>
 	</context-param>
 
