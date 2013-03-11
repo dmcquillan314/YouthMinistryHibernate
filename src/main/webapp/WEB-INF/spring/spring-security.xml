@@ -20,7 +20,7 @@
 		<form-login login-page="/signin" default-target-url="/home" login-processing-url="/signin/authenticate" authentication-failure-url="/signin?error=bad_credentials"/>		
 		<logout logout-success-url="/signin" />
 		
-		<remember-me />
+		<remember-me user-service-ref="userDetailsService" />
 		<session-management invalid-session-url="/invalidsession.jsp">
 			<concurrency-control max-sessions="1"
 				error-if-maximum-exceeded="true" />
@@ -35,13 +35,18 @@
 		class="com.youthministry.security.CustomUserDetailService" >
 	</beans:bean>
 
-	<authentication-manager>
+	<authentication-manager alias="authenticationManager" >
 		<authentication-provider user-service-ref="customUserService">
 			<password-encoder ref="customEncoder" />
 		</authentication-provider>
 		<!-- Spring Social Security authentication provider -->
 		<authentication-provider ref="socialAuthenticationProvider" />
 	</authentication-manager>
+
+	<jdbc-user-service id="userDetailsService" 
+					data-source-ref="dataSource" 
+					users-by-username-query="select username, password, true from User where username = ?"
+					authorities-by-username-query="select u.user_name username, r.name authority from user_roles u_roles, user u, roles r where u.user_name = ?"/>
 
 	<beans:bean id="textEncryptor" class="org.springframework.security.crypto.encrypt.Encryptors"
 		factory-method="noOpText" />
