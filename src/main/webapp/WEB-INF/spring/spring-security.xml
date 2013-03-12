@@ -10,6 +10,8 @@
 	<http pattern="/resources/scripts/**" security="none"/>
  
 	<http use-expressions="true" access-denied-page="/accessDenied.jsp" >
+		<form-login login-page="/signin" default-target-url="/home" login-processing-url="/signin/authenticate" authentication-failure-url="/signin?error=bad_credentials"/>		
+		<logout logout-success-url="/signin" />
 		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/group/**" access="hasRole('ROLE_USER')" />
 		<intercept-url pattern="/group" access="hasRole('ROLE_USER')" />
@@ -17,14 +19,12 @@
 		<intercept-url pattern="/**" access="permitAll" />
 		<intercept-url pattern="/auth/**" access="permitAll" />
 		<intercept-url pattern="/disconnect/facebook" access="permitAll" />
-		<form-login login-page="/signin" default-target-url="/home" login-processing-url="/signin/authenticate" authentication-failure-url="/signin?error=bad_credentials"/>		
-		<logout logout-success-url="/signin" />
-		
 		<remember-me user-service-ref="userDetailsService" />
-		<session-management invalid-session-url="/invalidsession.jsp">
+
+	<!--<session-management invalid-session-url="/invalidsession.jsp">
 			<concurrency-control max-sessions="1"
 				error-if-maximum-exceeded="true" />
-		</session-management>
+		</session-management>-->
 
 		<!--  Spring Social Security authentication filter -->
 		<custom-filter ref="socialAuthenticationFilter" before="PRE_AUTH_FILTER" />

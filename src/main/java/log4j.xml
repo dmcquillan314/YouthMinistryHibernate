@@ -13,7 +13,7 @@
 
 	<!-- Application logger -->
 	<logger name="tx">
-		<level value="warn" />
+		<level value="debug" />
 	</logger>
 
 	<!-- 3rdparty Loggers -->
