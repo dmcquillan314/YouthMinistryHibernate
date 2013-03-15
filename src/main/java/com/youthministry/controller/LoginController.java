@@ -19,7 +19,7 @@ import com.youthministry.domain.UserProfile;
 
 import com.youthministry.service.UserService;
 
-@Component
+@Controller
 public class LoginController {
 
 	@Autowired

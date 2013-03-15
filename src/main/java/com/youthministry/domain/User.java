@@ -26,7 +26,7 @@ public class User implements UserDetails,Serializable{
 	@GeneratedValue
 	@Column(name="USER_ID")
 	private Long userId;
-	@Column(name = "USER_NAME", nullable = false, length = 50)
+	@Column(name = "USERNAME", nullable = false, length = 50)
 	private String username;
 	@Column(name = "PASSWORD", nullable = false, length = 50)
 	private String password;

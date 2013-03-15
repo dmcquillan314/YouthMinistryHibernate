@@ -1,18 +1,28 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
+<%@ page session="false" %>
 <!DOCTYPE html>
 <html>
 <head>
 </head>
-<body>
-	<c:if test="${not empty error}">
-		<div class="errorblock">
-			Your login attempt was not successful, try again.<br /> Caused :
-			${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
+<body> 
+	<form action="<c:url value="/signin/authenticate"/>" id="signin" method="POST">
+	 	<div class="formInfo">
+	  		<c:if test="${param.error eq 'bad_credentials'}">
+	  		<div class="error">
+	  			Your sign in information was incorrect.
+	  			Please try again or <a href="<c:url value="/signup" />">sign up</a>.
+	  		</div>
+	 	 	</c:if>
+	 	 	<c:if test="${param.error eq 'multiple_users'}">
+	 	 	<div class="error">
+	 	 		Multiple local account are connected to the provider account.
+	 	 		Try again with a different provider or with your username and password.
+	 	 	</div>
+	 	 	</c:if>
 		</div>
-	</c:if>
- 
-	<form name='f' action="<c:url value='j_spring_security_check' />"
-		method='POST'>
  
 		<table>
 			<tr>
