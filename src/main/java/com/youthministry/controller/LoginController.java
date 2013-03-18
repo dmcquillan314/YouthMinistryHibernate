@@ -49,7 +49,7 @@ public class LoginController {
 		if (user != null) {
 			SignInUtils.signin(user.getUsername());
 			ProviderSignInUtils.handlePostSignUp(user.getUsername(), request);
-			return "redirect:/";
+			return "redirect:/home";
 		}
 		return null;
 	}

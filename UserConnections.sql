@@ -1,3 +1,4 @@
+drop table UserConnection;
 create table UserConnection (userId varchar(255) not null,
     providerId varchar(255) not null,
     providerUserId varchar(255),
