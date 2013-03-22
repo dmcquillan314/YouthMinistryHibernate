@@ -20,11 +20,6 @@ public class PageContent {
 	private Long pageContentId;
 	private String location;
 	
-	/*@OneToMany
-	@JoinTable(name="USER_VEHICLE", joinColumns=@JoinColumn(name="USER_ID"),
-			   inverseJoinColumns=@JoinColumn(name="VEHICLE_ID")
-			)*/
-	//@OneToMany(mappedBy="user")
 	@OneToMany(cascade=CascadeType.ALL)
 	private Collection<Group> groups = new ArrayList<Group>();
 	

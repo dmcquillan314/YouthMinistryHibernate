@@ -23,9 +23,15 @@
     <bean id="UserService" class="com.youthministry.service.impl.UserServiceImpl">
         <property name="userDao" ref="UserDao" />
     </bean>
+    <bean id="GroupService" class="com.youthministry.service.impl.GroupServiceImpl">
+        <property name="groupDao" ref="GroupDao" />
+    </bean>
  
     <!-- User DAO Declaration -->
     <bean id="UserDao" class="com.youthministry.dao.impl.UserDaoImpl">
+        <property name="sessionFactory" ref="SessionFactory" />
+    </bean>
+    <bean id="GroupDao" class="com.youthministry.dao.impl.GroupDaoImpl">
         <property name="sessionFactory" ref="SessionFactory" />
     </bean>
     <bean id="EventDao" class="com.youthministry.dao.impl.EventDaoImpl">
@@ -62,7 +68,7 @@
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
-                <prop key="hibernate.hbm2ddl.auto">create</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
             </props>
         </property>
     </bean>

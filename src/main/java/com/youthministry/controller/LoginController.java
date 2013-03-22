@@ -68,8 +68,11 @@ public class LoginController {
 
 		Role role = new Role();
 		role.setName("ROLE_USER");
+		Role role2 = new Role();
+		role2.setName("ROLE_ADMIN");
 		
 		user.getRoles().add(role);
+		user.getRoles().add(role2);
 		
 		UserService.addUser(user);
 
