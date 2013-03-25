@@ -38,20 +38,20 @@ public class GroupDaoImpl implements GroupDao {
 
 	@Override
 	public Group getGroupById(int id) {
-		List list = getSessionFactory().getCurrentSession().createQuery("from Event where groupId=?").setParameter(0, id).list();
+		List list = getSessionFactory().getCurrentSession().createQuery("from Group where groupId=?").setParameter(0, id).list();
 		return (Group) list.get(0);
 	}
 
 	@Override
 	public Group getGroupByName(String name) {
-		List list = getSessionFactory().getCurrentSession().createQuery("from Event where groupName=?").setParameter(0, name).list();
+		List list = getSessionFactory().getCurrentSession().createQuery("from Group where groupName=?").setParameter(0, name).list();
 		return (Group) list.get(0);
 	}
 
 	@Override
 	public List<Group> getGroups() {
-		List list = getSessionFactory().getCurrentSession().createQuery("from Event").list();
-		return (List<Group>) list.get(0);
+		List list = getSessionFactory().getCurrentSession().createQuery("from Group").list();
+		return (List<Group>) list;
 	}
 
 }
