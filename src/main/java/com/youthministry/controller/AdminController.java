@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -43,13 +44,18 @@ public class AdminController {
 	}
 		
 	@RequestMapping(value={"/admin"},method=RequestMethod.POST)
-	public String handleCreateGroup(@ModelAttribute(value="group") Group group, BindingResult errors, ModelMap map) {
+	public String handleCreateGroup(@ModelAttribute(value="group") Group group, BindingResult errors, Model map) {
 		this.setValidator(new GroupValidator());
 		this.getValidator().validate(group, errors);
 		if(! errors.hasErrors()) {
-			GroupService.addGroup(group);
+			try {
+				GroupService.addGroup(group);
+			} catch(ConstraintViolationException cve) {
+				errors.rejectValue("groupName", "groupName.duplicate", "This group name is already in use.");
+				System.out.println(cve.getConstraintName());
+			}
 		}
-		return "admin";
+		return "redirect:/admin";
 	}
 	
 	@ModelAttribute(value="group")

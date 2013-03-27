@@ -1,5 +1,6 @@
 package com.youthministry.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,7 @@ public class Group {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long groupId;
+	@Column(name = "GROUP_NAME", unique = true, nullable = false)
 	private String groupName;
 	private String groupDesc;
 	
