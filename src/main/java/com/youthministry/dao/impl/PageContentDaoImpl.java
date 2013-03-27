@@ -21,20 +21,17 @@ public class PageContentDaoImpl implements PageContentDao {
 
 	@Override
 	public void addPageContent(PageContent pageContent) {
-		// TODO Auto-generated method stub
-
+		getSessionFactory().getCurrentSession().save(pageContent);
 	}
 
 	@Override
 	public void updatePageContent(PageContent pageContent) {
-		// TODO Auto-generated method stub
-
+		getSessionFactory().getCurrentSession().update(pageContent);
 	}
 
 	@Override
 	public void deletePageContent(PageContent pageContent) {
-		// TODO Auto-generated method stub
-
+		getSessionFactory().getCurrentSession().delete(pageContent);
 	}
 
 	@Override

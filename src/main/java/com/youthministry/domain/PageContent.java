@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +19,9 @@ public class PageContent {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long pageContentId;
+	@Column(name="PAGE_CONTENT_NAME", unique=true, nullable=false)
+	private String pageContentName;
+	@Column(name="LOCATION", nullable=false)
 	private String location;
 	
 	@OneToMany(cascade=CascadeType.ALL)
@@ -28,6 +32,12 @@ public class PageContent {
 	}
 	public void setPageContentId(Long pageContentId) {
 		this.pageContentId = pageContentId;
+	}
+	public String getPageContentName() {
+		return pageContentName;
+	}
+	public void setPageContentName(String pageContentName) {
+		this.pageContentName = pageContentName;
 	}
 	public String getLocation() {
 		return location;
