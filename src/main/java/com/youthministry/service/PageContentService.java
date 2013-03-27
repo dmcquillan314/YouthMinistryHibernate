@@ -9,19 +9,19 @@ public interface PageContentService {
 	 * 
 	 * @param PageContent pageContent
 	 */
-	public void addPageContent(PageContent pageContent);
+	public void addPageContent(Object pageContent);
 	
 	/**
 	 * Update PageContent Entry
 	 * 
 	 * @param PageContent pageContent
 	 */
-	public void updatePageContent(PageContent pageContent);
+	public void updatePageContent(Object pageContent);
 	
 	/**
 	 * Delete PageContent Entry
 	 * 
 	 * @param PageContent pageContent
 	 */
-	public void deletePageContent(PageContent pageContent);
+	public void deletePageContent(Object pageContent);
 }

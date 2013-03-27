@@ -5,7 +5,6 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 
 import com.youthministry.dao.PageContentDao;
-import com.youthministry.domain.PageContent;
 
 public class PageContentDaoImpl implements PageContentDao {
 
@@ -20,12 +19,12 @@ public class PageContentDaoImpl implements PageContentDao {
 	}
 
 	@Override
-	public void addPageContent(PageContent pageContent) {
+	public void addPageContent(Object pageContent) {
 		getSessionFactory().getCurrentSession().save(pageContent);
 	}
 
 	@Override
-	public void updatePageContent(PageContent pageContent) {
+	public void updatePageContent(Object pageContent) {
 		getSessionFactory().getCurrentSession().update(pageContent);
 	}
 

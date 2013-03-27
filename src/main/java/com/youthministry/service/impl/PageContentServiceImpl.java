@@ -13,19 +13,19 @@ public class PageContentServiceImpl implements PageContentService {
 	
 	@Transactional(readOnly=false)
 	@Override
-	public void addPageContent(PageContent pageContent) {
+	public void addPageContent(Object pageContent) {
 		getPageContentDao().addPageContent(pageContent);
 	}
 
 	@Transactional(readOnly=false)
 	@Override
-	public void updatePageContent(PageContent pageContent) {
+	public void updatePageContent(Object pageContent) {
 		getPageContentDao().updatePageContent(pageContent);
 	}
 
 	@Transactional(readOnly=false)
 	@Override
-	public void deletePageContent(PageContent pageContent) {
+	public void deletePageContent(Object pageContent) {
 		getPageContentDao().deletePageContent(pageContent);
 	}
 

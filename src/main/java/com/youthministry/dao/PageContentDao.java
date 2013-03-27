@@ -10,21 +10,21 @@ public interface PageContentDao {
      *
      * @param  Event Event
      */
-    public void addPageContent(PageContent pageContent);
+    public void addPageContent(Object pageContent);
  
     /**
      * Update Event
      *
      * @param  Event Event
      */
-    public void updatePageContent(PageContent pageContent);
+    public void updatePageContent(Object pageContent);
  
     /**
      * Delete Event
      *
      * @param  Event Event
      */
-    public void deletePageContent(PageContent pageContent);
+    public void deletePageContent(Object pageContent);
     
     /**
      * Get Event
