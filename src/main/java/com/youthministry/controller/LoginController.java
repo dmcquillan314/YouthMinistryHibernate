@@ -2,6 +2,7 @@ package com.youthministry.controller;
 
 import javax.validation.Valid;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.web.ProviderSignInUtils;
@@ -45,11 +46,15 @@ public class LoginController {
 		if (formBinding.hasErrors()) {
 			return null;
 		}
-		User user = createUser(form, formBinding);
-		if (user != null) {
-			SignInUtils.signin(user.getUsername());
-			ProviderSignInUtils.handlePostSignUp(user.getUsername(), request);
-			return "redirect:/home";
+		try {
+			User user = createUser(form, formBinding);
+			if (user != null) {
+				SignInUtils.signin(user.getUsername());
+				ProviderSignInUtils.handlePostSignUp(user.getUsername(), request);
+				return "redirect:/home";
+			}
+		} catch(ConstraintViolationException cve) {
+			formBinding.rejectValue("username", "username.duplicate", "This username is already in use.");
 		}
 		return null;
 	}

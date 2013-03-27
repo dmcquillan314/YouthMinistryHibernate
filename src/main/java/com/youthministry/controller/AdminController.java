@@ -50,12 +50,13 @@ public class AdminController {
 		if(! errors.hasErrors()) {
 			try {
 				GroupService.addGroup(group);
+				return "redirect:/admin";
 			} catch(ConstraintViolationException cve) {
 				errors.rejectValue("groupName", "groupName.duplicate", "This group name is already in use.");
 				System.out.println(cve.getConstraintName());
 			}
 		}
-		return "redirect:/admin";
+		return null;
 	}
 	
 	@ModelAttribute(value="group")
