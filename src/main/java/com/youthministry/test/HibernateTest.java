@@ -39,9 +39,12 @@ public class HibernateTest {
 		image.setTitleText("image title text");
 		try {
 			pageContentService.addPageContent(textEntry);
+			pageContentService.addPageContent(image);
 		} catch(Exception e) {
 			
 		}
+		
+		System.out.println(pageContentService.getAllPageContent());
 		/*for(int j = 0; j < 10; j++) {
 			UserProfile userProf = new UserProfile();
 			userProf.setFirstName("first name" + j);

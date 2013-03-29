@@ -1,5 +1,7 @@
 package com.youthministry.service.impl;
 
+import java.util.ArrayList;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import com.youthministry.dao.PageContentDao;
@@ -27,6 +29,12 @@ public class PageContentServiceImpl implements PageContentService {
 	@Override
 	public void deletePageContent(Object pageContent) {
 		getPageContentDao().deletePageContent(pageContent);
+	}
+	
+	@Transactional(readOnly=true)
+	@Override
+	public ArrayList<? extends PageContent> getAllPageContent() {
+		return (ArrayList<? extends PageContent>) getPageContentDao().getAllPageContent();
 	}
 
 	public PageContentDao getPageContentDao() {

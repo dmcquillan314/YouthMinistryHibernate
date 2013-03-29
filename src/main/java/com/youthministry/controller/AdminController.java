@@ -22,9 +22,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.youthministry.controller.forms.GroupForm;
 import com.youthministry.controller.validator.GroupValidator;
+import com.youthministry.controller.validator.PageContentValidator;
 import com.youthministry.domain.Group;
+import com.youthministry.domain.Image;
+import com.youthministry.domain.TextEntry;
 import com.youthministry.service.GroupService;
 import com.youthministry.service.UserService;
+import com.youthministry.service.PageContentService;
 
 @Controller
 public class AdminController {
@@ -33,6 +37,8 @@ public class AdminController {
 	private GroupService GroupService;
 	@Autowired
 	private UserService UserService;
+	@Autowired
+	private PageContentService PageContentService;
 	
 	private Validator validator;
 
@@ -43,7 +49,7 @@ public class AdminController {
 		return "admin";
 	}
 		
-	@RequestMapping(value={"/admin"},method=RequestMethod.POST)
+	@RequestMapping(value={"/admin/creategroup"},method=RequestMethod.POST)
 	public String handleCreateGroup(@ModelAttribute(value="group") Group group, BindingResult errors, Model map) {
 		this.setValidator(new GroupValidator());
 		this.getValidator().validate(group, errors);
@@ -56,12 +62,50 @@ public class AdminController {
 				System.out.println(cve.getConstraintName());
 			}
 		}
-		return null;
+		return "admin";
+	}
+	@RequestMapping(value={"/admin/createimage"},method=RequestMethod.POST)
+	public String handleCreateImage(@ModelAttribute(value="image") Image image, BindingResult errors, Model map) {
+		this.setValidator(new PageContentValidator());
+		this.getValidator().validate(image, errors);
+		if(! errors.hasErrors()) {
+			try {
+				PageContentService.addPageContent(image);
+				return "redirect:/admin";
+			} catch(ConstraintViolationException cve) {
+				errors.rejectValue("pageContentName", "pageContentName.duplicate", "This page content name is already in use.");
+				System.out.println(cve.getConstraintName());
+			}
+		}
+		return "admin";
+	}
+	@RequestMapping(value={"/admin/createtextentry"},method=RequestMethod.POST)
+	public String handleCreateTextEntry(@ModelAttribute(value="textEntry") TextEntry textEntry, BindingResult errors, Model map) {
+		this.setValidator(new PageContentValidator());
+		this.getValidator().validate(textEntry, errors);
+		if(! errors.hasErrors()) {
+			try {
+				PageContentService.addPageContent(textEntry);
+				return "redirect:/admin";
+			} catch(ConstraintViolationException cve) {
+				errors.rejectValue("pageContentName", "pageContentName.duplicate", "This page content is already in use.");
+				System.out.println(cve.getConstraintName());
+			}
+		}
+		return "admin";
 	}
 	
 	@ModelAttribute(value="group")
 	public Group getGroup() {
 		return new Group();
+	}
+	@ModelAttribute(value="image")
+	public Image getImage() {
+		return new Image();
+	}
+	@ModelAttribute(value="textEntry")
+	public TextEntry getTextEntry() {
+		return new TextEntry();
 	}
 	private Validator getValidator() {
 		return validator;

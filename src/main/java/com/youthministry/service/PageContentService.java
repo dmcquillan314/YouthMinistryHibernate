@@ -1,5 +1,7 @@
 package com.youthministry.service;
 
+import java.util.ArrayList;
+
 import com.youthministry.domain.PageContent;
 
 public interface PageContentService {
@@ -24,4 +26,11 @@ public interface PageContentService {
 	 * @param PageContent pageContent
 	 */
 	public void deletePageContent(Object pageContent);
+	
+	/**
+	 * Get all PageContent Entries
+	 * 
+	 * @param 
+	 */
+	public ArrayList<? extends PageContent> getAllPageContent();
 }
