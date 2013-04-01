@@ -33,7 +33,7 @@ public class GroupServiceImpl implements GroupService {
 
 	@Transactional(readOnly=true)
 	@Override
-	public Group getGroupById(int id) {
+	public Group getGroupById(Long id) {
 		return getGroupDao().getGroupById(id);
 	}
 

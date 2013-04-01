@@ -37,7 +37,7 @@ public class GroupDaoImpl implements GroupDao {
 	}
 
 	@Override
-	public Group getGroupById(int id) {
+	public Group getGroupById(Long id) {
 		List list = getSessionFactory().getCurrentSession().createQuery("from GROUP_DETAILS where groupId=?").setParameter(0, id).list();
 		return (Group) list.get(0);
 	}

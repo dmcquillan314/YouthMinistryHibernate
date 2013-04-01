@@ -50,8 +50,8 @@ public class PageContentDaoImpl implements PageContentDao {
 	}
 
 	@Override
-	public List<PageContent> getAllPageContent() {
-		ArrayList<PageContent> pageContentArray = (ArrayList<PageContent>) getSessionFactory().getCurrentSession().createQuery("from PageContent").list();
+	public List<? extends PageContent> getAllPageContent() {
+		ArrayList<? extends PageContent> pageContentArray = (ArrayList<PageContent>) getSessionFactory().getCurrentSession().createQuery("from PageContent").list();
 		return pageContentArray;
 	}
 

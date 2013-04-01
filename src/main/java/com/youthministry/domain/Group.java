@@ -15,6 +15,9 @@ public class Group {
 	private String groupName;
 	private String groupDesc;
 	
+	/*public String getIdAsString() {
+		return new Long(groupId).toString();
+	}*/
 	public Long getGroupId() {
 		return groupId;
 	}

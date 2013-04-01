@@ -44,6 +44,6 @@ public interface PageContentDao {
      * Get Event List
      *
      */
-    public List<PageContent> getAllPageContent();
+    public List<? extends PageContent> getAllPageContent();
 
 }

@@ -32,7 +32,7 @@ public interface GroupService {
      *
      * @param  int Id
      */
-    public Group getGroupById(int id);
+    public Group getGroupById(Long id);
     
     /**
      * Get Event
