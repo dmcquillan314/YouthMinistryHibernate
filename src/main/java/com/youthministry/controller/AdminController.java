@@ -49,7 +49,8 @@ public class AdminController {
 	@RequestMapping(value={"/admin"},method=RequestMethod.GET)
 	public String admin(Model map) {
 		map.addAttribute("groups", GroupService.getGroups());
-		map.addAttribute("contentItems", PageContentService.getAllPageContent());
+		map.addAttribute("images", PageContentService.getAllImageEntries());
+		map.addAttribute("textEntries", PageContentService.getAllTextEntries());
 		map.addAttribute("users", UserService.getUsers());
 		return "admin";
 	}
@@ -57,7 +58,8 @@ public class AdminController {
 	@RequestMapping(value={"/admin/creategroup"},method=RequestMethod.POST)
 	public String handleCreateGroup(@ModelAttribute(value="group") Group group, BindingResult errors, Model map) {
 		map.addAttribute("groups", GroupService.getGroups());
-		map.addAttribute("contentItems", PageContentService.getAllPageContent());
+		map.addAttribute("images", PageContentService.getAllImageEntries());
+		map.addAttribute("textEntries", PageContentService.getAllTextEntries());
 		map.addAttribute("users", UserService.getUsers());
 		this.setValidator(new GroupValidator());
 		this.getValidator().validate(group, errors);
@@ -75,7 +77,8 @@ public class AdminController {
 	@RequestMapping(value={"/admin/createimage"},method=RequestMethod.POST)
 	public String handleCreateImage(@ModelAttribute(value="image") Image image, BindingResult errors, Model map) {
 		map.addAttribute("groups", GroupService.getGroups());
-		map.addAttribute("contentItems", PageContentService.getAllPageContent());
+		map.addAttribute("images", PageContentService.getAllImageEntries());
+		map.addAttribute("textEntries", PageContentService.getAllTextEntries());
 		map.addAttribute("users", UserService.getUsers());
 		this.setValidator(new PageContentValidator());
 		this.getValidator().validate(image, errors);
@@ -94,7 +97,8 @@ public class AdminController {
 	@RequestMapping(value={"/admin/createtextentry"},method=RequestMethod.POST)
 	public String handleCreateTextEntry(@ModelAttribute(value="textEntry") TextEntry textEntry, BindingResult errors, Model map) {
 		map.addAttribute("groups", GroupService.getGroups());
-		map.addAttribute("contentItems", PageContentService.getAllPageContent());
+		map.addAttribute("images", PageContentService.getAllImageEntries());
+		map.addAttribute("textEntries", PageContentService.getAllTextEntries());
 		map.addAttribute("users", UserService.getUsers());
 		this.setValidator(new PageContentValidator());
 		this.getValidator().validate(textEntry, errors);

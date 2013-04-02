@@ -19,12 +19,12 @@ public class PageContent {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long pageContentId;
-	@Column(name="PAGE_CONTENT_NAME", unique=true, nullable=false)
+	@Column(name="PAGE_CONTENT_NAME", nullable=false)
 	private String pageContentName;
 	@Column(name="LOCATION", nullable=false)
 	private String location;
-	
-	@OneToMany(cascade=CascadeType.ALL)
+		
+	@OneToMany(cascade=CascadeType.REMOVE)
 	private Collection<Group> groups = new ArrayList<Group>();
 	
 	public Long getPageContentId() {

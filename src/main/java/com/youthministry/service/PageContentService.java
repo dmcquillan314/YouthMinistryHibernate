@@ -33,4 +33,8 @@ public interface PageContentService {
 	 * @param 
 	 */
 	public ArrayList<? extends PageContent> getAllPageContent();
+
+	ArrayList<? extends PageContent> getAllImageEntries();
+
+	ArrayList<? extends PageContent> getAllTextEntries();
 }

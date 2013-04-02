@@ -2,7 +2,9 @@ package com.youthministry.dao;
 
 import java.util.List;
 
+import com.youthministry.domain.Image;
 import com.youthministry.domain.PageContent;
+import com.youthministry.domain.TextEntry;
 
 public interface PageContentDao {
     /**
@@ -33,17 +35,15 @@ public interface PageContentDao {
      */
     public PageContent getPageContentById(int id);
         
-    /**TODO
-     * Get Event
-     *
-     * @param  int Event Id
-     *
-    public Event getEventsBetween(Date startDate, Date endDate);*/
  
     /**
      * Get Event List
      *
      */
     public List<? extends PageContent> getAllPageContent();
+
+	List<TextEntry> getAllTextEntries();
+
+	List<Image> getAllImageEntries();
 
 }

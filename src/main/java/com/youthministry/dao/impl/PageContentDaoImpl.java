@@ -24,13 +24,7 @@ public class PageContentDaoImpl implements PageContentDao {
 
 	@Override
 	public void addPageContent(Object pageContent) {
-		//if(pageContent instanceof TextEntry) {
-			//TextEntry textEntry = (TextEntry) pageContent;
-			getSessionFactory().getCurrentSession().save(pageContent);
-		//} else if (pageContent instanceof Image) {
-			//Image image = (Image) pageContent;			
-			//getSessionFactory().getCurrentSession().save(image);
-		//}
+		getSessionFactory().getCurrentSession().save(pageContent);
 	}
 
 	@Override
@@ -53,6 +47,18 @@ public class PageContentDaoImpl implements PageContentDao {
 	public List<? extends PageContent> getAllPageContent() {
 		ArrayList<? extends PageContent> pageContentArray = (ArrayList<PageContent>) getSessionFactory().getCurrentSession().createQuery("from PageContent").list();
 		return pageContentArray;
+	}
+	
+	@Override 
+	public List<TextEntry> getAllTextEntries() {
+		ArrayList<TextEntry> textEntryArray = (ArrayList<TextEntry>) getSessionFactory().getCurrentSession().createQuery("from TextEntry").list();
+		return textEntryArray;
+	}
+	
+	@Override 
+	public List<Image> getAllImageEntries() {
+		ArrayList<Image> imageEntryArray = (ArrayList<Image>) getSessionFactory().getCurrentSession().createQuery("from Image").list();
+		return imageEntryArray;
 	}
 
 }

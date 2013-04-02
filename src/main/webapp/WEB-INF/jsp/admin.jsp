@@ -34,8 +34,13 @@
 		<button type="submit">Create Group</button>
 	</form:form>
 	<h4>Current content items</h4>
-	<c:forEach items="${contentItems}" var="contentItem">
-		<p>${contentItem}</p>
+	<h5>Text Entries</h5>
+	<c:forEach items="${textEntries}" var="textEntry">
+		<p>Page Content Id: ${textEntry.pageContentId}</p>
+		<p>Page Content Name: ${textEntry.pageContentName}</p>
+		<p>Location: ${textEntry.location}</p>
+		<p>Content Title: ${textEntry.contentTitle}</p>
+		<p>Content Body: ${textEntry.contentBody}</p>
 	</c:forEach>
 	<form:form action="/admin/createtextentry" method="POST"
 		commandName="textEntry">
@@ -72,6 +77,15 @@
 		<p>
 			<button type="submit">Create page content</button>
 	</form:form>
+	<h5>Image Entries</h5>
+	<c:forEach items="${images}" var="image">
+		<p>Page Content Id: ${image.pageContentId}</p>
+		<p>Page Content Name: ${image.pageContentName}</p>
+		<p>Location: ${image.location}</p>
+		<p>Path To Image: ${image.pathToImage}</p>
+		<p>Image Alt Text: ${image.altText}</p>
+		<p>Image Title Text: ${image.titleText}</p>
+	</c:forEach>
 	<form:form action="/admin/createimage" method="POST"
 		commandName="image">
 		<div class="formInfo">
@@ -106,10 +120,8 @@
 			<form:input path="titleText" />
 			<c:if test="${not empty groups}">
         	Content group <form:errors path="groups" cssClass="error" />
-				<form:select id="groupSelect" path="groups" multiple="multiple">
-					<form:options items="${groups}" itemValue="groupId"
-						itemLabel="groupName" />
-				</form:select>
+				<form:select id="groupSelect" path="groups" multiple="true"
+					items="${groups}" itemLabel="groupName" itemValue="groupId" />
 			</c:if>
 		</fieldset>
 		<p>

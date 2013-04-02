@@ -37,6 +37,18 @@ public class PageContentServiceImpl implements PageContentService {
 		return (ArrayList<? extends PageContent>) getPageContentDao().getAllPageContent();
 	}
 
+	@Transactional(readOnly=true)
+	@Override
+	public ArrayList<? extends PageContent> getAllTextEntries() {
+		return (ArrayList<? extends PageContent>) getPageContentDao().getAllTextEntries();
+	}
+
+	@Transactional(readOnly=true)
+	@Override
+	public ArrayList<? extends PageContent> getAllImageEntries() {
+		return (ArrayList<? extends PageContent>) getPageContentDao().getAllImageEntries();
+	}
+
 	public PageContentDao getPageContentDao() {
 		return pageContentDao;
 	}
