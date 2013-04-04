@@ -11,7 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.Cascade;
 
 @Entity
 @Inheritance (strategy=InheritanceType.JOINED)
@@ -24,7 +28,11 @@ public class PageContent {
 	@Column(name="LOCATION", nullable=false)
 	private String location;
 		
-	@OneToMany(cascade=CascadeType.REMOVE)
+	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name = "GROUP_PAGE_CONTENT",
+	joinColumns = @JoinColumn(name = "PAGE_CONTENT_ID", unique=false),
+	inverseJoinColumns = @JoinColumn(name = "GROUP_ID", unique=false))
+	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)	
 	private Collection<Group> groups = new ArrayList<Group>();
 	
 	public Long getPageContentId() {

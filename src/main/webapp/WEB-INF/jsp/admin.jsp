@@ -71,7 +71,7 @@
 			<c:if test="${not empty groups}">
         	Content group <form:errors path="groups" cssClass="error" />
 				<form:select id="groupSelect" path="groups" multiple="true"
-					items="${groups}" itemLabel="groupName" itemValue="groupId" />
+					items="${groups}" itemLabel="groupName" itemValue="idAsString" />
 			</c:if>
 		</fieldset>
 		<p>
@@ -121,7 +121,7 @@
 			<c:if test="${not empty groups}">
         	Content group <form:errors path="groups" cssClass="error" />
 				<form:select id="groupSelect" path="groups" multiple="true"
-					items="${groups}" itemLabel="groupName" itemValue="groupId" />
+					items="${groups}" itemLabel="groupName" itemValue="idAsString" />
 			</c:if>
 		</fieldset>
 		<p>
