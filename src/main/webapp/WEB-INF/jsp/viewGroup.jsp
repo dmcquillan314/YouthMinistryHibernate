@@ -2,7 +2,7 @@
 test view group test ${model.groupName}
 <a href="<c:url value='/j_spring_security_logout' />" > Logout</a>
 	<h5>Active Event Entries</h5>
-	<c:forEach items="${events}" var="event">
+	<c:forEach items="${model.events}" var="event">
 		<p>Event name: ${event.eventName}</p>
 		<p>Event description: ${event.eventDesc}</p>
 		<p>Event start time: ${event.startTime}</p>
