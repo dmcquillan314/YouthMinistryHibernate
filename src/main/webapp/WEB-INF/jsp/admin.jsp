@@ -128,35 +128,73 @@
 			<button type="submit">Create page content</button>
 	</form:form>
 	<h5>Event Entries</h5>
-	<c:forEach items="${events}" var="image">
+	<c:forEach items="${events}" var="event">
+		<p>Event name: ${event.eventName}</p>
+		<p>Event description: ${event.eventDesc}</p>
+		<p>Event start time: ${event.startTime}</p>
+		<p>Event end time: ${event.endTime}</p>
+		<p>Event end time: ${event.location.locationName}</p>
+		<p>Event end time: ${event.location.street}</p>
+		<p>Event end time: ${event.location.city}</p>
+		<p>Event end time: ${event.location.state}</p>
+		<p>Event end time: ${event.location.zipcode}</p>
+		<p>Event end time: ${event.location.country}</p>
+		<c:forEach items="${event.groups}" var="group">
+			<p>Group name: ${group.groupName}</p>
+		</c:forEach>
 	</c:forEach>
 	<form:form action="/admin/createevent" method="POST"
-		commandName="event">
+		commandName="eventLocation">
 		<div class="formInfo">
 			<form:errors path="*" />
 		</div>
-
 		<fieldset>
-			<form:label path="eventName">
+			<form:label path="event.eventName">
 			Event Name 
-			<form:errors path="eventName" cssClass="error" />
+			<form:errors path="event.eventName" cssClass="error" />
 			</form:label>
-			<form:input path="eventName" />
-			<form:label path="eventDesc">
-			Event Description <form:errors path="eventDesc" cssClass="error" />
-
+			<form:input path="event.eventName" />
+			<form:label path="event.eventDesc">
+			Event Description <form:errors path="event.eventDesc" cssClass="error" />
 			</form:label>
-			<form:input path="eventDesc" />
-			<form:label path="startTime">
-			Start time <form:errors path="startTime" cssClass="error" />
-
+			<form:input path="event.eventDesc" />
+			<form:label path="event.startTime">
+			Start time (yyyyMMddHHmmss) <form:errors path="event.startTime" cssClass="error" />
 			</form:label>
-			<form:input path="startTime" />
-			<form:label path="endTime">
-			End time <form:errors path="endTime" cssClass="error" />
-
+			<form:input path="event.startTime" />
+			<form:label path="event.endTime">yyyyMMddHHmmss<form:errors path="event.endTime" cssClass="error" />
 			</form:label>
-			<form:input path="endTime" />
+			<form:input path="event.endTime" />
+			
+			<form:label path="location.locationName">
+			Location name <form:errors path="location.locationName" cssClass="error"/>
+			</form:label>
+			<form:input path="location.locationName" />
+			<form:label path="location.street">
+			Street <form:errors path="location.street" cssClass="error"/>
+			</form:label>
+			<form:input path="location.street" />
+			<form:label path="location.city">
+			City <form:errors path="location.city" cssClass="error"/>
+			</form:label>
+			<form:input path="location.city" />
+			<form:label path="location.state">
+			State <form:errors path="location.state" cssClass="error"/>
+			</form:label>
+			<form:input path="location.state" />
+			<form:label path="location.zipcode">
+			Zipcode <form:errors path="location.zipcode" cssClass="error"/>
+			</form:label>
+			<form:input path="location.zipcode" />
+			<form:label path="location.country">
+			Country <form:errors path="location.country" cssClass="error"/>
+			</form:label>
+			<form:input path="location.country" />
+			<c:if test="${not empty groups}">
+        	Event group <form:errors path="event.groups" cssClass="error" />
+				<form:select id="groupSelect" path="event.groups" multiple="true"
+					items="${groups}" itemLabel="groupName" itemValue="idAsString" />
+			</c:if>
 		</fieldset>
 		<p>
 			<button type="submit">Create page content</button>

@@ -28,11 +28,11 @@
     <bean id="GroupService" class="com.youthministry.service.impl.GroupServiceImpl">
         <property name="groupDao" ref="GroupDao" />
     </bean>
-    <bean id="PageContentService" class="com.youthministry.service.impl.PageContentServiceImpl">
-        <property name="pageContentDao" ref="PageContentDao" />
-    </bean>
     <bean id="EventService" class="com.youthministry.service.impl.EventServiceImpl">
         <property name="eventDao" ref="EventDao" />
+    </bean>
+    <bean id="PageContentService" class="com.youthministry.service.impl.PageContentServiceImpl">
+        <property name="pageContentDao" ref="PageContentDao" />
     </bean>
  
     <!-- User DAO Declaration -->
@@ -76,6 +76,7 @@
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
+             	<prop key="hibernate.enable_lazy_load_no_trans">true</prop>
                 <!-- <prop key="hibernate.hbm2ddl.auto">create</prop> -->
             </props>
         </property>

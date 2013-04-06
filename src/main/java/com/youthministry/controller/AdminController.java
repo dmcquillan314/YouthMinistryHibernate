@@ -17,11 +17,15 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.youthministry.controller.validator.EventValidator;
 import com.youthministry.controller.validator.GroupValidator;
 import com.youthministry.controller.validator.PageContentValidator;
 import com.youthministry.domain.Event;
+import com.youthministry.domain.EventLocation;
 import com.youthministry.domain.Group;
 import com.youthministry.domain.Image;
+import com.youthministry.domain.Location;
 import com.youthministry.domain.TextEntry;
 import com.youthministry.service.GroupService;
 import com.youthministry.service.UserService;
@@ -113,14 +117,18 @@ public class AdminController {
 		}
 		return "admin";
 	}
-	@RequestMapping(value={"/admin/createvent"},method=RequestMethod.POST)
-	public String handleCreateEvent(@ModelAttribute(value="event") Event event, BindingResult errors, Model map) {
+	@RequestMapping(value={"/admin/createevent"},method=RequestMethod.POST)
+	public String handleCreateEvent(@ModelAttribute(value="eventLocation") EventLocation eventLocation, BindingResult errors, Model map) {
 		map.addAttribute("groups", GroupService.getGroups());
 		map.addAttribute("images", PageContentService.getAllImageEntries());
 		map.addAttribute("textEntries", PageContentService.getAllTextEntries());
 		map.addAttribute("users", UserService.getUsers());
 		map.addAttribute("events", EventService.getEvents());
+		this.setValidator(new EventValidator());
+		this.getValidator().validate(eventLocation, errors);
 		if(! errors.hasErrors()) {
+			Event event = eventLocation.getEvent();
+			event.setLocation(eventLocation.getLocation());
 			try {
 				EventService.addEvent(event);
 				return "redirect:/admin";
@@ -143,16 +151,16 @@ public class AdminController {
 	public TextEntry getTextEntry() {
 		return new TextEntry();
 	}
-	@ModelAttribute(value="event")
-	public Event getEvent() {
-		return new Event();
+	@ModelAttribute(value="eventLocation")
+	public EventLocation getEventLocation() {
+		return new EventLocation();
 	}
-	
+		
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) throws Exception {
 		CustomDateEditor editor = new CustomDateEditor(new SimpleDateFormat("yyyyMMddHHmmss"), true);
 		binder.registerCustomEditor(Date.class, editor);
-		binder.registerCustomEditor(Collection.class, "groups", new CustomCollectionEditor(Collection.class) {
+		binder.registerCustomEditor(Collection.class, new CustomCollectionEditor(Collection.class) {
 			protected Object convertElement(Object element) {
 				if(element instanceof Group) {
 					System.out.println("Converting from Group to Group: " + element);

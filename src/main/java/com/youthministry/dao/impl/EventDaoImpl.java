@@ -47,9 +47,14 @@ public class EventDaoImpl implements EventDao {
 	}
 
 	@Override
-	public List<Event> getEvents() {
-		// TODO Auto-generated method stub
-		return (List<Event>) getSessionFactory().getCurrentSession().createQuery("from Event");
+	public List<Event> getEventsForGroup(String groupName) {
+		return (List<Event>) getSessionFactory().getCurrentSession().createQuery("from Event e left join fetch e.groups g where g.groupName = ?").setParameter(0, groupName).list();
 	}
+	
+	@Override
+	public List<Event> getEvents() {
+		return (List<Event>) getSessionFactory().getCurrentSession().createQuery("from Event").list();
+	}
+
 
 }

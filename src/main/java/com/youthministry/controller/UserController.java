@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,8 +13,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.youthministry.service.EventService;
+import com.youthministry.service.PageContentService;
+
 @Controller
 public class UserController {
+	
+	@Autowired
+	private PageContentService PageContentService;
+	@Autowired
+	private EventService EventService;
 	
 	@RequestMapping(value={"/group","/home"})
 	public ModelAndView groupView(HttpServletRequest request) {
@@ -28,6 +37,7 @@ public class UserController {
 		System.out.println(request.getServletPath());
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("groupName", groupName);
+		model.put("events", EventService.getEventsForGroup(groupName));
 		return new ModelAndView("viewGroup", "model", model);
 	}
 	

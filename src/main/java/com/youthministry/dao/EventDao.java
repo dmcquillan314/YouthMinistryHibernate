@@ -40,6 +40,13 @@ public interface EventDao {
      */
     public Event getEventByName(String name);
     
+    /*
+     * Get Event By Group
+     * 
+     * @param int group name
+     */
+    public List<Event> getEventsForGroup(String groupName);
+    
     /**TODO
      * Get Event
      *
