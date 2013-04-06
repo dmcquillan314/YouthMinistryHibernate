@@ -127,5 +127,39 @@
 		<p>
 			<button type="submit">Create page content</button>
 	</form:form>
+	<h5>Event Entries</h5>
+	<c:forEach items="${events}" var="image">
+	</c:forEach>
+	<form:form action="/admin/createevent" method="POST"
+		commandName="event">
+		<div class="formInfo">
+			<form:errors path="*" />
+		</div>
+
+		<fieldset>
+			<form:label path="eventName">
+			Event Name 
+			<form:errors path="eventName" cssClass="error" />
+			</form:label>
+			<form:input path="eventName" />
+			<form:label path="eventDesc">
+			Event Description <form:errors path="eventDesc" cssClass="error" />
+
+			</form:label>
+			<form:input path="eventDesc" />
+			<form:label path="startTime">
+			Start time <form:errors path="startTime" cssClass="error" />
+
+			</form:label>
+			<form:input path="startTime" />
+			<form:label path="endTime">
+			End time <form:errors path="endTime" cssClass="error" />
+
+			</form:label>
+			<form:input path="endTime" />
+		</fieldset>
+		<p>
+			<button type="submit">Create page content</button>
+	</form:form>
 </body>
 </html>

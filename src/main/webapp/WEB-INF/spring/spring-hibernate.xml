@@ -31,6 +31,9 @@
     <bean id="PageContentService" class="com.youthministry.service.impl.PageContentServiceImpl">
         <property name="pageContentDao" ref="PageContentDao" />
     </bean>
+    <bean id="EventService" class="com.youthministry.service.impl.EventServiceImpl">
+        <property name="eventDao" ref="EventDao" />
+    </bean>
  
     <!-- User DAO Declaration -->
     <bean id="UserDao" class="com.youthministry.dao.impl.UserDaoImpl">
