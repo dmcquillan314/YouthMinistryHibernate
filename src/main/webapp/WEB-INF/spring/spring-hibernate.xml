@@ -34,6 +34,9 @@
     <bean id="PageContentService" class="com.youthministry.service.impl.PageContentServiceImpl">
         <property name="pageContentDao" ref="PageContentDao" />
     </bean>
+    <bean id="RoleService" class="com.youthministry.service.impl.RoleServiceImpl">
+        <property name="roleDao" ref="RoleDao" />
+    </bean>
  
     <!-- User DAO Declaration -->
     <bean id="UserDao" class="com.youthministry.dao.impl.UserDaoImpl">
@@ -46,6 +49,9 @@
         <property name="sessionFactory" ref="SessionFactory" />
     </bean>
     <bean id="PageContentDao" class="com.youthministry.dao.impl.PageContentDaoImpl">
+        <property name="sessionFactory" ref="SessionFactory" />
+    </bean>
+    <bean id="RoleDao" class="com.youthministry.dao.impl.RoleDaoImpl">
         <property name="sessionFactory" ref="SessionFactory" />
     </bean>
     
@@ -77,7 +83,7 @@
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
              	<prop key="hibernate.enable_lazy_load_no_trans">true</prop>
-                <!-- <prop key="hibernate.hbm2ddl.auto">create</prop> -->
+                <!--<prop key="hibernate.hbm2ddl.auto">create</prop>-->
             </props>
         </property>
     </bean>

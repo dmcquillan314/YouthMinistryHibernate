@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.youthministry.service.EventService;
 import com.youthministry.service.PageContentService;
+import com.youthministry.service.GroupService;
 
 @Controller
 public class UserController {
@@ -23,6 +24,8 @@ public class UserController {
 	private PageContentService PageContentService;
 	@Autowired
 	private EventService EventService;
+	@Autowired
+	private GroupService GroupService;
 	
 	@RequestMapping(value={"/group","/home"})
 	public ModelAndView groupView(HttpServletRequest request) {
@@ -37,7 +40,10 @@ public class UserController {
 		System.out.println(request.getServletPath());
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("groupName", groupName);
+		model.put("groups", GroupService.getGroups());
 		model.put("events", EventService.getEventsForGroup(groupName));
+		model.put("images", PageContentService.getAllImageEntriesForGroup(groupName));
+		model.put("textEntries", PageContentService.getAllTextEntriesForGroup(groupName));
 		return new ModelAndView("viewGroup", "model", model);
 	}
 	

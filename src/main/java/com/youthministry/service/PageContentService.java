@@ -1,8 +1,11 @@
 package com.youthministry.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import com.youthministry.domain.Image;
 import com.youthministry.domain.PageContent;
+import com.youthministry.domain.TextEntry;
 
 public interface PageContentService {
 	
@@ -37,4 +40,8 @@ public interface PageContentService {
 	ArrayList<? extends PageContent> getAllImageEntries();
 
 	ArrayList<? extends PageContent> getAllTextEntries();
+
+	List<? extends PageContent> getAllTextEntriesForGroup(String groupName);
+
+	List<? extends PageContent> getAllImageEntriesForGroup(String groupName);
 }

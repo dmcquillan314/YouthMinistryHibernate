@@ -15,6 +15,7 @@ import org.springframework.validation.Validator;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -27,10 +28,13 @@ import com.youthministry.domain.Group;
 import com.youthministry.domain.Image;
 import com.youthministry.domain.Location;
 import com.youthministry.domain.TextEntry;
+import com.youthministry.domain.User;
+import com.youthministry.domain.Role;
 import com.youthministry.service.GroupService;
 import com.youthministry.service.UserService;
 import com.youthministry.service.PageContentService;
 import com.youthministry.service.EventService;
+import com.youthministry.service.RoleService;
 
 @Controller
 public class AdminController {
@@ -43,6 +47,8 @@ public class AdminController {
 	private PageContentService PageContentService;
 	@Autowired
 	private EventService EventService;
+	@Autowired
+	private RoleService RoleService;
 	
 	private Validator validator;
 	
@@ -53,9 +59,30 @@ public class AdminController {
 		map.addAttribute("textEntries", PageContentService.getAllTextEntries());
 		map.addAttribute("users", UserService.getUsers());
 		map.addAttribute("events", EventService.getEvents());
+		map.addAttribute("roles", RoleService.getRoles());
 		return "admin";
 	}
 		
+	@RequestMapping(value={"/admin/updateuser/{id}"},method=RequestMethod.POST)
+	public String handleUpdateUser(@PathVariable String id, @ModelAttribute(value="user") User user, BindingResult errors, Model map) {
+		map.addAttribute("groups", GroupService.getGroups());
+		map.addAttribute("images", PageContentService.getAllImageEntries());
+		map.addAttribute("textEntries", PageContentService.getAllTextEntries());
+		map.addAttribute("users", UserService.getUsers());
+		map.addAttribute("events", EventService.getEvents());
+		map.addAttribute("roles", RoleService.getRoles());
+		user.setUserId(Long.parseLong(id));
+		if(!errors.hasErrors()) {
+			try {
+				UserService.updateUser(user);
+				return "redirect:/admin";
+			} catch(ConstraintViolationException cve) {
+				System.out.println(cve.getConstraintName());
+			}
+		}
+		return "admin";
+	}
+	
 	@RequestMapping(value={"/admin/creategroup"},method=RequestMethod.POST)
 	public String handleCreateGroup(@ModelAttribute(value="group") Group group, BindingResult errors, Model map) {
 		map.addAttribute("groups", GroupService.getGroups());
@@ -63,6 +90,7 @@ public class AdminController {
 		map.addAttribute("textEntries", PageContentService.getAllTextEntries());
 		map.addAttribute("users", UserService.getUsers());
 		map.addAttribute("events", EventService.getEvents());
+		map.addAttribute("roles", RoleService.getRoles());
 		this.setValidator(new GroupValidator());
 		this.getValidator().validate(group, errors);
 		if(! errors.hasErrors()) {
@@ -83,6 +111,7 @@ public class AdminController {
 		map.addAttribute("textEntries", PageContentService.getAllTextEntries());
 		map.addAttribute("users", UserService.getUsers());
 		map.addAttribute("events", EventService.getEvents());
+		map.addAttribute("roles", RoleService.getRoles());
 		this.setValidator(new PageContentValidator());
 		this.getValidator().validate(image, errors);
 		if(! errors.hasErrors()) {
@@ -104,6 +133,7 @@ public class AdminController {
 		map.addAttribute("textEntries", PageContentService.getAllTextEntries());
 		map.addAttribute("users", UserService.getUsers());
 		map.addAttribute("events", EventService.getEvents());
+		map.addAttribute("roles", RoleService.getRoles());
 		this.setValidator(new PageContentValidator());
 		this.getValidator().validate(textEntry, errors);
 		if(! errors.hasErrors()) {
@@ -124,6 +154,7 @@ public class AdminController {
 		map.addAttribute("textEntries", PageContentService.getAllTextEntries());
 		map.addAttribute("users", UserService.getUsers());
 		map.addAttribute("events", EventService.getEvents());
+		map.addAttribute("roles", RoleService.getRoles());
 		this.setValidator(new EventValidator());
 		this.getValidator().validate(eventLocation, errors);
 		if(! errors.hasErrors()) {
@@ -142,6 +173,10 @@ public class AdminController {
 	@ModelAttribute(value="group")
 	public Group getGroup() {
 		return new Group();
+	}
+	@ModelAttribute(value="user")
+	public User getUser() {
+		return new User();
 	}
 	@ModelAttribute(value="image")
 	public Image getImage() {
@@ -170,6 +205,21 @@ public class AdminController {
 					Group group = GroupService.getGroupById(Long.parseLong((String) element));
 					System.out.println("Looking up group for id " + element + ": " + group);
 					return group;
+				}
+				System.out.println("Don't know what to do with: " + element);
+				return null;
+			}
+		});
+		binder.registerCustomEditor(Collection.class, new CustomCollectionEditor(Collection.class) {
+			protected Object convertElement(Object element) {
+				if(element instanceof Role) {
+					System.out.println("Converting from Role to Role: " + element);
+					return element;
+				}
+				if(element instanceof String || element instanceof Long) {
+					Role role = RoleService.getRoleById(Long.parseLong((String) element));
+					System.out.println("Looking up role for id " + element + ": " + role);
+					return role;
 				}
 				System.out.println("Don't know what to do with: " + element);
 				return null;

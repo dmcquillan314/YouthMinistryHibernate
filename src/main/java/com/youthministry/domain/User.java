@@ -31,7 +31,7 @@ public class User implements UserDetails,Serializable{
 	private Long userId;
 	@Column(name = "USERNAME", unique=true, nullable = false, length = 50)
 	private String username;
-	@Column(name = "PASSWORD", nullable = false, length = 50)
+	@Column(name = "PASSWORD", nullable = true, length = 50)
 	private String password;
 	
 	@OneToOne(cascade=CascadeType.ALL)

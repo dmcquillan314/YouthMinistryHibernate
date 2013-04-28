@@ -26,4 +26,19 @@ public class Role {
 		this.name = name;
 	}
 	
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	public boolean equals(Role role) {
+		if(role.getName() == this.name && role.getId() == this.id) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

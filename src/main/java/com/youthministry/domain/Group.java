@@ -37,5 +37,11 @@ public class Group {
 	public void setGroupDesc(String groupDesc) {
 		this.groupDesc = groupDesc;
 	}
-	
+	public boolean equals(Group group) {
+		if(group.getGroupId() == this.groupId && group.getGroupName() == this.groupName && group.getGroupDesc() == this.groupDesc) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

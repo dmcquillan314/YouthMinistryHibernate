@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 
 import com.youthministry.dao.PageContentDao;
+import com.youthministry.domain.Event;
 import com.youthministry.domain.Image;
 import com.youthministry.domain.PageContent;
 import com.youthministry.domain.TextEntry;
@@ -59,6 +60,16 @@ public class PageContentDaoImpl implements PageContentDao {
 	public List<Image> getAllImageEntries() {
 		ArrayList<Image> imageEntryArray = (ArrayList<Image>) getSessionFactory().getCurrentSession().createQuery("from Image").list();
 		return imageEntryArray;
+	}
+
+	@Override
+	public List<TextEntry> getAllTextEntriesForGroup(String groupName) {
+		return (List<TextEntry>) getSessionFactory().getCurrentSession().createQuery("from TextEntry t left join fetch t.groups g where g.groupName = ?").setParameter(0, groupName).list();
+	}
+
+	@Override
+	public List<Image> getAllImageEntriesForGroup(String groupName) {
+		return (List<Image>) getSessionFactory().getCurrentSession().createQuery("from Image i left join fetch i.groups g where g.groupName = ?").setParameter(0, groupName).list();
 	}
 
 }

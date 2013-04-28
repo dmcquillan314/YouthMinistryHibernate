@@ -1,6 +1,7 @@
 package com.youthministry.service.impl;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,6 +48,16 @@ public class PageContentServiceImpl implements PageContentService {
 	@Override
 	public ArrayList<? extends PageContent> getAllImageEntries() {
 		return (ArrayList<? extends PageContent>) getPageContentDao().getAllImageEntries();
+	}
+
+	@Override
+	public List<? extends PageContent> getAllTextEntriesForGroup(String groupName) {
+		return (ArrayList<? extends PageContent>) getPageContentDao().getAllTextEntriesForGroup(groupName);
+	}
+
+	@Override
+	public List<? extends PageContent> getAllImageEntriesForGroup(String groupName) {
+		return (ArrayList<? extends PageContent>) getPageContentDao().getAllImageEntriesForGroup(groupName);
 	}
 
 	public PageContentDao getPageContentDao() {

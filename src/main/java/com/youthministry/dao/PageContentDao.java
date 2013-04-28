@@ -46,4 +46,8 @@ public interface PageContentDao {
 
 	List<Image> getAllImageEntries();
 
+	List<TextEntry> getAllTextEntriesForGroup(String groupName);
+
+	List<Image> getAllImageEntriesForGroup(String groupName);
+
 }

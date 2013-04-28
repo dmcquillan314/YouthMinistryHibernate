@@ -7,7 +7,30 @@
 </head>
 <body>
 
-	<h3>Manage Content</h3>
+	
+	<h4>Manage Users</h4>
+	<c:forEach items="${users}" var="user">
+		<form:form action="/admin/updateuser/${user.userId}" method="POST" commandName="user">
+			<div class="formInfo">
+				<form:errors path="*" />
+			</div>
+			<ul>
+				<li>User: ${user.username}</li>
+				<li>First Name: ${user.userProfile.firstName}</li>
+				<li>Last Name: ${user.userProfile.lastName}</li>
+				<li>Groups: 
+					<form:select id="userGroupSelect" path="groups" multiple="true"
+					items="${groups}" itemLabel="groupName" itemValue="idAsString" />
+				</li>
+				<li>Roles: 
+					<form:select id="userRoleSelect" path="roles" multiple="true"
+					items="${roles}" itemLabel="name" itemValue="id" />
+				</li>
+			</ul>
+			<form:button type="submit" name="submit">Update user</form:button>
+		</form:form>
+	</c:forEach>
+
 	<form:form action="/admin/creategroup" method="POST"
 		commandName="group">
 		<h4>Current Groups</h4>
