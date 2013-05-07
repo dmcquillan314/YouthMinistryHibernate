@@ -1,6 +1,7 @@
 package com.youthministry.service.impl;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -31,11 +32,11 @@ public class UserServiceImpl implements UserService {
 			uTemp.setPassword(user.getPassword());
 		}
 		if(user.getGroups() != null && user.getGroups().size() > 0) {
-			ArrayList<Group> uGroups = (ArrayList<Group>) user.getGroups();
+			LinkedHashSet<Group> uGroups = (LinkedHashSet<Group>) user.getGroups();
 			uTemp.setGroups(uGroups);
 		}
 		if(user.getRoles() != null && user.getRoles().size() > 0) {
-			ArrayList<Role> uRoles = (ArrayList<Role>) user.getRoles();
+			LinkedHashSet<Role> uRoles = (LinkedHashSet<Role>) user.getRoles();
 			uTemp.setRoles(uRoles);
 		}
 		if(user.getUserProfile() != null) {
@@ -46,8 +47,8 @@ public class UserServiceImpl implements UserService {
 				uTemp.getUserProfile().setLastName(user.getUserProfile().getLastName());
 			}			
 		}
-		System.out.println("update user");
-		//getUserDao().updateUser(user);
+		//System.out.println("update user");
+		getUserDao().updateUser(uTemp);
 	}
 
 	@Transactional(readOnly=false)

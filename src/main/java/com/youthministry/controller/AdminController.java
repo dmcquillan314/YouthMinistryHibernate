@@ -195,7 +195,7 @@ public class AdminController {
 	protected void initBinder(WebDataBinder binder) throws Exception {
 		CustomDateEditor editor = new CustomDateEditor(new SimpleDateFormat("yyyyMMddHHmmss"), true);
 		binder.registerCustomEditor(Date.class, editor);
-		binder.registerCustomEditor(Collection.class, new CustomCollectionEditor(Collection.class) {
+		binder.registerCustomEditor(Collection.class, "groups", new CustomCollectionEditor(Collection.class) {
 			protected Object convertElement(Object element) {
 				if(element instanceof Group) {
 					System.out.println("Converting from Group to Group: " + element);
@@ -210,7 +210,7 @@ public class AdminController {
 				return null;
 			}
 		});
-		binder.registerCustomEditor(Collection.class, new CustomCollectionEditor(Collection.class) {
+		binder.registerCustomEditor(Collection.class, "roles", new CustomCollectionEditor(Collection.class) {
 			protected Object convertElement(Object element) {
 				if(element instanceof Role) {
 					System.out.println("Converting from Role to Role: " + element);

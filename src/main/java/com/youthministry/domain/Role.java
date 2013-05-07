@@ -15,9 +15,9 @@ public class Role {
 	@GeneratedValue
 	private Long id;
 	
+	@Column(name="role", unique=true, nullable=false)
 	private String name;
 	
-	@Column(name="role", unique=true, nullable=false)
 	public String getName() {
 		return name;
 	}

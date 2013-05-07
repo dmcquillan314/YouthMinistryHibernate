@@ -19,12 +19,15 @@ import com.youthministry.domain.User;
 import com.youthministry.domain.UserProfile;
 
 import com.youthministry.service.UserService;
+import com.youthministry.service.RoleService;
 
 @Controller
 public class LoginController {
 
 	@Autowired
 	private UserService UserService;
+	@Autowired
+	private RoleService RoleService;
 	
 	@RequestMapping(value={"/", "/signin"})
 	public String signin() {
@@ -70,14 +73,9 @@ public class LoginController {
 		userProfile.setLastName(form.getLastName());
 
 		user.setUserProfile(userProfile);
-
-		Role role = new Role();
-		role.setName("ROLE_USER");
-		Role role2 = new Role();
-		role2.setName("ROLE_ADMIN");
 		
-		user.getRoles().add(role);
-		user.getRoles().add(role2);
+		user.getRoles().add(RoleService.getRoleByName("ROLE_USER"));
+		user.getRoles().add(RoleService.getRoleByName("ROLE_ADMIN"));
 		
 		UserService.addUser(user);
 

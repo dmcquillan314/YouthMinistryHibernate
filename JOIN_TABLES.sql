@@ -34,3 +34,8 @@ CREATE TABLE `USER_ROLES` (
       CONSTRAINT `FK7342994915570C54` FOREIGN KEY (`roles_id`) REFERENCES `roles` (`id`),
       CONSTRAINT `FK734299497758EF67` FOREIGN KEY (`user_USER_ID`) REFERENCES `user` (`USER_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- alter table script for roles table
+ALTER TABLE `YouthMinistry`.`roles` 
+CHANGE COLUMN `name` `name` VARCHAR(255) NOT NULL  
+, ADD UNIQUE INDEX `role_name_UNIQUE` (`name` ASC);
