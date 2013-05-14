@@ -104,6 +104,52 @@ public class AdminController {
 		}
 		return "admin";
 	}
+	
+	@RequestMapping(value={"/admin/updategroup/{id}"},method=RequestMethod.POST)
+	public String handleUpdateUser(@PathVariable String id, @ModelAttribute(value="group") Group group, BindingResult errors, Model map) {
+		map.addAttribute("groups", GroupService.getGroups());
+		map.addAttribute("images", PageContentService.getAllImageEntries());
+		map.addAttribute("textEntries", PageContentService.getAllTextEntries());
+		map.addAttribute("users", UserService.getUsers());
+		map.addAttribute("events", EventService.getEvents());
+		map.addAttribute("roles", RoleService.getRoles());
+		this.setValidator(new GroupValidator());
+		this.getValidator().validate(group, errors);
+		group.setGroupId(Long.parseLong(id));
+		if(! errors.hasErrors()) {
+			try {
+				GroupService.updateGroup(group);
+				return "redirect:/admin";
+			} catch(ConstraintViolationException cve) {
+				errors.rejectValue("groupName", "groupName.duplicate", "This group name is already in use.");
+				System.out.println(cve.getConstraintName());
+			}
+		}
+		return "admin";
+	}
+	@RequestMapping(value={"/admin/updateimage/{id}"},method=RequestMethod.POST)
+	public String handleUpdateImage(@PathVariable String id, @ModelAttribute(value="image") Image image, BindingResult errors, Model map) {
+		map.addAttribute("groups", GroupService.getGroups());
+		map.addAttribute("images", PageContentService.getAllImageEntries());
+		map.addAttribute("textEntries", PageContentService.getAllTextEntries());
+		map.addAttribute("users", UserService.getUsers());
+		map.addAttribute("events", EventService.getEvents());
+		map.addAttribute("roles", RoleService.getRoles());
+		this.setValidator(new PageContentValidator());
+		this.getValidator().validate(image, errors);
+		image.setPageContentId(Long.parseLong(id));
+		if(! errors.hasErrors()) {
+			try {
+				PageContentService.updatePageContent(image);
+				return "redirect:/admin";
+			} catch(ConstraintViolationException cve) {
+				errors.rejectValue("pageContentName", "pageContentName.duplicate", "This page content is already in use.");
+				System.out.println(cve.getConstraintName());
+			}
+		}
+		return "admin";
+	}
+
 	@RequestMapping(value={"/admin/createimage"},method=RequestMethod.POST)
 	public String handleCreateImage(@ModelAttribute(value="image") Image image, BindingResult errors, Model map) {
 		map.addAttribute("groups", GroupService.getGroups());
@@ -126,6 +172,28 @@ public class AdminController {
 		}
 		return "admin";
 	}
+	@RequestMapping(value={"/admin/updatetextentry/{id}"},method=RequestMethod.POST)
+	public String handleUpdateTextEntry(@PathVariable String id, @ModelAttribute(value="textEntry") TextEntry textEntry, BindingResult errors, Model map) {
+		map.addAttribute("groups", GroupService.getGroups());
+		map.addAttribute("images", PageContentService.getAllImageEntries());
+		map.addAttribute("textEntries", PageContentService.getAllTextEntries());
+		map.addAttribute("users", UserService.getUsers());
+		map.addAttribute("events", EventService.getEvents());
+		map.addAttribute("roles", RoleService.getRoles());
+		this.setValidator(new PageContentValidator());
+		this.getValidator().validate(textEntry, errors);
+		textEntry.setPageContentId(Long.parseLong(id));
+		if(! errors.hasErrors()) {
+			try {
+				PageContentService.updatePageContent(textEntry);
+				return "redirect:/admin";
+			} catch(ConstraintViolationException cve) {
+				errors.rejectValue("pageContentName", "pageContentName.duplicate", "This page content is already in use.");
+				System.out.println(cve.getConstraintName());
+			}
+		}
+		return "admin";
+	}
 	@RequestMapping(value={"/admin/createtextentry"},method=RequestMethod.POST)
 	public String handleCreateTextEntry(@ModelAttribute(value="textEntry") TextEntry textEntry, BindingResult errors, Model map) {
 		map.addAttribute("groups", GroupService.getGroups());
@@ -142,6 +210,30 @@ public class AdminController {
 				return "redirect:/admin";
 			} catch(ConstraintViolationException cve) {
 				errors.rejectValue("pageContentName", "pageContentName.duplicate", "This page content is already in use.");
+				System.out.println(cve.getConstraintName());
+			}
+		}
+		return "admin";
+	}
+	@RequestMapping(value={"/admin/updateevent/{id}"},method=RequestMethod.POST)
+	public String handleUpdateEvent(@PathVariable String id, @ModelAttribute(value="eventLocation") EventLocation eventLocation, BindingResult errors, Model map) {
+		map.addAttribute("groups", GroupService.getGroups());
+		map.addAttribute("images", PageContentService.getAllImageEntries());
+		map.addAttribute("textEntries", PageContentService.getAllTextEntries());
+		map.addAttribute("users", UserService.getUsers());
+		map.addAttribute("events", EventService.getEvents());
+		map.addAttribute("roles", RoleService.getRoles());
+		this.setValidator(new EventValidator());
+		this.getValidator().validate(eventLocation, errors);
+		eventLocation.getEvent().setEventId(Long.parseLong(id));
+		if(! errors.hasErrors()) {
+			Event event = eventLocation.getEvent();
+			event.setLocation(eventLocation.getLocation());
+			try {
+				EventService.addEvent(event);
+				return "redirect:/admin";
+			} catch(ConstraintViolationException cve) {
+				errors.rejectValue("groupName", "groupName.unknownError","An error occurred while processing your request.");
 				System.out.println(cve.getConstraintName());
 			}
 		}

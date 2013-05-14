@@ -28,7 +28,7 @@ public class GroupDaoImpl implements GroupDao {
 
 	@Override
 	public void updateGroup(Group group) {
-		getSessionFactory().getCurrentSession().update(group);
+		getSessionFactory().getCurrentSession().merge(group);
 	}
 
 	@Override

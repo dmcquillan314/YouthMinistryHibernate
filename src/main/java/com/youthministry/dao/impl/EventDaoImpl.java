@@ -26,7 +26,7 @@ public class EventDaoImpl implements EventDao {
 
 	@Override
 	public void updateEvent(Event event) {
-		getSessionFactory().getCurrentSession().update(event);
+		getSessionFactory().getCurrentSession().merge(event);
 	}
 
 	@Override

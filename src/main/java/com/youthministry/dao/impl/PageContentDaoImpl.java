@@ -30,7 +30,7 @@ public class PageContentDaoImpl implements PageContentDao {
 
 	@Override
 	public void updatePageContent(Object pageContent) {
-		getSessionFactory().getCurrentSession().update(pageContent);
+		getSessionFactory().getCurrentSession().merge(pageContent);
 	}
 
 	@Override
