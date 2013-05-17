@@ -37,5 +37,9 @@ CREATE TABLE `USER_ROLES` (
 
 -- alter table script for roles table
 ALTER TABLE `YouthMinistry`.`roles` 
-CHANGE COLUMN `name` `name` VARCHAR(255) NOT NULL  
-, ADD UNIQUE INDEX `role_name_UNIQUE` (`name` ASC);
+CHANGE COLUMN `role` `role` VARCHAR(255) NOT NULL  
+, ADD UNIQUE INDEX `role_UNIQUE` (`role` ASC);
+
+-- create role data
+insert into YouthMinistry.roles(role) values ('ROLE_ADMIN');
+insert into YouthMinistry.roles(role) values ('ROLE_USER');
