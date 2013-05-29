@@ -36,24 +36,24 @@ public class EventDaoImpl implements EventDao {
 
 	@Override
 	public Event getEventById(Long id) {
-		List list = getSessionFactory().getCurrentSession().createQuery("from Event where eventId=?").setParameter(0, id).list();
+		List list = getSessionFactory().getCurrentSession().createQuery("from Event e left join fetch e.groups left join fetch e.location where eventId=?").setParameter(0, id).list();
 		return (Event) list.get(0);
 	}
 
 	@Override
 	public Event getEventByName(String name) {
-		List list = getSessionFactory().getCurrentSession().createQuery("from Event where eventName=?").setParameter(0, name).list();
+		List list = getSessionFactory().getCurrentSession().createQuery("from Event e left join fetch e.groups left join fetch e.location where eventName=?").setParameter(0, name).list();
 		return (Event) list.get(0);
 	}
 
 	@Override
 	public List<Event> getEventsForGroup(String groupName) {
-		return (List<Event>) getSessionFactory().getCurrentSession().createQuery("from Event e left join fetch e.groups g where g.groupName = ?").setParameter(0, groupName).list();
+		return (List<Event>) getSessionFactory().getCurrentSession().createQuery("from Event e left join fetch e.groups g left join fetch e.location where g.groupName = ?").setParameter(0, groupName).list();
 	}
 	
 	@Override
 	public List<Event> getEvents() {
-		return (List<Event>) getSessionFactory().getCurrentSession().createQuery("from Event").list();
+		return (List<Event>) getSessionFactory().getCurrentSession().createQuery("from Event e left join fetch e.groups left join fetch e.location").list();
 	}
 
 
