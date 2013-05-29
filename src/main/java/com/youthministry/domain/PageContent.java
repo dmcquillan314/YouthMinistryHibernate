@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,7 +29,7 @@ public class PageContent {
 	@Column(name="LOCATION", nullable=false)
 	private String location;
 		
-	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.EAGER)
 	@JoinTable(name = "GROUP_PAGE_CONTENT",
 	joinColumns = @JoinColumn(name = "PAGE_CONTENT_ID", unique=false),
 	inverseJoinColumns = @JoinColumn(name = "GROUP_ID", unique=false))

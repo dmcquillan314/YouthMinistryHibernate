@@ -7,6 +7,7 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,15 +34,16 @@ public class Event {
 	private Date startTime;
 	@Column(name="END_TIME")
 	private Date endTime;
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private Location location;
 
-	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.EAGER)
 	@JoinTable(name = "EVENT_GROUP",
 	joinColumns = @JoinColumn(name = "EVENT_ID", unique=false),
 	inverseJoinColumns = @JoinColumn(name = "GROUP_ID", unique=false))
 	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)	
 	private Collection<Group> groups = new ArrayList<Group>();
+	
 	public Long getEventId() {
 		return eventId;
 	}

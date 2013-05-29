@@ -46,19 +46,19 @@ public class PageContentDaoImpl implements PageContentDao {
 
 	@Override
 	public List<? extends PageContent> getAllPageContent() {
-		ArrayList<? extends PageContent> pageContentArray = (ArrayList<PageContent>) getSessionFactory().getCurrentSession().createQuery("from PageContent p left join fetch p.groups").list();
+		ArrayList<? extends PageContent> pageContentArray = (ArrayList<PageContent>) getSessionFactory().getCurrentSession().createQuery("from PageContent").list();
 		return pageContentArray;
 	}
 	
 	@Override 
 	public List<TextEntry> getAllTextEntries() {
-		ArrayList<TextEntry> textEntryArray = (ArrayList<TextEntry>) getSessionFactory().getCurrentSession().createQuery("from TextEntry t left join fetch t.groups").list();
+		ArrayList<TextEntry> textEntryArray = (ArrayList<TextEntry>) getSessionFactory().getCurrentSession().createQuery("from TextEntry").list();
 		return textEntryArray;
 	}
 	
 	@Override 
 	public List<Image> getAllImageEntries() {
-		ArrayList<Image> imageEntryArray = (ArrayList<Image>) getSessionFactory().getCurrentSession().createQuery("from Image i left join fetch i.groups").list();
+		ArrayList<Image> imageEntryArray = (ArrayList<Image>) getSessionFactory().getCurrentSession().createQuery("from Image").list();
 		return imageEntryArray;
 	}
 
