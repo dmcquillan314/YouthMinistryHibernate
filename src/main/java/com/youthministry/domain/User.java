@@ -13,17 +13,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
- 
+
 import org.hibernate.annotations.Cascade;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-@Table(name = "user")
+@Table(name="USER")
 public class User implements UserDetails,Serializable{
 	@Id
 	@GeneratedValue
@@ -35,10 +36,13 @@ public class User implements UserDetails,Serializable{
 	private String password;
 	
 	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="USER_PROFILE_ID")
 	private UserProfile userProfile;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-	@Column(name="roles",unique=false)
+	@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @JoinTable(name="USER_ROLE",
+               joinColumns=@JoinColumn(name="USER_ID"),
+               inverseJoinColumns=@JoinColumn(name="ROLE_ID"))	
 	private Collection<Role> roles = new ArrayList<Role>();
 	
 	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})

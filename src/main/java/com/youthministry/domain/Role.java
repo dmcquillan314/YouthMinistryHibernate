@@ -3,19 +3,19 @@ package com.youthministry.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="roles")
-public class Role {
-
+@Table(name="ROLE")
+public class Role
+{
 	@Id
 	@GeneratedValue
+	@Column(name="ROLE_ID")
 	private Long id;
 	
-	@Column(name="role", unique=true, nullable=false)
+	@Column(name="ROLE", unique=true, nullable=false)
 	private String name;
 	
 	public String getName() {
