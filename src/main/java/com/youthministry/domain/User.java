@@ -19,6 +19,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -42,13 +44,15 @@ public class User implements UserDetails,Serializable{
 	@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinTable(name="USER_ROLE",
                joinColumns=@JoinColumn(name="USER_ID"),
-               inverseJoinColumns=@JoinColumn(name="ROLE_ID"))	
+               inverseJoinColumns=@JoinColumn(name="ROLE_ID"))
+	@Fetch(FetchMode.SELECT)
 	private Collection<Role> roles = new ArrayList<Role>();
 	
-	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+	@OneToMany(fetch=FetchType.EAGER, cascade={CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name = "USER_GROUP",
 	joinColumns = @JoinColumn(name = "USER_ID", unique=false),
 	inverseJoinColumns = @JoinColumn(name = "GROUP_ID", unique=false))
+	@Fetch(FetchMode.SELECT)
 	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)	
 	private Collection<Group> groups = new ArrayList<Group>();
 	
