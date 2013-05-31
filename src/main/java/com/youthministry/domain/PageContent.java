@@ -12,17 +12,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 
 @Entity
+@Table(name="PAGE_CONTENT")
 @Inheritance (strategy=InheritanceType.JOINED)
 public class PageContent {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="PAGE_CONTENT_ID")
+	
 	private Long pageContentId;
 	@Column(name="PAGE_CONTENT_NAME", nullable=false)
 	private String pageContentName;

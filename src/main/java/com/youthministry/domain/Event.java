@@ -34,7 +34,9 @@ public class Event {
 	private Date startTime;
 	@Column(name="END_TIME")
 	private Date endTime;
+	
 	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="LOCATION_ID")
 	private Location location;
 
 	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.EAGER)

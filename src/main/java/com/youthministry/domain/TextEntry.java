@@ -3,8 +3,10 @@ package com.youthministry.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="TEXT_ENTRY")
 public class TextEntry extends PageContent {
 	
 	@Column(name="CONTENT_TITLE")
