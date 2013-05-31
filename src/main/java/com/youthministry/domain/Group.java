@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
+@Entity(name="GROUP_DETAIL")
 @Table(name="GROUP_DETAIL")
 public class Group {
 	@Id
