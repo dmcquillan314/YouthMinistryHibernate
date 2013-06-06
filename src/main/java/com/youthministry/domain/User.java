@@ -48,10 +48,10 @@ public class User implements UserDetails,Serializable{
 	@Fetch(FetchMode.SELECT)
 	private Collection<Role> roles = new ArrayList<Role>();
 	
-	@OneToMany(fetch=FetchType.EAGER, cascade={CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name = "USER_GROUP",
-	joinColumns = @JoinColumn(name = "USER_ID", unique=false),
-	inverseJoinColumns = @JoinColumn(name = "GROUP_ID", unique=false))
+	@ManyToMany(fetch=FetchType.EAGER, cascade={CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name="USER_GROUP",
+	           joinColumns=@JoinColumn(name="USER_ID"),
+	           inverseJoinColumns=@JoinColumn(name="GROUP_ID"))
 	@Fetch(FetchMode.SELECT)
 	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)	
 	private Collection<Group> groups = new ArrayList<Group>();
