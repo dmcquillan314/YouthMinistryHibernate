@@ -46,7 +46,7 @@
 	<jdbc-user-service id="userDetailsService" 
 					data-source-ref="dataSource" 
 					users-by-username-query="select USERNAME, PASSWORD, true from USER where USERNAME = ?"
-					authorities-by-username-query="select u.USERNAME username, r.NAME authority from USER_ROLE u_roles, USER u, ROLE r where USERNAME = ? group by authority"/>
+					authorities-by-username-query="select u.USERNAME username, r.ROLE authority from USER_ROLE u_roles, USER u, ROLE r where USERNAME = ? group by authority"/>
 
 	<beans:bean id="textEncryptor" class="org.springframework.security.crypto.encrypt.Encryptors"
 		factory-method="noOpText" />

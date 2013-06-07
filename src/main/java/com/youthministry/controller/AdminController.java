@@ -302,6 +302,21 @@ public class AdminController {
 				return null;
 			}
 		});
+		binder.registerCustomEditor(Collection.class, "event.groups", new CustomCollectionEditor(Collection.class) {
+			protected Object convertElement(Object element) {
+				if(element instanceof Group) {
+					System.out.println("Converting from Group to Group: " + element);
+					return element;
+				}
+				if(element instanceof String || element instanceof Long) {
+					Group group = GroupService.getGroupById(Long.parseLong((String) element));
+					System.out.println("Looking up group for id " + element + ": " + group);
+					return group;
+				}
+				System.out.println("Don't know what to do with: " + element);
+				return null;
+			}
+		});
 		binder.registerCustomEditor(Collection.class, "roles", new CustomCollectionEditor(Collection.class) {
 			protected Object convertElement(Object element) {
 				if(element instanceof Role) {
