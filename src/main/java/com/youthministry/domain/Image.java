@@ -2,8 +2,10 @@ package com.youthministry.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="IMAGE")
 public class Image extends PageContent {
 	@Column(name="PATH_TO_IMAGE")
 	private String pathToImage;
