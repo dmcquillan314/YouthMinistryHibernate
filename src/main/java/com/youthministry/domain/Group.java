@@ -2,15 +2,19 @@ package com.youthministry.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Entity(name="GROUP_DETAILS")
+@Entity(name="GROUP_DETAIL")
+@Table(name="GROUP_DETAIL")
 public class Group {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="GROUP_ID")
 	private Long groupId;
+	
 	@Column(name = "GROUP_NAME", unique = true, nullable = false)
 	private String groupName;
 	@Column(name="GROUP_DESC")

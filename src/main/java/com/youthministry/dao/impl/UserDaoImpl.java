@@ -55,7 +55,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User getUserByIdWithGroups(Long id) {
-		List list = getSessionFactory().getCurrentSession().createQuery("from User u left join fetch u.groups").list();
+		List list = getSessionFactory().getCurrentSession().createQuery("from User u").list();
 		return (User)list.get(0);
 		//return null;
 	}

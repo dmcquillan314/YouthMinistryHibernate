@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -34,13 +35,15 @@ public class Event {
 	private Date startTime;
 	@Column(name="END_TIME")
 	private Date endTime;
+	
 	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="LOCATION_ID")
 	private Location location;
 
-	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.EAGER)
+	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.EAGER)
 	@JoinTable(name = "EVENT_GROUP",
-	joinColumns = @JoinColumn(name = "EVENT_ID", unique=false),
-	inverseJoinColumns = @JoinColumn(name = "GROUP_ID", unique=false))
+		joinColumns = @JoinColumn(name = "EVENT_ID"),
+		inverseJoinColumns = @JoinColumn(name = "GROUP_ID"))
 	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)	
 	private Collection<Group> groups = new ArrayList<Group>();
 	

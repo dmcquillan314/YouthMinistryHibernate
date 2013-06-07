@@ -12,27 +12,31 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 
 @Entity
+@Table(name="PAGE_CONTENT")
 @Inheritance (strategy=InheritanceType.JOINED)
 public class PageContent {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="PAGE_CONTENT_ID")
+	
 	private Long pageContentId;
 	@Column(name="PAGE_CONTENT_NAME", nullable=false)
 	private String pageContentName;
 	@Column(name="LOCATION", nullable=false)
 	private String location;
 		
-	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.EAGER)
+	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.EAGER)
 	@JoinTable(name = "GROUP_PAGE_CONTENT",
-	joinColumns = @JoinColumn(name = "PAGE_CONTENT_ID", unique=false),
-	inverseJoinColumns = @JoinColumn(name = "GROUP_ID", unique=false))
+		joinColumns = @JoinColumn(name = "PAGE_CONTENT_ID"),
+		inverseJoinColumns = @JoinColumn(name = "GROUP_ID"))
 	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)	
 	private Collection<Group> groups = new ArrayList<Group>();
 	
