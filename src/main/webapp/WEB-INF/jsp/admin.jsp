@@ -267,19 +267,6 @@
 	</form:form>
 	<h5>Manage events</h5>
 	<c:forEach items="${events}" var="event">
-		<p>Event name: ${event.eventName}</p>
-		<p>Event description: ${event.eventDesc}</p>
-		<p>Event start time: ${event.startTime}</p>
-		<p>Event end time: ${event.endTime}</p>
-		<p>Event end time: ${event.location.locationName}</p>
-		<p>Event end time: ${event.location.street}</p>
-		<p>Event end time: ${event.location.city}</p>
-		<p>Event end time: ${event.location.state}</p>
-		<p>Event end time: ${event.location.zipcode}</p>
-		<p>Event end time: ${event.location.country}</p>
-		<c:forEach items="${event.groups}" var="group">
-			<p>Group name: ${group.groupName}</p>
-		</c:forEach>
 		<form:form action="/admin/createevent" method="POST"
 			commandName="eventLocation">
 			<div class="formInfo">
@@ -388,6 +375,43 @@
 			</c:if>
 		</fieldset>
 		<button type="submit">Create event</button>
+	</form:form>
+	<h5>Manage Pages</h5>
+	<c:forEach items="${pages}" var="page">
+		<form:form action="/admin/updatepage/${page.pageId}" method="POST"
+			commandName="page">
+			<div class="formInfo">
+				<form:errors path="*" />
+			</div>
+			<fieldset>
+				<form:label path="pageName">
+				Page name <form:errors path="pageName" cssClass="error"/>
+				</form:label>
+				<form:input path="pageName" />
+				<form:label path="pageURL">
+				Page URL name <form:errors path="pageURL" cssClass="error"/>
+				</form:label>
+				<form:input path="pageURL" />
+			</fieldset>
+			<button type="submit">update page</button>
+		</form:form>
+	</c:forEach>
+	<form:form action="/admin/createpage" method="POST"
+		commandName="page">
+		<div class="formInfo">
+			<form:errors path="*" />
+		</div>
+		<fieldset>
+				<form:label path="pageName">
+				Page name <form:errors path="pageName" cssClass="error"/>
+				</form:label>
+				<form:input path="pageName" />
+				<form:label path="pageURL">
+				Page URL name <form:errors path="pageURL" cssClass="error"/>
+				</form:label>
+				<form:input path="pageURL" />
+		</fieldset>
+		<button type="submit">Create page</button>
 	</form:form>
 </body>
 </html>

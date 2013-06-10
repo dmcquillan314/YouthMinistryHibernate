@@ -10,7 +10,7 @@ import com.youthministry.domain.TextEntry;
 public class PageContentValidator implements Validator {
 
 	@Override
-	public boolean supports(Class clazz) {
+	public boolean supports(Class<?> clazz) {
 		return Image.class.isAssignableFrom(clazz) || TextEntry.class.isAssignableFrom(clazz);
 	}
 

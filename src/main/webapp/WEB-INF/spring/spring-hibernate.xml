@@ -20,6 +20,7 @@
     <bean id="Image" class="com.youthministry.domain.Image"/>
     <bean id="PageContent" class="com.youthministry.domain.PageContent"/>
     <bean id="TextEntry" class="com.youthministry.domain.TextEntry"/>
+    <bean id="Page" class="com.youthministry.domain.Page"/>
  
     <!-- User Service Declaration -->
     <bean id="UserService" class="com.youthministry.service.impl.UserServiceImpl">
@@ -33,6 +34,9 @@
     </bean>
     <bean id="PageContentService" class="com.youthministry.service.impl.PageContentServiceImpl">
         <property name="pageContentDao" ref="PageContentDao" />
+    </bean>
+    <bean id="PageService" class="com.youthministry.service.impl.PageServiceImpl">
+        <property name="pageDao" ref="PageDao" />
     </bean>
     <bean id="RoleService" class="com.youthministry.service.impl.RoleServiceImpl">
         <property name="roleDao" ref="RoleDao" />
@@ -49,6 +53,9 @@
         <property name="sessionFactory" ref="SessionFactory" />
     </bean>
     <bean id="PageContentDao" class="com.youthministry.dao.impl.PageContentDaoImpl">
+        <property name="sessionFactory" ref="SessionFactory" />
+    </bean>
+    <bean id="PageDao" class="com.youthministry.dao.impl.PageDaoImpl">
         <property name="sessionFactory" ref="SessionFactory" />
     </bean>
     <bean id="RoleDao" class="com.youthministry.dao.impl.RoleDaoImpl">
@@ -69,6 +76,7 @@
             <list>
                 <value>com.youthministry.domain.Event</value>
                 <value>com.youthministry.domain.Group</value>
+                <value>com.youthministry.domain.Page</value>
                 <value>com.youthministry.domain.Image</value>
                 <value>com.youthministry.domain.Location</value>
                 <value>com.youthministry.domain.PageContent</value>

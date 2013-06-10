@@ -6,7 +6,6 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 
 import com.youthministry.dao.PageContentDao;
-import com.youthministry.domain.Event;
 import com.youthministry.domain.Image;
 import com.youthministry.domain.PageContent;
 import com.youthministry.domain.TextEntry;
@@ -40,8 +39,8 @@ public class PageContentDaoImpl implements PageContentDao {
 
 	@Override
 	public PageContent getPageContentById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		List list = getSessionFactory().getCurrentSession().createQuery("from PAGE_CONTENT where pageContentId=?").setParameter(0, id).list();
+		return (PageContent) list.get(0);
 	}
 
 	@Override
