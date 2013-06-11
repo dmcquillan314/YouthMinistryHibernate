@@ -22,6 +22,7 @@ import com.youthministry.service.UserService;
 import com.youthministry.service.PageContentService;
 import com.youthministry.service.EventService;
 import com.youthministry.service.RoleService;
+import com.youthministry.service.PageService;
 
 @Controller
 public class AdminGroupController {
@@ -36,6 +37,8 @@ public class AdminGroupController {
 	private EventService EventService;
 	@Autowired
 	private RoleService RoleService;
+	@Autowired
+	private PageService PageService;
 	
 	private Validator validator;
 	

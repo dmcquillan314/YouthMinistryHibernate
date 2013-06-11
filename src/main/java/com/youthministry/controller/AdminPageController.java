@@ -31,8 +31,6 @@ public class AdminPageController {
 	@Autowired
 	private GroupService GroupService;
 	@Autowired
-	private PageService PageService;
-	@Autowired
 	private UserService UserService;
 	@Autowired
 	private PageContentService PageContentService;
@@ -40,6 +38,8 @@ public class AdminPageController {
 	private EventService EventService;
 	@Autowired
 	private RoleService RoleService;
+	@Autowired
+	private PageService PageService;
 	
 	private Validator validator;
 

@@ -376,42 +376,6 @@
 		</fieldset>
 		<button type="submit">Create event</button>
 	</form:form>
-	<h5>Manage Pages</h5>
-	<c:forEach items="${pages}" var="page">
-		<form:form action="/admin/updatepage/${page.pageId}" method="POST"
-			commandName="page">
-			<div class="formInfo">
-				<form:errors path="*" />
-			</div>
-			<fieldset>
-				<form:label path="pageName">
-				Page name <form:errors path="pageName" cssClass="error"/>
-				</form:label>
-				<form:input path="pageName" />
-				<form:label path="pageURL">
-				Page URL name <form:errors path="pageURL" cssClass="error"/>
-				</form:label>
-				<form:input path="pageURL" />
-			</fieldset>
-			<button type="submit">update page</button>
-		</form:form>
-	</c:forEach>
-	<form:form action="/admin/createpage" method="POST"
-		commandName="page">
-		<div class="formInfo">
-			<form:errors path="*" />
-		</div>
-		<fieldset>
-				<form:label path="pageName">
-				Page name <form:errors path="pageName" cssClass="error"/>
-				</form:label>
-				<form:input path="pageName" />
-				<form:label path="pageURL">
-				Page URL name <form:errors path="pageURL" cssClass="error"/>
-				</form:label>
-				<form:input path="pageURL" />
-		</fieldset>
-		<button type="submit">Create page</button>
-	</form:form>
+	${pages}
 </body>
 </html>

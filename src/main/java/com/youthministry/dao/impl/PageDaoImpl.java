@@ -1,6 +1,5 @@
 package com.youthministry.dao.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -43,9 +42,9 @@ public class PageDaoImpl implements PageDao {
 	}
 
 	@Override
-	public ArrayList<Page> getPages() {
+	public List<Page> getPages() {
 		List list = getSessionFactory().getCurrentSession().createQuery("from PAGE").list();
-		return (ArrayList<Page>) list;
+		return (List<Page>) list;
 	}
 
 }

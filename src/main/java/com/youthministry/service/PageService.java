@@ -1,6 +1,7 @@
 package com.youthministry.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.youthministry.domain.Page;
 
@@ -14,5 +15,5 @@ public interface PageService {
 	
 	public Page getPageById(long id);
 	
-	public ArrayList<Page> getPages();
+	public List<Page> getPages();
 }
