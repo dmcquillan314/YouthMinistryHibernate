@@ -51,6 +51,7 @@ public class AdminPageContentController {
 		map.addAttribute("users", UserService.getUsers());
 		map.addAttribute("events", EventService.getEvents());
 		map.addAttribute("roles", RoleService.getRoles());
+		map.addAttribute("pages", PageService.getPages());
 		this.setValidator(new PageContentValidator());
 		this.getValidator().validate(image, errors);
 		image.setPageContentId(Long.parseLong(id));
@@ -74,6 +75,7 @@ public class AdminPageContentController {
 		map.addAttribute("users", UserService.getUsers());
 		map.addAttribute("events", EventService.getEvents());
 		map.addAttribute("roles", RoleService.getRoles());
+		map.addAttribute("pages", PageService.getPages());
 		this.setValidator(new PageContentValidator());
 		this.getValidator().validate(image, errors);
 		if(! errors.hasErrors()) {

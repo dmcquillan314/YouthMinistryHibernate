@@ -56,6 +56,7 @@ public class AdminEventController {
 		map.addAttribute("users", UserService.getUsers());
 		map.addAttribute("events", EventService.getEvents());
 		map.addAttribute("roles", RoleService.getRoles());
+		map.addAttribute("pages", PageService.getPages());
 		this.setValidator(new EventValidator());
 		this.getValidator().validate(eventLocation, errors);
 		eventLocation.getEvent().setEventId(Long.parseLong(id));
@@ -80,6 +81,7 @@ public class AdminEventController {
 		map.addAttribute("users", UserService.getUsers());
 		map.addAttribute("events", EventService.getEvents());
 		map.addAttribute("roles", RoleService.getRoles());
+		map.addAttribute("pages", PageService.getPages());
 		this.setValidator(new EventValidator());
 		this.getValidator().validate(eventLocation, errors);
 		if(! errors.hasErrors()) {

@@ -55,6 +55,7 @@ public class AdminUserController {
 		map.addAttribute("users", UserService.getUsers());
 		map.addAttribute("events", EventService.getEvents());
 		map.addAttribute("roles", RoleService.getRoles());
+		map.addAttribute("pages", PageService.getPages());
 		user.setUserId(Long.parseLong(id));
 		if(!errors.hasErrors()) {
 			try {

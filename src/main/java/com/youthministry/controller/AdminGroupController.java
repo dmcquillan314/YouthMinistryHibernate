@@ -47,6 +47,7 @@ public class AdminGroupController {
 		map.addAttribute("users", UserService.getUsers());
 		map.addAttribute("events", EventService.getEvents());
 		map.addAttribute("roles", RoleService.getRoles());
+		map.addAttribute("pages", PageService.getPages());
 		this.setValidator(new GroupValidator());
 		this.getValidator().validate(group, errors);
 		if(! errors.hasErrors()) {
@@ -69,6 +70,7 @@ public class AdminGroupController {
 		map.addAttribute("users", UserService.getUsers());
 		map.addAttribute("events", EventService.getEvents());
 		map.addAttribute("roles", RoleService.getRoles());
+		map.addAttribute("pages", PageService.getPages());
 		this.setValidator(new GroupValidator());
 		this.getValidator().validate(group, errors);
 		group.setGroupId(Long.parseLong(id));
