@@ -32,7 +32,7 @@ public class Page {
 	private String pageName;
 	
 	@Column(name="PAGE_URL")
-	private String pageURL;
+	private String pageUrl;
 	
 	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.EAGER)
 	@JoinTable(name = "PAGE_PAGE_CONTENT",
@@ -41,6 +41,8 @@ public class Page {
 	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)	
 	@Fetch(FetchMode.SELECT)
 	private Collection<PageContent> contentItems = new ArrayList<PageContent>();
+
+	// TODO: PARENT PAGES, META TAGS
 
 	/**
 	 * @return the pageId
@@ -73,15 +75,15 @@ public class Page {
 	/**
 	 * @return the pageURL
 	 */
-	public String getPageURL() {
-		return pageURL;
+	public String getPageUrl() {
+		return pageUrl;
 	}
 
 	/**
 	 * @param pageURL the pageURL to set
 	 */
 	public void setPageURL(String pageURL) {
-		this.pageURL = pageURL;
+		this.pageUrl = pageURL;
 	}
 
 	/**
@@ -98,5 +100,4 @@ public class Page {
 		this.contentItems = contentItems;
 	}
 
-	// TODO: PARENT PAGES
 }

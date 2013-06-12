@@ -19,7 +19,7 @@ public class PageValidator implements Validator {
 			Page page = (Page) object;
 			if(page.getPageName() != null && !"".equals(page.getPageName())) {
 				errors.rejectValue("pageName", "pageName.required", "Invalid page name");
-			} else if(page.getPageURL() != null && !"".equals(page.getPageURL())) {
+			} else if(page.getPageUrl() != null && !"".equals(page.getPageUrl())) {
 				errors.rejectValue("pageUrl", "pageUrl.required", "Invalid page url");				
 			}
 		} else {

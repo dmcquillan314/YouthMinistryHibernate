@@ -376,6 +376,30 @@
 		</fieldset>
 		<button type="submit">Create event</button>
 	</form:form>
+	<form:form action="/admin/createpage" method="POST"
+		commandName="page">
+		<div class="formInfo">
+			<form:errors path="*" />
+		</div>
+		<fieldset>
+			<form:label path="pageName">
+			Page Name 
+			<form:errors path="pageName" cssClass="error" />
+			</form:label>
+			<form:input path="pageName" />
+			<form:label path="pageUrl">
+			Page Url 
+			<form:errors path="pageUrl" cssClass="error" />
+			</form:label>
+			<form:input path="pageUrl" />
+			<c:if test="${not empty contentItems}">
+        	Content Items <form:errors path="contentItems" cssClass="error" />
+				<form:select id="contentSelect" path="contentItems" multiple="true"
+					items="${contentItems}" itemLabel="pageContentName" itemValue="pageContentId" />
+			</c:if>
+		</fieldset>
+		<button type="submit">Create page</button>
+	</form:form>
 	${pages}
 </body>
 </html>
