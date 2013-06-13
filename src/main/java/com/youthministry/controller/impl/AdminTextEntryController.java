@@ -19,6 +19,14 @@ public class AdminTextEntryController extends AbstractAdminPageContentController
 	@Override
 	@RequestMapping(value={"/admin/updatetextentry/{id}"},method=RequestMethod.POST)
 	public String handleUpdate(@PathVariable String id, @ModelAttribute(value="textEntry") Object object, BindingResult errors, Model map) {
+		map.addAttribute("users", UserService.getUsers());
+		map.addAttribute("groups", GroupService.getGroups());
+		map.addAttribute("contentItems", PageContentService.getAllPageContent());
+		map.addAttribute("images", PageContentService.getAllImageEntries());
+		map.addAttribute("textEntries", PageContentService.getAllTextEntries());
+		map.addAttribute("events", EventService.getEvents());
+		map.addAttribute("roles", RoleService.getRoles());
+		map.addAttribute("pages", PageService.getPages());
 		TextEntry textEntry = (TextEntry) object;
 		this.setValidator(new PageContentValidator());
 		this.getValidator().validate(textEntry, errors);
@@ -38,6 +46,14 @@ public class AdminTextEntryController extends AbstractAdminPageContentController
 	@Override
 	@RequestMapping(value={"/admin/createtextentry"},method=RequestMethod.POST)
 	public String handleCreate(@ModelAttribute(value="textEntry") Object object, BindingResult errors, Model map) {
+		map.addAttribute("users", UserService.getUsers());
+		map.addAttribute("groups", GroupService.getGroups());
+		map.addAttribute("contentItems", PageContentService.getAllPageContent());
+		map.addAttribute("images", PageContentService.getAllImageEntries());
+		map.addAttribute("textEntries", PageContentService.getAllTextEntries());
+		map.addAttribute("events", EventService.getEvents());
+		map.addAttribute("roles", RoleService.getRoles());
+		map.addAttribute("pages", PageService.getPages());
 		TextEntry textEntry = (TextEntry) object;
 		this.setValidator(new PageContentValidator());
 		this.getValidator().validate(textEntry, errors);
@@ -57,11 +73,6 @@ public class AdminTextEntryController extends AbstractAdminPageContentController
 	public String handleDelete(String id) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@ModelAttribute(value="textEntry")
-	public TextEntry getTextEntry() {
-		return new TextEntry();
 	}
 
 }

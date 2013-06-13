@@ -19,6 +19,14 @@ public class AdminGroupController extends AbstractAdminController {
 	@Override
 	@RequestMapping(value={"/admin/creategroup"},method=RequestMethod.POST)
 	public String handleCreate(@ModelAttribute(value="group") Object object, BindingResult errors, Model map) {
+		map.addAttribute("users", UserService.getUsers());
+		map.addAttribute("groups", GroupService.getGroups());
+		map.addAttribute("contentItems", PageContentService.getAllPageContent());
+		map.addAttribute("images", PageContentService.getAllImageEntries());
+		map.addAttribute("textEntries", PageContentService.getAllTextEntries());
+		map.addAttribute("events", EventService.getEvents());
+		map.addAttribute("roles", RoleService.getRoles());
+		map.addAttribute("pages", PageService.getPages());
 		Group group = (Group) object;
 		this.setValidator(new GroupValidator());
 		this.getValidator().validate(group, errors);
@@ -37,6 +45,14 @@ public class AdminGroupController extends AbstractAdminController {
 	@Override
 	@RequestMapping(value={"/admin/updategroup/{id}"},method=RequestMethod.POST)
 	public String handleUpdate(@PathVariable String id, @ModelAttribute(value="group") Object object, BindingResult errors, Model map) {
+		map.addAttribute("users", UserService.getUsers());
+		map.addAttribute("groups", GroupService.getGroups());
+		map.addAttribute("contentItems", PageContentService.getAllPageContent());
+		map.addAttribute("images", PageContentService.getAllImageEntries());
+		map.addAttribute("textEntries", PageContentService.getAllTextEntries());
+		map.addAttribute("events", EventService.getEvents());
+		map.addAttribute("roles", RoleService.getRoles());
+		map.addAttribute("pages", PageService.getPages());
 		Group group = (Group) object;
 		this.setValidator(new GroupValidator());
 		this.getValidator().validate(group, errors);
@@ -58,10 +74,4 @@ public class AdminGroupController extends AbstractAdminController {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@ModelAttribute(value="group")
-	public Group getGroup() {
-		return new Group();
-	}
-	
 }

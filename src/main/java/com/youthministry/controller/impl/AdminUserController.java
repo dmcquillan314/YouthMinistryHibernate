@@ -28,6 +28,14 @@ public class AdminUserController extends AbstractAdminController {
 	@RequestMapping(value={"/admin/updateuser/{id}"},method=RequestMethod.POST)
 	public String handleUpdate(String id, Object object, BindingResult errors,
 			Model map) { 
+		map.addAttribute("users", UserService.getUsers());
+		map.addAttribute("groups", GroupService.getGroups());
+		map.addAttribute("contentItems", PageContentService.getAllPageContent());
+		map.addAttribute("images", PageContentService.getAllImageEntries());
+		map.addAttribute("textEntries", PageContentService.getAllTextEntries());
+		map.addAttribute("events", EventService.getEvents());
+		map.addAttribute("roles", RoleService.getRoles());
+		map.addAttribute("pages", PageService.getPages());
 		User user = (User) object;
 		user.setUserId(Long.parseLong(id));
 		if(!errors.hasErrors()) {
@@ -52,13 +60,7 @@ public class AdminUserController extends AbstractAdminController {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
-	@ModelAttribute(value="user")
-	public User getUser() {
-		return new User();
-	}
-	
+		
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) throws Exception {
 		CustomDateEditor editor = new CustomDateEditor(new SimpleDateFormat("yyyyMMddHHmmss"), true);

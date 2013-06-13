@@ -19,6 +19,14 @@ public class AdminImageController extends AbstractAdminPageContentController {
 	@Override
 	@RequestMapping(value={"/admin/updateimage/{id}"},method=RequestMethod.POST)
 	public String handleUpdate(@PathVariable String id, @ModelAttribute(value="image") Object object, BindingResult errors, Model map) {
+		map.addAttribute("users", UserService.getUsers());
+		map.addAttribute("groups", GroupService.getGroups());
+		map.addAttribute("contentItems", PageContentService.getAllPageContent());
+		map.addAttribute("images", PageContentService.getAllImageEntries());
+		map.addAttribute("textEntries", PageContentService.getAllTextEntries());
+		map.addAttribute("events", EventService.getEvents());
+		map.addAttribute("roles", RoleService.getRoles());
+		map.addAttribute("pages", PageService.getPages());
 		Image image = (Image) object;
 		this.setValidator(new PageContentValidator());
 		this.getValidator().validate(image, errors);
@@ -37,6 +45,14 @@ public class AdminImageController extends AbstractAdminPageContentController {
 	@Override
 	@RequestMapping(value={"/admin/createimage"},method=RequestMethod.POST)
 	public String handleCreate(@ModelAttribute(value="image") Object object, BindingResult errors, Model map) {
+		map.addAttribute("users", UserService.getUsers());
+		map.addAttribute("groups", GroupService.getGroups());
+		map.addAttribute("contentItems", PageContentService.getAllPageContent());
+		map.addAttribute("images", PageContentService.getAllImageEntries());
+		map.addAttribute("textEntries", PageContentService.getAllTextEntries());
+		map.addAttribute("events", EventService.getEvents());
+		map.addAttribute("roles", RoleService.getRoles());
+		map.addAttribute("pages", PageService.getPages());
 		Image image = (Image) object;
 		this.setValidator(new PageContentValidator());
 		this.getValidator().validate(image, errors);
@@ -56,11 +72,6 @@ public class AdminImageController extends AbstractAdminPageContentController {
 	public String handleDelete(String id) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@ModelAttribute(value="image")
-	public Image getImage() {
-		return new Image();
 	}
 
 }

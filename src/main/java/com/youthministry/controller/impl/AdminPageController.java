@@ -26,6 +26,14 @@ public class AdminPageController extends AbstractAdminController {
 	@Override
 	@RequestMapping(value={"/admin/updatepage/{id}"},method=RequestMethod.POST)
 	public String handleUpdate(@PathVariable String id, @ModelAttribute(value="page") Object object, BindingResult errors, Model map) {
+		map.addAttribute("users", UserService.getUsers());
+		map.addAttribute("groups", GroupService.getGroups());
+		map.addAttribute("contentItems", PageContentService.getAllPageContent());
+		map.addAttribute("images", PageContentService.getAllImageEntries());
+		map.addAttribute("textEntries", PageContentService.getAllTextEntries());
+		map.addAttribute("events", EventService.getEvents());
+		map.addAttribute("roles", RoleService.getRoles());
+		map.addAttribute("pages", PageService.getPages());
 		Page page = (Page) object;
 		this.setValidator(new PageValidator());
 		this.getValidator().validate(page, errors);
@@ -45,6 +53,14 @@ public class AdminPageController extends AbstractAdminController {
 	@Override
 	@RequestMapping(value={"/admin/createpage"},method=RequestMethod.POST)
 	public String handleCreate(@ModelAttribute(value="page") Object object, BindingResult errors, Model map) {
+		map.addAttribute("users", UserService.getUsers());
+		map.addAttribute("groups", GroupService.getGroups());
+		map.addAttribute("contentItems", PageContentService.getAllPageContent());
+		map.addAttribute("images", PageContentService.getAllImageEntries());
+		map.addAttribute("textEntries", PageContentService.getAllTextEntries());
+		map.addAttribute("events", EventService.getEvents());
+		map.addAttribute("roles", RoleService.getRoles());
+		map.addAttribute("pages", PageService.getPages());
 		Page page = (Page) object;
 		this.setValidator(new PageValidator());
 		this.getValidator().validate(page, errors);
@@ -61,13 +77,5 @@ public class AdminPageController extends AbstractAdminController {
 		return "admin";
 	}
 
-	@ModelAttribute(value="page")
-	public Page getPage() {
-		return new Page();
-	}
-	@ModelAttribute(value="group")
-	public Group getGroup() {
-		return new Group();
-	}
 	
 }

@@ -82,8 +82,8 @@ public class Page {
 	/**
 	 * @param pageURL the pageURL to set
 	 */
-	public void setPageURL(String pageURL) {
-		this.pageUrl = pageURL;
+	public void setPageUrl(String pageUrl) {
+		this.pageUrl = pageUrl;
 	}
 
 	/**

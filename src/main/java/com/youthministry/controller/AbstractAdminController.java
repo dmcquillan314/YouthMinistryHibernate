@@ -4,6 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
+import com.youthministry.domain.Event;
+import com.youthministry.domain.EventLocation;
+import com.youthministry.domain.Group;
+import com.youthministry.domain.Image;
+import com.youthministry.domain.Page;
+import com.youthministry.domain.Role;
+import com.youthministry.domain.TextEntry;
+import com.youthministry.domain.User;
 import com.youthministry.service.GroupService;
 import com.youthministry.service.UserService;
 import com.youthministry.service.PageService;
@@ -42,5 +52,37 @@ public abstract class AbstractAdminController {
 	
 	public abstract String handleDelete(String id);
 
+	@ModelAttribute(value="user")
+	public User getUser() {
+		return new User();
+	}
+	@ModelAttribute(value="group")
+	public Group getGroup() {
+		return new Group();
+	}
+	@ModelAttribute(value="image")
+	public Image getImage() {
+		return new Image();
+	}
+	@ModelAttribute(value="textEntry")
+	public TextEntry getTextEntry() {
+		return new TextEntry();
+	}
+	@ModelAttribute(value="event")
+	public Event getEvent() {
+		return new Event();
+	}
+	@ModelAttribute(value="eventLocation")
+	public EventLocation getEventLocation() {
+		return new EventLocation();
+	}
+	@ModelAttribute(value="role")
+	public Role getRole() {
+		return new Role();
+	}
+	@ModelAttribute(value="page")
+	public Page getPage() {
+		return new Page();
+	}
 	
 }

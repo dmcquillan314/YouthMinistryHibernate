@@ -41,6 +41,14 @@ public class AdminEventController extends AbstractAdminController {
 	@RequestMapping(value={"/admin/createevent"},method=RequestMethod.POST)
 	public String handleCreate(@ModelAttribute(value="eventLocation") Object object, BindingResult errors,
 			Model map) {
+		map.addAttribute("users", UserService.getUsers());
+		map.addAttribute("groups", GroupService.getGroups());
+		map.addAttribute("contentItems", PageContentService.getAllPageContent());
+		map.addAttribute("images", PageContentService.getAllImageEntries());
+		map.addAttribute("textEntries", PageContentService.getAllTextEntries());
+		map.addAttribute("events", EventService.getEvents());
+		map.addAttribute("roles", RoleService.getRoles());
+		map.addAttribute("pages", PageService.getPages());
 		EventLocation eventLocation = (EventLocation) object;
 		this.setValidator(new EventValidator());
 		this.getValidator().validate(eventLocation, errors);
@@ -61,6 +69,14 @@ public class AdminEventController extends AbstractAdminController {
 	@RequestMapping(value={"/admin/updateevent/{id}"},method=RequestMethod.POST)
 	public String handleUpdate(@PathVariable String id, @ModelAttribute(value="eventLocation") Object object, BindingResult errors,
 			Model map) {
+		map.addAttribute("users", UserService.getUsers());
+		map.addAttribute("groups", GroupService.getGroups());
+		map.addAttribute("contentItems", PageContentService.getAllPageContent());
+		map.addAttribute("images", PageContentService.getAllImageEntries());
+		map.addAttribute("textEntries", PageContentService.getAllTextEntries());
+		map.addAttribute("events", EventService.getEvents());
+		map.addAttribute("roles", RoleService.getRoles());
+		map.addAttribute("pages", PageService.getPages());
 		EventLocation eventLocation = (EventLocation) object;
 		this.setValidator(new EventValidator());
 		this.getValidator().validate(eventLocation, errors);
@@ -83,11 +99,6 @@ public class AdminEventController extends AbstractAdminController {
 	public String handleDelete(@PathVariable String id) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@ModelAttribute(value="eventLocation")
-	public EventLocation getEventLocation() {
-		return new EventLocation();
 	}
 		
 	@InitBinder
