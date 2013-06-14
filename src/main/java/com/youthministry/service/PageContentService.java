@@ -10,6 +10,13 @@ import com.youthministry.domain.TextEntry;
 public interface PageContentService {
 	
 	/**
+	 * Get PageContent Entrybyid 
+	 * 
+	 * @param Long id
+	 */
+	public PageContent getPageContentById(Long id);
+	
+	/**
 	 * Add PageContent Entry
 	 * 
 	 * @param PageContent pageContent

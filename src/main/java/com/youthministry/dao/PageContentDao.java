@@ -33,7 +33,7 @@ public interface PageContentDao {
      *
      * @param  int Event Id
      */
-    public PageContent getPageContentById(int id);
+    public PageContent getPageContentById(Long id);
         
  
     /**

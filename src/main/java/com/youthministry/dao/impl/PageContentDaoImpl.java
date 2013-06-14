@@ -38,14 +38,14 @@ public class PageContentDaoImpl implements PageContentDao {
 	}
 
 	@Override
-	public PageContent getPageContentById(int id) {
+	public PageContent getPageContentById(Long id) {
 		List list = getSessionFactory().getCurrentSession().createQuery("from PAGE_CONTENT where pageContentId=?").setParameter(0, id).list();
 		return (PageContent) list.get(0);
 	}
 
 	@Override
 	public List<? extends PageContent> getAllPageContent() {
-		ArrayList<? extends PageContent> pageContentArray = (ArrayList<PageContent>) getSessionFactory().getCurrentSession().createQuery("from PageContent").list();
+		ArrayList<? extends PageContent> pageContentArray = (ArrayList<PageContent>) getSessionFactory().getCurrentSession().createQuery("from PAGE_CONTENT").list();
 		return pageContentArray;
 	}
 	

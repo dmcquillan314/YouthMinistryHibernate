@@ -19,7 +19,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 
-@Entity
+@Entity(name="PAGE_CONTENT")
 @Table(name="PAGE_CONTENT")
 @Inheritance (strategy=InheritanceType.JOINED)
 public class PageContent {

@@ -13,6 +13,12 @@ import com.youthministry.service.PageContentService;
 public class PageContentServiceImpl implements PageContentService {
 
 	private PageContentDao pageContentDao;
+
+	@Transactional(readOnly=true)
+	@Override
+	public PageContent getPageContentById(Long id) {
+		return getPageContentDao().getPageContentById(id);
+	}
 	
 	@Transactional(readOnly=false)
 	@Override

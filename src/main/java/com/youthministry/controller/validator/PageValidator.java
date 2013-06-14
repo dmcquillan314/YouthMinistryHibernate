@@ -17,9 +17,9 @@ public class PageValidator implements Validator {
 	public void validate(Object object, Errors errors) {
 		if(object != null) {
 			Page page = (Page) object;
-			if(page.getPageName() != null && !"".equals(page.getPageName())) {
+			if(page.getPageName() != null && "".equals(page.getPageName())) {
 				errors.rejectValue("pageName", "pageName.required", "Invalid page name");
-			} else if(page.getPageUrl() != null && !"".equals(page.getPageUrl())) {
+			} else if(page.getPageUrl() != null && "".equals(page.getPageUrl())) {
 				errors.rejectValue("pageUrl", "pageUrl.required", "Invalid page url");				
 			}
 		} else {

@@ -6,7 +6,6 @@
 <head>
 </head>
 <body>
-
 	
 	<h4>Manage Users</h4>
 	<c:forEach items="${users}" var="user">
@@ -376,6 +375,32 @@
 		</fieldset>
 		<button type="submit">Create event</button>
 	</form:form>
+	<c:forEach items="${pages}" var="page">
+		<form:form action="/admin/updatepage/${page.pageId}" method="POST"
+			commandName="page">
+			<div class="formInfo">
+				<form:errors path="*" />
+			</div>
+			<fieldset>
+				<form:label path="pageName">
+				Page Name 
+				<form:errors path="pageName" cssClass="error" />
+				</form:label>
+				<form:input path="pageName" value="${page.pageName}" />
+				<form:label path="pageUrl">
+				Page Url 
+				<form:errors path="pageUrl" cssClass="error" />
+				</form:label>
+				<form:input path="pageUrl" value="${page.pageUrl}" />
+				<c:if test="${not empty contentItems}">
+	        	Content Items <form:errors path="contentItems" cssClass="error" />
+					<form:select id="contentSelect" path="contentItems" multiple="true"
+						items="${contentItems}" itemLabel="pageContentName" itemValue="pageContentId" />
+				</c:if>
+			</fieldset>
+			<button type="submit">Update page</button>
+		</form:form>
+	</c:forEach>
 	<form:form action="/admin/createpage" method="POST"
 		commandName="page">
 		<div class="formInfo">
@@ -400,6 +425,5 @@
 		</fieldset>
 		<button type="submit">Create page</button>
 	</form:form>
-	${pages}
 </body>
 </html>
