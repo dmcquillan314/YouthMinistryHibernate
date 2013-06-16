@@ -6,28 +6,36 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import com.youthministry.dao.UserDao;
 import com.youthministry.domain.User;
 import com.youthministry.domain.Group;
 import com.youthministry.domain.Role;
 import com.youthministry.domain.UserProfile;
+import com.youthministry.genericdao.GenericDao;
 import com.youthministry.service.UserService;
 
 @Transactional(readOnly=true)
 public class UserServiceImpl implements UserService {
 
-	private UserDao userDao;
+	private GenericDao genericDao;
+	
+	public void setGenericDao(GenericDao genericDao) {
+		this.genericDao = genericDao;
+	}
+	
+	public GenericDao getGenericDao() {
+		return this.genericDao;
+	}
 	
 	@Transactional(readOnly=false)
 	@Override
 	public void addUser(User user) {
-		getUserDao().addUser(user);
+		getGenericDao().create(user);
 	}
 
 	@Transactional(readOnly=false)
 	@Override
 	public void updateUser(User user) {
-		User uTemp = getUserDao().getUserById(user.getUserId());
+		User uTemp = (User) getGenericDao().read(user.getUserId());
 		if(user.getPassword() != null && !"".equals(user.getPassword())) {
 			uTemp.setPassword(user.getPassword());
 		}
@@ -48,45 +56,37 @@ public class UserServiceImpl implements UserService {
 			}			
 		}
 		//System.out.println("update user");
-		getUserDao().updateUser(uTemp);
+		getGenericDao().update(uTemp);
 	}
 
 	@Transactional(readOnly=false)
 	@Override
 	public void deleteUser(User user) {
-		getUserDao().deleteUser(user);
-	}
-
-	@Transactional(readOnly=true)
-	@Override
-	public User getUserByName(String username) {
-		return getUserDao().getUserByName(username);
+		getGenericDao().delete(user);
 	}
 
 	@Transactional(readOnly=true)
 	@Override
 	public User getUserById(Long id) {
-		return getUserDao().getUserById(id);
+		return (User) getGenericDao().read(id);
 	}
 
-	@Transactional(readOnly=true)
+	@Override
+	public User getUserByName(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@Override
 	public User getUserByIdWithGroups(Long id) {
-		return getUserDao().getUserByIdWithGroups(id);
+		// TODO Auto-generated method stub
+		return null;
 	}
-	
-	@Transactional(readOnly=true)
+
 	@Override
 	public List<User> getUsers() {
-		return getUserDao().getUsers();
-	}
-
-	public UserDao getUserDao() {
-		return userDao;
-	}
-
-	public void setUserDao(UserDao userDao) {
-		this.userDao = userDao;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

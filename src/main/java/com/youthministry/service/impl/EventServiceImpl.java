@@ -4,63 +4,63 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import com.youthministry.dao.EventDao;
 import com.youthministry.domain.Event;
+import com.youthministry.genericdao.GenericDao;
 import com.youthministry.service.EventService;
 
 @Transactional(readOnly=true)
 public class EventServiceImpl implements EventService {
 
-	private EventDao eventDao;
+	private GenericDao genericDao;
+	
+	public void setGenericDao(GenericDao genericDao) {
+		this.genericDao = genericDao;
+	}
+	
+	public GenericDao getGenericDao() {
+		return this.genericDao;
+	}
 	
 	@Transactional(readOnly=false)
 	@Override
 	public void addEvent(Event event) {
-		getEventDao().addEvent(event);
+		getGenericDao().create(event);
 	}
 
 	@Transactional(readOnly=false)
 	@Override
 	public void updateEvent(Event event) {
-		getEventDao().updateEvent(event);
+		getGenericDao().update(event);
 	}
 
 	@Transactional(readOnly=false)
 	@Override
 	public void deleteEvent(Event event) {
-		getEventDao().deleteEvent(event);
+		getGenericDao().delete(event);
 	}
 
 	@Transactional(readOnly=true)
 	@Override
 	public Event getEventById(Long id) {
-		return getEventDao().getEventById(id);
-	}
-	
-	@Transactional(readOnly=true)
-	@Override
-	public List<Event> getEventsForGroup(String groupName) {
-		return getEventDao().getEventsForGroup(groupName);
+		return (Event) getGenericDao().read(id);
 	}
 
-	@Transactional(readOnly=true)
 	@Override
 	public Event getGroupByName(String name) {
-		return getEventDao().getEventByName(name);
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	@Transactional(readOnly=true)
+	@Override
+	public List<Event> getEventsForGroup(String groupName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@Override
 	public List<Event> getEvents() {
-		return getEventDao().getEvents();
-	}
-
-	public EventDao getEventDao() {
-		return eventDao;
-	}
-
-	public void setEventDao(EventDao eventDao) {
-		this.eventDao = eventDao;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

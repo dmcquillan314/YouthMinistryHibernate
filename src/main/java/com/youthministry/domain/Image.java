@@ -2,11 +2,18 @@ package com.youthministry.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="IMAGE")
-public class Image extends PageContent {
+public class Image {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="IMAGE_ID")
+	private Long imageId;
 	@Column(name="PATH_TO_IMAGE")
 	private String pathToImage;
 	@Column(name="ALT_TEXT")

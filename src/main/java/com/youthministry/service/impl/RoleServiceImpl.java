@@ -4,57 +4,57 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import com.youthministry.dao.RoleDao;
 import com.youthministry.domain.Role;
+import com.youthministry.genericdao.GenericDao;
 import com.youthministry.service.RoleService;
 
 @Transactional(readOnly=true)
 public class RoleServiceImpl implements RoleService {
 
-	private RoleDao roleDao;
+	private GenericDao genericDao;
+	
+	public void setGenericDao(GenericDao genericDao) {
+		this.genericDao = genericDao;
+	}
+	
+	public GenericDao getGenericDao() {
+		return this.genericDao;
+	}
 	
 	@Transactional(readOnly=false)
 	@Override
 	public void addRole(Role role) {
-		getRoleDao().addRole(role);
+		getGenericDao().create(role);
 	}
 
 	@Transactional(readOnly=false)
 	@Override
 	public void updateRole(Role role) {
-		getRoleDao().updateRole(role);
+		getGenericDao().update(role);
 	}
 
 	@Transactional(readOnly=false)
 	@Override
 	public void deleteRole(Role role) {
-		getRoleDao().deleteRole(role);
+		getGenericDao().delete(role);
 	}
 
 	@Transactional(readOnly=true)
 	@Override
 	public Role getRoleById(Long id) {
-		return getRoleDao().getRoleById(id);
+		return (Role) getGenericDao().read(id);
 	}
 
-	@Transactional(readOnly=true)
 	@Override
 	public Role getRoleByName(String name) {
-		return getRoleDao().getRoleByName(name);
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	@Transactional(readOnly=true)
 	@Override
 	public List<Role> getRoles() {
-		return getRoleDao().getRoles();
-	}
-
-	public RoleDao getRoleDao() {
-		return roleDao;
-	}
-
-	public void setRoleDao(RoleDao roleDao) {
-		this.roleDao = roleDao;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
