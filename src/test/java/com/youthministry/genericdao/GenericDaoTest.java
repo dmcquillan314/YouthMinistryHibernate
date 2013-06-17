@@ -1,8 +1,7 @@
 package com.youthministry.genericdao;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,10 +21,11 @@ import com.youthministry.service.RoleService;
 import com.youthministry.service.UserService;
 
 import com.youthministry.domain.Event;
-import com.youthministry.domain.EventLocation;
 import com.youthministry.domain.Group;
 import com.youthministry.domain.Image;
+import com.youthministry.domain.Location;
 import com.youthministry.domain.Page;
+import com.youthministry.domain.PageContent;
 import com.youthministry.domain.Role;
 import com.youthministry.domain.TextEntry;
 import com.youthministry.domain.User;
@@ -76,45 +76,8 @@ public class GenericDaoTest {
     	logger.info(role.getName());
     }
     
-    public void testTextEntry() {
-    	TextEntry textEntry = new TextEntry();
-    	textEntry.setPageContentName("test case page content name");
-    	textEntry.setContentTitle("test case title");
-    	textEntry.setContentBody("test case body");
-    	textEntry.setLocation("test case location");
-    	
-    	Group group = new Group();
-    	Group group2 = new Group();
-    	group.setGroupName("test case group 1");
-    	group2.setGroupName("test case group name 2");
-    	
-    	ArrayList<Group> groups = new ArrayList<Group>();
-    	groups.add(group);
-    	groups.add(group2);
-    	
-    	textEntry.setGroups(groups);
-    	
-    	PageContentService.addPageContent(textEntry);
-    	logger.info(textEntry.toString());
-
-    	logger.info(textEntry.getPageContentId().toString());
-
-    	Long id = textEntry.getPageContentId();
-    	
-    	textEntry = null;
-
-    	textEntry = (TextEntry) PageContentService.getPageContentById(id);
-    	
-    	logger.info(textEntry.getPageContentId().toString());
-    	textEntry.setContentBody("updated content body");
-    	
-    	PageContentService.updatePageContent(textEntry);
-    	logger.info(textEntry.getContentBody());
-
-    	PageContentService.deletePageContent(textEntry);
-    }
     
-	//@Test
+	@Test
 	public void testGroupService() {
 		Group group = new Group();
 		Long id = createGroup(group);
@@ -122,7 +85,7 @@ public class GenericDaoTest {
 		GroupService.deleteGroup(group);
 	}
 
-	//@Test
+	@Test
 	public void testPageService() {
 		Page page = new Page();
 		page.setPageName("test page name");
@@ -143,7 +106,7 @@ public class GenericDaoTest {
 
 	}
 
-	//@Test
+	@Test
 	public void testUserService() {
 		User user = new User();
 		user.setUsername("test");
@@ -179,12 +142,89 @@ public class GenericDaoTest {
 
 	@Test
 	public void testPageContentService() {
+		PageContent pageContent = new PageContent();
+		pageContent.setPageContentName("test case page name");
+		pageContent.setContentTitle("test case content title");
+		pageContent.setContentBody("test case content body");
+		
+		Image image = new Image();
+		Image image2 = new Image();
+		image.setPathToImage("test case path to image");
+		image.setAltText("test case alt text");
+		image.setTitleText("test case alt text");
+		image2.setPathToImage("test case 2 path to image");
+		image2.setAltText("test case 2 alt text");
+		image2.setTitleText("test case 2 alt text");
+		ArrayList<Image> images = new ArrayList<Image>();
+		images.add(image);
+		images.add(image2);
+		pageContent.setImages(images);
+		
+		Group group = new Group();
+		Group group2 = new Group();
+		group.setGroupName("test case group name");
+		group2.setGroupName("test case group name 2");
+		ArrayList<Group> groups = new ArrayList<Group>();
+		groups.add(group);
+		groups.add(group2);
+		pageContent.setGroups(groups);
+		
+		PageContentService.addPageContent(pageContent);
+		
+		Long id = pageContent.getPageContentId();
+		pageContent = null;
+		
+		pageContent = PageContentService.getPageContentById(id);
+		
+		pageContent.setPageContentName("test case page name updated");
+		
+		PageContentService.updatePageContent(pageContent);
+		
+		PageContentService.deletePageContent(pageContent);
+		
 	}
 
+	@Test
 	public void testEventService() {
+		Event event = new Event();
+		event.setEventName("test case event name");
+		event.setEventDesc("test case event description");
+		Date startTime = new Date();
+		Date endTime = new Date();
+		event.setStartTime(startTime);
+		event.setEndTime(endTime);
+		
+		Group group = new Group();
+		Group group2 = new Group();
+		group.setGroupName("test case group name");
+		group2.setGroupName("test case group name 2");
+		ArrayList<Group> groups = new ArrayList<Group>();
+		groups.add(group);
+		groups.add(group2);
+
+		event.setGroups(groups);
+		
+		String city = "test city",
+			   country = "test country",
+			   locationName = "test location name",
+			   state = "test state",
+			   street = "test street",
+			   zipcode = "test zipcode";
+		
+		Location location = new Location();
+		location.setCity(city);
+		location.setCountry(country);
+		location.setLocationName(locationName);
+		location.setState(state);
+		location.setStreet(street);
+		location.setZipcode(zipcode);
+		
+		event.setLocation(location);
+		
+		EventService.addEvent(event);
 	}
 
-	//@Test
+	@Test
 	public void testRoleService() {
 		Role role = new Role();
 		Long id = createRole(role);

@@ -17,7 +17,6 @@
 	<bean id="Location" class="com.youthministry.domain.Location" />
 	<bean id="Image" class="com.youthministry.domain.Image" />
 	<bean id="PageContent" class="com.youthministry.domain.PageContent" />
-	<bean id="TextEntry" class="com.youthministry.domain.TextEntry" />
 	<bean id="Page" class="com.youthministry.domain.Page" />
 
 	<bean id="finderIntroductionAdvisor" class="com.youthministry.genericdao.finder.impl.FinderIntroductionAdvisor" />
@@ -91,6 +90,15 @@
 		class="com.youthministry.genericdao.impl.GenericDaoHibernateImpl">
 		<constructor-arg>
 			<value>com.youthministry.domain.PageContent</value>
+		</constructor-arg>
+		<property name="sessionFactory">
+			<ref bean="SessionFactory" />
+		</property>
+	</bean>
+	<bean id="imageDao"
+		class="com.youthministry.genericdao.impl.GenericDaoHibernateImpl">
+		<constructor-arg>
+			<value>com.youthministry.domain.Image</value>
 		</constructor-arg>
 		<property name="sessionFactory">
 			<ref bean="SessionFactory" />
