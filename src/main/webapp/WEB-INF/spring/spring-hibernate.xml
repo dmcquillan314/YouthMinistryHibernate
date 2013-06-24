@@ -60,7 +60,7 @@
 	</bean>
 
 	<!-- DAO Declaration -->
-	<bean id="personDao" parent="abstractDao">
+	<bean id="userDao" parent="abstractDao">
 	    <property name="proxyInterfaces">
 	        <value>com.youthministry.dao.UserDao</value>
 	    </property>
@@ -124,7 +124,7 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/YouthMinistry" />
 		<property name="username" value="root" />
-		<property name="password" value="" />
+		<property name="password" value="snow314eagle159" />
 	</bean>
 	<!-- Session Factory Declaration -->
 	<bean id="SessionFactory"

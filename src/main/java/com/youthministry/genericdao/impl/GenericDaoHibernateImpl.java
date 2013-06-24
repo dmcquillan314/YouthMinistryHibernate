@@ -31,6 +31,10 @@ public class GenericDaoHibernateImpl<T, PK extends Serializable> implements Gene
 
     private Class<T> type;
 
+    public GenericDaoHibernateImpl() {
+    	
+    }
+    
     public GenericDaoHibernateImpl(Class<T> type)
     {
         this.type = type;
