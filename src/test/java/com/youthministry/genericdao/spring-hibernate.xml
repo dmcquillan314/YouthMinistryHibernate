@@ -17,6 +17,7 @@
 	<bean id="Location" class="com.youthministry.domain.Location" />
 	<bean id="Image" class="com.youthministry.domain.Image" />
 	<bean id="PageContent" class="com.youthministry.domain.PageContent" />
+	<bean id="TextEntry" class="com.youthministry.domain.TextEntry" />
 	<bean id="Page" class="com.youthministry.domain.Page" />
 
 	<bean id="finderIntroductionAdvisor" class="com.youthministry.genericdao.finder.impl.FinderIntroductionAdvisor" />
@@ -59,15 +60,18 @@
 	</bean>
 
 	<!-- DAO Declaration -->
-	<bean id="userDao"
-		class="com.youthministry.genericdao.impl.GenericDaoHibernateImpl">
-		<constructor-arg>
-			<value>com.youthministry.domain.User</value>
-		</constructor-arg>
-		<property name="sessionFactory">
-			<ref bean="SessionFactory" />
-		</property>
-	</bean>
+	<bean id="userDao" parent="abstractDao">
+	    <property name="proxyInterfaces">
+	        <value>com.youthministry.dao.UserDao</value>
+	    </property>
+	    <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.youthministry.domain.User</value>
+	            </constructor-arg>
+	        </bean>
+	    </property>
+	</bean>	
 	<bean id="groupDao"
 		class="com.youthministry.genericdao.impl.GenericDaoHibernateImpl">
 		<constructor-arg>
@@ -90,15 +94,6 @@
 		class="com.youthministry.genericdao.impl.GenericDaoHibernateImpl">
 		<constructor-arg>
 			<value>com.youthministry.domain.PageContent</value>
-		</constructor-arg>
-		<property name="sessionFactory">
-			<ref bean="SessionFactory" />
-		</property>
-	</bean>
-	<bean id="imageDao"
-		class="com.youthministry.genericdao.impl.GenericDaoHibernateImpl">
-		<constructor-arg>
-			<value>com.youthministry.domain.Image</value>
 		</constructor-arg>
 		<property name="sessionFactory">
 			<ref bean="SessionFactory" />
@@ -129,7 +124,7 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/YouthMinistry" />
 		<property name="username" value="root" />
-		<property name="password" value="" />
+		<property name="password" value="snow314eagle159" />
 	</bean>
 	<!-- Session Factory Declaration -->
 	<bean id="SessionFactory"

@@ -2,6 +2,7 @@ package com.youthministry.genericdao;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,6 +21,7 @@ import com.youthministry.service.PageService;
 import com.youthministry.service.RoleService;
 import com.youthministry.service.UserService;
 
+import com.youthministry.dao.UserDao;
 import com.youthministry.domain.Event;
 import com.youthministry.domain.Group;
 import com.youthministry.domain.Image;
@@ -48,6 +50,9 @@ public class GenericDaoTest {
 	protected EventService EventService;
 	@Autowired
 	protected RoleService RoleService;
+	
+	@Autowired
+	protected UserDao userDao;
 
     final Logger logger = LoggerFactory.getLogger(GenericDaoTest.class);
     
@@ -125,6 +130,9 @@ public class GenericDaoTest {
     	logger.info(user.getUserProfile().getLastName());
 		
 		user = UserService.getUserById(id);
+
+		List<User> u = userDao.findByUsername("test"); // Runtime exception
+		user = u.get(0);
 		
 		user.setUsername("test updated");
 		user.setPassword("test updated");

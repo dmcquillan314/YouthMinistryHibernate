@@ -60,15 +60,18 @@
 	</bean>
 
 	<!-- DAO Declaration -->
-	<bean id="userDao"
-		class="com.youthministry.genericdao.impl.GenericDaoHibernateImpl">
-		<constructor-arg>
-			<value>com.youthministry.domain.User</value>
-		</constructor-arg>
-		<property name="sessionFactory">
-			<ref bean="SessionFactory" />
-		</property>
-	</bean>
+	<bean id="personDao" parent="abstractDao">
+	    <property name="proxyInterfaces">
+	        <value>com.youthministry.dao.UserDao</value>
+	    </property>
+	    <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.youthministry.domain.User</value>
+	            </constructor-arg>
+	        </bean>
+	    </property>
+	</bean>	
 	<bean id="groupDao"
 		class="com.youthministry.genericdao.impl.GenericDaoHibernateImpl">
 		<constructor-arg>
