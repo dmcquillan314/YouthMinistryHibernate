@@ -129,7 +129,7 @@ public class GenericDaoTest {
     	logger.info(user.getUserProfile().getFirstName());
     	logger.info(user.getUserProfile().getLastName());
 		
-		user = UserService.getUserById(id);
+		user = UserService.getByUserId(id);
 
 		List<User> u = userDao.findByUsername("test"); // Runtime exception
 		user = u.get(0);

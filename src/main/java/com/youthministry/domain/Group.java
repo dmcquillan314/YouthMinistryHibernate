@@ -5,8 +5,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+@NamedQueries({
+	@NamedQuery(
+		name = "Group.findByUsername",
+		query = "from Group g where g.groupName = :name"
+	),
+	@NamedQuery(
+		name = "Group.findAll",
+		query = "from Group"
+	)
+})
 @Entity(name="GROUP_DETAIL")
 @Table(name="GROUP_DETAIL")
 public class Group {

@@ -41,22 +41,22 @@
 
 	<!-- User Service Declaration -->
 	<bean id="UserService" class="com.youthministry.service.impl.UserServiceImpl">
-		<property name="genericDao" ref="userDao" />
+		<property name="userDao" ref="userDao" />
 	</bean>
 	<bean id="GroupService" class="com.youthministry.service.impl.GroupServiceImpl">
-		<property name="genericDao" ref="groupDao" />
+		<property name="groupDao" ref="groupDao" />
 	</bean>
 	<bean id="EventService" class="com.youthministry.service.impl.EventServiceImpl">
-		<property name="genericDao" ref="eventDao" />
+		<property name="eventDao" ref="eventDao" />
 	</bean>
 	<bean id="PageContentService" class="com.youthministry.service.impl.PageContentServiceImpl">
-		<property name="genericDao" ref="pageContentDao" />
+		<property name="pageContentDao" ref="pageContentDao" />
 	</bean>
 	<bean id="PageService" class="com.youthministry.service.impl.PageServiceImpl">
-		<property name="genericDao" ref="pageDao" />
+		<property name="pageDao" ref="pageDao" />
 	</bean>
 	<bean id="RoleService" class="com.youthministry.service.impl.RoleServiceImpl">
-		<property name="genericDao" ref="roleDao" />
+		<property name="roleDao" ref="roleDao" />
 	</bean>
 
 	<!-- DAO Declaration -->
@@ -72,51 +72,66 @@
 	        </bean>
 	    </property>
 	</bean>	
-	<bean id="groupDao"
-		class="com.youthministry.genericdao.impl.GenericDaoHibernateImpl">
-		<constructor-arg>
-			<value>com.youthministry.domain.Group</value>
-		</constructor-arg>
-		<property name="sessionFactory">
-			<ref bean="SessionFactory" />
-		</property>
-	</bean>
-	<bean id="eventDao"
-		class="com.youthministry.genericdao.impl.GenericDaoHibernateImpl">
-		<constructor-arg>
-			<value>com.youthministry.domain.Event</value>
-		</constructor-arg>
-		<property name="sessionFactory">
-			<ref bean="SessionFactory" />
-		</property>
-	</bean>
-	<bean id="pageContentDao"
-		class="com.youthministry.genericdao.impl.GenericDaoHibernateImpl">
-		<constructor-arg>
-			<value>com.youthministry.domain.PageContent</value>
-		</constructor-arg>
-		<property name="sessionFactory">
-			<ref bean="SessionFactory" />
-		</property>
-	</bean>
-	<bean id="pageDao"
-		class="com.youthministry.genericdao.impl.GenericDaoHibernateImpl">
-		<constructor-arg>
-			<value>com.youthministry.domain.Page</value>
-		</constructor-arg>
-		<property name="sessionFactory">
-			<ref bean="SessionFactory" />
-		</property>
-	</bean>
-	<bean id="roleDao"
-		class="com.youthministry.genericdao.impl.GenericDaoHibernateImpl">
-		<constructor-arg>
-			<value>com.youthministry.domain.Role</value>
-		</constructor-arg>
-		<property name="sessionFactory">
-			<ref bean="SessionFactory" />
-		</property>
-	</bean>
+	<bean id="groupDao" parent="abstractDao">
+	    <property name="proxyInterfaces">
+	        <value>com.youthministry.dao.GroupDao</value>
+	    </property>
+	    <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.youthministry.domain.Group</value>
+	            </constructor-arg>
+	        </bean>
+	    </property>
+	</bean>	
+	<bean id="eventDao" parent="abstractDao">
+	    <property name="proxyInterfaces">
+	        <value>com.youthministry.dao.EventDao</value>
+	    </property>
+	    <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.youthministry.domain.Event</value>
+	            </constructor-arg>
+	        </bean>
+	    </property>
+	</bean>	
+	<bean id="pageContentDoa" parent="abstractDao">
+	    <property name="proxyInterfaces">
+	        <value>com.youthministry.dao.PageContentDao</value>
+	    </property>
+	    <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.youthministry.domain.PageContent</value>
+	            </constructor-arg>
+	        </bean>
+	    </property>
+	</bean>	
+	<bean id="pageDao" parent="abstractDao">
+	    <property name="proxyInterfaces">
+	        <value>com.youthministry.dao.PageDao</value>
+	    </property>
+	    <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.youthministry.domain.Page</value>
+	            </constructor-arg>
+	        </bean>
+	    </property>
+	</bean>	
+	<bean id="roleDao" parent="abstractDao">
+	    <property name="proxyInterfaces">
+	        <value>com.youthministry.dao.RoleDao</value>
+	    </property>
+	    <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.youthministry.domain.Role</value>
+	            </constructor-arg>
+	        </bean>
+	    </property>
+	</bean>	
 
 	<!-- Data Source Declaration -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"

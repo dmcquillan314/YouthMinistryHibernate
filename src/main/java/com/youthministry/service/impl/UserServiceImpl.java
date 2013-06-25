@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.youthministry.dao.UserDao;
 import com.youthministry.domain.User;
 import com.youthministry.domain.Group;
 import com.youthministry.domain.Role;
@@ -16,26 +18,19 @@ import com.youthministry.service.UserService;
 @Transactional(readOnly=true)
 public class UserServiceImpl implements UserService {
 
-	private GenericDao genericDao;
-	
-	public void setGenericDao(GenericDao genericDao) {
-		this.genericDao = genericDao;
-	}
-	
-	public GenericDao getGenericDao() {
-		return this.genericDao;
-	}
+	@Autowired
+	private UserDao userDao;
 	
 	@Transactional(readOnly=false)
 	@Override
 	public void addUser(User user) {
-		getGenericDao().create(user);
+		userDao.create(user);
 	}
 
 	@Transactional(readOnly=false)
 	@Override
 	public void updateUser(User user) {
-		User uTemp = (User) getGenericDao().read(user.getUserId());
+		User uTemp = (User) userDao.read(user.getUserId());
 		if(user.getPassword() != null && !"".equals(user.getPassword())) {
 			uTemp.setPassword(user.getPassword());
 		}
@@ -56,37 +51,31 @@ public class UserServiceImpl implements UserService {
 			}			
 		}
 		//System.out.println("update user");
-		getGenericDao().update(uTemp);
+		userDao.update(uTemp);
 	}
 
 	@Transactional(readOnly=false)
 	@Override
 	public void deleteUser(User user) {
-		getGenericDao().delete(user);
+		userDao.delete(user);
 	}
 
 	@Transactional(readOnly=true)
 	@Override
-	public User getUserById(Long id) {
-		return (User) getGenericDao().read(id);
+	public User getByUserId(Long id) {
+		return (User) userDao.read(id);
 	}
 
 	@Override
-	public User getUserByName(String username) {
+	public User getByUsername(String username) {
 		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public User getUserByIdWithGroups(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return (User) userDao.findByUsername(username);
 	}
 
 	@Override
 	public List<User> getUsers() {
 		// TODO Auto-generated method stub
-		return null;
+		return (List<User>) userDao.findAll();
 	}
 
 }

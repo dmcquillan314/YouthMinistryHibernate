@@ -4,8 +4,20 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+@NamedQueries({
+	@NamedQuery(
+		name = "Role.findByName",
+		query = "from Role r where r.name = :name"
+	),
+	@NamedQuery(
+		name = "Role.findAll",
+		query = "from Role"
+	)
+})
 @Entity
 @Table(name="ROLE")
 public class Role

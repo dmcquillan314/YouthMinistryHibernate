@@ -16,12 +16,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+@NamedQueries(
+	@NamedQuery(
+		name = "PageContent.findAll",
+		query = "from PageContent"
+	)
+)
 @Entity(name="PAGE_CONTENT")
 @Table(name="PAGE_CONTENT")
 @Inheritance (strategy=InheritanceType.JOINED)

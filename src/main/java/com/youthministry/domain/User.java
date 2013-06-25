@@ -29,8 +29,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @NamedQueries({
 	@NamedQuery(
-	name = "User.findByUsername",
-	query = "from User u where u.username = :username"
+		name = "User.findByUsername",
+		query = "from User u where u.username = :username"
+	),
+	@NamedQuery(
+		name = "User.findAll",
+		query = "from User"
 	)
 })
 @Entity

@@ -46,8 +46,6 @@ public class AdminController {
 		map.addAttribute("users", UserService.getUsers());
 		map.addAttribute("groups", GroupService.getGroups());
 		map.addAttribute("contentItems", PageContentService.getAllPageContent());
-		map.addAttribute("images", PageContentService.getAllImageEntries());
-		map.addAttribute("textEntries", PageContentService.getAllTextEntries());
 		map.addAttribute("events", EventService.getEvents());
 		map.addAttribute("roles", RoleService.getRoles());
 		map.addAttribute("pages", PageService.getPages());

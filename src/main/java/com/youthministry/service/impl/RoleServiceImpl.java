@@ -2,8 +2,10 @@ package com.youthministry.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.youthministry.dao.RoleDao;
 import com.youthministry.domain.Role;
 import com.youthministry.genericdao.GenericDao;
 import com.youthministry.service.RoleService;
@@ -11,50 +13,41 @@ import com.youthministry.service.RoleService;
 @Transactional(readOnly=true)
 public class RoleServiceImpl implements RoleService {
 
-	private GenericDao genericDao;
-	
-	public void setGenericDao(GenericDao genericDao) {
-		this.genericDao = genericDao;
-	}
-	
-	public GenericDao getGenericDao() {
-		return this.genericDao;
-	}
+	@Autowired
+	private RoleDao roleDao;
 	
 	@Transactional(readOnly=false)
 	@Override
 	public void addRole(Role role) {
-		getGenericDao().create(role);
+		roleDao.create(role);
 	}
 
 	@Transactional(readOnly=false)
 	@Override
 	public void updateRole(Role role) {
-		getGenericDao().update(role);
+		roleDao.update(role);
 	}
 
 	@Transactional(readOnly=false)
 	@Override
 	public void deleteRole(Role role) {
-		getGenericDao().delete(role);
+		roleDao.delete(role);
 	}
 
 	@Transactional(readOnly=true)
 	@Override
 	public Role getRoleById(Long id) {
-		return (Role) getGenericDao().read(id);
+		return (Role) roleDao.read(id);
 	}
 
 	@Override
 	public Role getRoleByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return roleDao.findByName(name).get(0);
 	}
 
 	@Override
 	public List<Role> getRoles() {
-		// TODO Auto-generated method stub
-		return null;
+		return roleDao.findAll();
 	}
 
 }

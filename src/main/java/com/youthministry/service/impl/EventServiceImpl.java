@@ -2,8 +2,10 @@ package com.youthministry.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.youthministry.dao.EventDao;
 import com.youthministry.domain.Event;
 import com.youthministry.genericdao.GenericDao;
 import com.youthministry.service.EventService;
@@ -11,56 +13,41 @@ import com.youthministry.service.EventService;
 @Transactional(readOnly=true)
 public class EventServiceImpl implements EventService {
 
-	private GenericDao genericDao;
-	
-	public void setGenericDao(GenericDao genericDao) {
-		this.genericDao = genericDao;
-	}
-	
-	public GenericDao getGenericDao() {
-		return this.genericDao;
-	}
+	@Autowired
+	private EventDao eventDao;
 	
 	@Transactional(readOnly=false)
 	@Override
 	public void addEvent(Event event) {
-		getGenericDao().create(event);
+		eventDao.create(event);
 	}
 
 	@Transactional(readOnly=false)
 	@Override
 	public void updateEvent(Event event) {
-		getGenericDao().update(event);
+		eventDao.update(event);
 	}
 
 	@Transactional(readOnly=false)
 	@Override
 	public void deleteEvent(Event event) {
-		getGenericDao().delete(event);
+		eventDao.delete(event);
 	}
 
 	@Transactional(readOnly=true)
 	@Override
 	public Event getEventById(Long id) {
-		return (Event) getGenericDao().read(id);
+		return (Event) eventDao.read(id);
 	}
 
 	@Override
 	public Event getGroupByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Event> getEventsForGroup(String groupName) {
-		// TODO Auto-generated method stub
-		return null;
+		return eventDao.findByName(name).get(0);
 	}
 
 	@Override
 	public List<Event> getEvents() {
-		// TODO Auto-generated method stub
-		return null;
+		return eventDao.findAll();
 	}
 
 }

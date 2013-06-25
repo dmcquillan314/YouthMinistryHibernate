@@ -7,13 +7,13 @@ import com.youthministry.domain.Page;
 
 public interface PageService {
 	
-	public void addPage(Object object);
+	public void addPage(Page page);
 	
-	public void updatePage(Object object);
+	public void updatePage(Page page);
 	
-	public void deletePage(Object object);
+	public void deletePage(Page page);
 	
-	public Page getPageById(long id);
+	public Page getPageById(Long id);
 	
 	public List<Page> getPages();
 }

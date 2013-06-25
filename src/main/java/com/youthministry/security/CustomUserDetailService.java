@@ -16,7 +16,7 @@ public class CustomUserDetailService implements UserDetailsService {
 			throws UsernameNotFoundException {
 		ApplicationContext context = ContextLoader.getCurrentWebApplicationContext();
 		UserService userService = (UserService)context.getBean("UserService");
-		User user = userService.getUserByName(username);
+		User user = userService.getByUsername(username);
 		return user;
 	}
 

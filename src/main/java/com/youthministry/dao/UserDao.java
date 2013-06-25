@@ -7,4 +7,5 @@ import com.youthministry.genericdao.GenericDao;
 
 public interface UserDao extends GenericDao<User, Long> {
 	List<User> findByUsername(String username);
+	List<User> findAll();
 }
