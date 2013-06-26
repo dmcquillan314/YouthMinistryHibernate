@@ -40,14 +40,7 @@ public interface EventService {
 	 * @param String name
 	 */
 	public Event getGroupByName(String name);
-	
-	/**
-	 * Get Event by name
-	 * 
-	 * @param String name
-	 */
-	public List<Event> getEventsForGroup(String groupName);
-	
+		
 	/**
 	 * Get all Events
 	 * 

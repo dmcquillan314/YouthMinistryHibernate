@@ -24,7 +24,7 @@ public class SignInUtils {
 		// TODO: change third param to use custom getAuthorities method in customUserDetailsService
 		ApplicationContext context = ContextLoader.getCurrentWebApplicationContext();
 		UserService userService = (UserService)context.getBean("UserService");
-		User user = userService.getUserByName(userId);
+		User user = userService.getByUsername(userId);
 		Authentication authentication = new UsernamePasswordAuthenticationToken(userId,null,user.getAuthorities());
 		SecurityContextHolder.getContext().setAuthentication(authentication);	
 	}
