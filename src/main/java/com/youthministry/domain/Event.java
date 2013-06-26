@@ -14,12 +14,24 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 
+@NamedQueries({
+	@NamedQuery(
+		name = "Event.findByName",
+		query = "from Event e where e.eventName = :name"
+	),
+	@NamedQuery(
+		name = "Event.findAll",
+		query = "from Event"
+	)
+})
 @Entity
 @Table(name="EVENT")
 public class Event {

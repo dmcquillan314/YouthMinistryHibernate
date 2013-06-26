@@ -21,34 +21,26 @@ public interface PageContentService {
 	 * 
 	 * @param PageContent pageContent
 	 */
-	public void addPageContent(Object pageContent);
+	public void addPageContent(PageContent pageContent);
 	
 	/**
 	 * Update PageContent Entry
 	 * 
 	 * @param PageContent pageContent
 	 */
-	public void updatePageContent(Object pageContent);
+	public void updatePageContent(PageContent pageContent);
 	
 	/**
 	 * Delete PageContent Entry
 	 * 
 	 * @param PageContent pageContent
 	 */
-	public void deletePageContent(Object pageContent);
+	public void deletePageContent(PageContent pageContent);
 	
 	/**
 	 * Get all PageContent Entries
 	 * 
 	 * @param 
 	 */
-	public ArrayList<? extends PageContent> getAllPageContent();
-
-	ArrayList<? extends PageContent> getAllImageEntries();
-
-	ArrayList<? extends PageContent> getAllTextEntries();
-
-	List<? extends PageContent> getAllTextEntriesForGroup(String groupName);
-
-	List<? extends PageContent> getAllImageEntriesForGroup(String groupName);
+	public List<PageContent> getAllPageContent();
 }

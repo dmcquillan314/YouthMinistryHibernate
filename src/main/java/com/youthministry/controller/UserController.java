@@ -41,9 +41,7 @@ public class UserController {
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("groupName", groupName);
 		model.put("groups", GroupService.getGroups());
-		model.put("events", EventService.getEventsForGroup(groupName));
-		model.put("images", PageContentService.getAllImageEntriesForGroup(groupName));
-		model.put("textEntries", PageContentService.getAllTextEntriesForGroup(groupName));
+		model.put("events", EventService.getEvents());
 		return new ModelAndView("viewGroup", "model", model);
 	}
 	
