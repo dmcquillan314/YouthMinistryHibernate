@@ -96,7 +96,7 @@
 	        </bean>
 	    </property>
 	</bean>	
-	<bean id="pageContentDoa" parent="abstractDao">
+	<bean id="pageContentDao" parent="abstractDao">
 	    <property name="proxyInterfaces">
 	        <value>com.youthministry.dao.PageContentDao</value>
 	    </property>

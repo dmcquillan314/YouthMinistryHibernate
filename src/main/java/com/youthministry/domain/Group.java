@@ -12,11 +12,11 @@ import javax.persistence.Table;
 @NamedQueries({
 	@NamedQuery(
 		name = "Group.findByUsername",
-		query = "from Group g where g.groupName = :name"
+		query = "from GROUP_DETAIL g where g.groupName = :name"
 	),
 	@NamedQuery(
 		name = "Group.findAll",
-		query = "from Group"
+		query = "from GROUP_DETAIL"
 	)
 })
 @Entity(name="GROUP_DETAIL")

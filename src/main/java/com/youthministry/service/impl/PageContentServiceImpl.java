@@ -14,37 +14,44 @@ import com.youthministry.service.PageContentService;
 @Transactional(readOnly=true)
 public class PageContentServiceImpl implements PageContentService {
 
-	@Autowired
 	private PageContentDao pageContentDao;
+	
+	public void setPageContentDao(PageContentDao pageContentDao) {
+		this.pageContentDao = pageContentDao;
+	}
+	
+	public PageContentDao getPageContentDao() {
+		return pageContentDao;
+	}
 	
 	@Transactional(readOnly=true)
 	@Override
 	public PageContent getPageContentById(Long id) {
-		return (PageContent) pageContentDao.read(id);
+		return (PageContent) getPageContentDao().read(id);
 	}
 	
 	@Transactional(readOnly=false)
 	@Override
 	public void addPageContent(PageContent pageContent) {
-		pageContentDao.create(pageContent);
+		getPageContentDao().create(pageContent);
 	}
 
 	@Transactional(readOnly=false)
 	@Override
 	public void updatePageContent(PageContent pageContent) {
-		pageContentDao.update(pageContent);
+		getPageContentDao().update(pageContent);
 	}
 
 	@Transactional(readOnly=false)
 	@Override
 	public void deletePageContent(PageContent pageContent) {
-		pageContentDao.delete(pageContent);
+		getPageContentDao().delete(pageContent);
 	}
 
 	@Override
 	public List<PageContent> getAllPageContent() {
 		// TODO Auto-generated method stub
-		return pageContentDao.findAll();
+		return getPageContentDao().findAll();
 	}	
 
 }

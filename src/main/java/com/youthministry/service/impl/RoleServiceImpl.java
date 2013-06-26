@@ -13,41 +13,48 @@ import com.youthministry.service.RoleService;
 @Transactional(readOnly=true)
 public class RoleServiceImpl implements RoleService {
 
-	@Autowired
 	private RoleDao roleDao;
+	
+	public void setRoleDao(RoleDao roleDao) {
+		this.roleDao = roleDao;
+	}
+	
+	public RoleDao getRoleDao() {
+		return roleDao;
+	}
 	
 	@Transactional(readOnly=false)
 	@Override
 	public void addRole(Role role) {
-		roleDao.create(role);
+		getRoleDao().create(role);
 	}
 
 	@Transactional(readOnly=false)
 	@Override
 	public void updateRole(Role role) {
-		roleDao.update(role);
+		getRoleDao().update(role);
 	}
 
 	@Transactional(readOnly=false)
 	@Override
 	public void deleteRole(Role role) {
-		roleDao.delete(role);
+		getRoleDao().delete(role);
 	}
 
 	@Transactional(readOnly=true)
 	@Override
 	public Role getRoleById(Long id) {
-		return (Role) roleDao.read(id);
+		return (Role) getRoleDao().read(id);
 	}
 
 	@Override
 	public Role getRoleByName(String name) {
-		return roleDao.findByName(name).get(0);
+		return getRoleDao().findByName(name).get(0);
 	}
 
 	@Override
 	public List<Role> getRoles() {
-		return roleDao.findAll();
+		return getRoleDao().findAll();
 	}
 
 }

@@ -27,7 +27,7 @@ import org.hibernate.annotations.FetchMode;
 @NamedQueries(
 	@NamedQuery(
 		name = "PageContent.findAll",
-		query = "from PageContent"
+		query = "from PAGE_CONTENT"
 	)
 )
 @Entity(name="PAGE_CONTENT")

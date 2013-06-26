@@ -13,37 +13,44 @@ import com.youthministry.service.PageService;
 @Transactional(readOnly=true)
 public class PageServiceImpl implements PageService {
 
-	@Autowired
 	private PageDao pageDao;
+	
+	public void setPageDao(PageDao pageDao) {
+		this.pageDao = pageDao;
+	}
+	
+	public PageDao getPageDao() {
+		return pageDao;
+	}
 	
 	@Transactional(readOnly=false)
 	@Override
 	public void addPage(Page page) {
-		pageDao.create(page);
+		getPageDao().create(page);
 	}
 
 	@Transactional(readOnly=false)
 	@Override
 	public void updatePage(Page page) {
-		pageDao.update(page);
+		getPageDao().update(page);
 	}
 
 	@Transactional(readOnly=false)
 	@Override
 	public void deletePage(Page page) {
-		pageDao.delete(page);
+		getPageDao().delete(page);
 	}
 
 	@Transactional(readOnly=true)
 	@Override
 	public Page getPageById(Long id) {
-		return (Page) pageDao.read(id);
+		return (Page) getPageDao().read(id);
 	}
 
 	@Override
 	public List<Page> getPages() {
 		// TODO Auto-generated method stub
-		return pageDao.findAll();
+		return getPageDao().findAll();
 	}
 	
 }

@@ -18,19 +18,26 @@ import com.youthministry.service.UserService;
 @Transactional(readOnly=true)
 public class UserServiceImpl implements UserService {
 
-	@Autowired
 	private UserDao userDao;
+	
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
+	}
+	
+	public UserDao getUserDao() {
+		return userDao;
+	}
 	
 	@Transactional(readOnly=false)
 	@Override
 	public void addUser(User user) {
-		userDao.create(user);
+		getUserDao().create(user);
 	}
 
 	@Transactional(readOnly=false)
 	@Override
 	public void updateUser(User user) {
-		User uTemp = (User) userDao.read(user.getUserId());
+		User uTemp = (User) getUserDao().read(user.getUserId());
 		if(user.getPassword() != null && !"".equals(user.getPassword())) {
 			uTemp.setPassword(user.getPassword());
 		}
@@ -51,31 +58,29 @@ public class UserServiceImpl implements UserService {
 			}			
 		}
 		//System.out.println("update user");
-		userDao.update(uTemp);
+		getUserDao().update(uTemp);
 	}
 
 	@Transactional(readOnly=false)
 	@Override
 	public void deleteUser(User user) {
-		userDao.delete(user);
+		getUserDao().delete(user);
 	}
 
 	@Transactional(readOnly=true)
 	@Override
 	public User getByUserId(Long id) {
-		return (User) userDao.read(id);
+		return (User) getUserDao().read(id);
 	}
 
 	@Override
 	public User getByUsername(String username) {
-		// TODO Auto-generated method stub
-		return (User) userDao.findByUsername(username);
+		return (User) getUserDao().findByUsername(username);
 	}
 
 	@Override
 	public List<User> getUsers() {
-		// TODO Auto-generated method stub
-		return (List<User>) userDao.findAll();
+		return (List<User>) getUserDao().findAll();
 	}
 
 }
