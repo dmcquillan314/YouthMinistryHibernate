@@ -27,7 +27,7 @@ public class Group {
 	@Column(name="GROUP_ID")
 	private Long groupId;
 	
-	@Column(name = "GROUP_NAME", unique = true, nullable = false)
+	@Column(name = "GROUP_NAME", unique = false, nullable = false)
 	private String groupName;
 	@Column(name="GROUP_DESC")
 	private String groupDesc;

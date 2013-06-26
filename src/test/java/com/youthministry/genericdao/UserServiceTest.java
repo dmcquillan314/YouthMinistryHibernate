@@ -37,42 +37,42 @@ import com.youthministry.domain.UserProfile;
 @ContextConfiguration(locations = { "root-context.xml"}) 
 @TransactionConfiguration
 @Transactional
-public class PageServiceTest {
+public class UserServiceTest {
 	@Autowired
-	protected PageService PageService;
-
-    final Logger logger = LoggerFactory.getLogger(PageServiceTest.class);
+	protected UserService UserService;
+	
+    final Logger logger = LoggerFactory.getLogger(UserService.class);
     
-	public Long testCreatePage() {
-		Page page = new Page();
-		page.setPageName("test page name");
-		page.setPageUrl("test page url");
-		PageService.addPage(page);
-		Long id = page.getPageId();
+	public Long testCreateUser() {
+		User user = new User();
+		user.setUsername("test");
+		user.setPassword("test");
+		UserProfile userProfile = new UserProfile();
+		user.setUserProfile(userProfile);
+		user.getUserProfile().setFirstName("firstName");
+		user.getUserProfile().setLastName("lastName");
 		
-		return id;
-	}
-	
-	@Test
-	public void testReadPage() {
-		Long id = testCreatePage();
-		Page page = PageService.getPageById(id);
-	}
-	
-	@Test
-	public void testUpdatePage() {
-		Long id = testCreatePage();
-		Page page = PageService.getPageById(id);
-		page.setPageName("test page name updated");
+		UserService.addUser(user);
 		
-		PageService.updatePage(page);
+		return user.getUserId();
 	}
 	
 	@Test
-	public void testDeletePage() {
-		Long id = testCreatePage();
-		Page page = PageService.getPageById(id);
-		PageService.deletePage(page);
+	public void testReadUser() {
+		User user = UserService.getByUserId(testCreateUser());
+	}
+	
+	@Test
+	public void testUpdateUser() {
+		User user = UserService.getByUserId(testCreateUser());
+		user.setUsername("test updated");
+		UserService.updateUser(user);
+	}
+	
+	@Test
+	public void testDeleteUser() {
+		User user = UserService.getByUserId(testCreateUser());
+    	UserService.deleteUser(user);
 	}
 
 }
