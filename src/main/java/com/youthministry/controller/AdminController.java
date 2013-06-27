@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.youthministry.domain.Group;
+import com.youthministry.domain.PageContent;
 import com.youthministry.domain.User;
 import com.youthministry.domain.Image;
 import com.youthministry.domain.TextEntry;
@@ -22,6 +23,7 @@ import com.youthministry.service.PageContentService;
 import com.youthministry.service.PageService;
 import com.youthministry.service.RoleService;
 import com.youthministry.service.UserService;
+import com.youthministry.service.ImageService;
 
 @Controller
 public class AdminController {
@@ -38,6 +40,8 @@ public class AdminController {
 	protected EventService EventService;
 	@Autowired
 	protected RoleService RoleService;
+	@Autowired
+	protected ImageService ImageService;
 	
 	protected Validator validator;
 	
@@ -49,6 +53,7 @@ public class AdminController {
 		map.addAttribute("events", EventService.getEvents());
 		map.addAttribute("roles", RoleService.getRoles());
 		map.addAttribute("pages", PageService.getPages());
+		map.addAttribute("images", ImageService.getAll());
 		return "admin";
 	}
 	@ModelAttribute(value="user")
@@ -63,9 +68,9 @@ public class AdminController {
 	public Image getImage() {
 		return new Image();
 	}
-	@ModelAttribute(value="textEntry")
-	public TextEntry getTextEntry() {
-		return new TextEntry();
+	@ModelAttribute(value="pageContent")
+	public PageContent getPageContent() {
+		return new PageContent();
 	}
 	@ModelAttribute(value="event")
 	public Event getEvent() {

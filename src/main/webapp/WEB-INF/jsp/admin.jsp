@@ -155,7 +155,7 @@
 		<button type="submit">Create Image</button>
 	</form:form>	
 		
-	<h4>Manage content items</h4>
+	<%-- <h4>Manage content items</h4>
 	
 	<c:forEach items="${contentItems}" var="contentItem">
 		<form:form action="/admin/updatepagecontent/${contentItem.pageContentId}" method="POST" commandName="pageContent">
@@ -199,7 +199,7 @@
 			</fieldset>
 			<button type="submit">Update Page Content</button>		
 		</form:form>
-	</c:forEach>
+	</c:forEach>--%>
 	
 	<form:form action="/admin/createpagecontent" method="POST" commandName="pageContent">
 		<div class="formInfo">
