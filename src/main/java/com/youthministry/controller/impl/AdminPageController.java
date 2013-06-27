@@ -38,6 +38,7 @@ public class AdminPageController extends AbstractAdminController {
 		map.addAttribute("events", EventService.getEvents());
 		map.addAttribute("roles", RoleService.getRoles());
 		map.addAttribute("pages", PageService.getPages());
+		map.addAttribute("images", ImageService.getAll());
 		Page page = (Page) object;
 		this.setValidator(new PageValidator());
 		this.getValidator().validate(page, errors);

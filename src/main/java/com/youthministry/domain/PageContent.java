@@ -40,15 +40,7 @@ public class PageContent {
 	private Long pageContentId;
 	@Column(name="PAGE_CONTENT_NAME", nullable=false)
 	private String pageContentName;
-	
-	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.EAGER)
-	@JoinTable(name = "GROUP_PAGE_CONTENT",
-		joinColumns = @JoinColumn(name = "PAGE_CONTENT_ID"),
-		inverseJoinColumns = @JoinColumn(name = "GROUP_ID"))
-	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)	
-	@Fetch(FetchMode.SELECT)
-	private Collection<Group> groups = new ArrayList<Group>();
-	
+		
 	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.EAGER)
 	@JoinTable(name = "IMAGE_PAGE_CONTENT",
 	joinColumns = @JoinColumn(name = "PAGE_CONTENT_ID"),
@@ -74,12 +66,6 @@ public class PageContent {
 	}
 	public void setPageContentName(String pageContentName) {
 		this.pageContentName = pageContentName;
-	}
-	public Collection<Group> getGroups() {
-		return groups;
-	}
-	public void setGroups(Collection<Group> groups) {
-		this.groups = groups;
 	}
 	public Collection<Image> getImages() {
 		return images;

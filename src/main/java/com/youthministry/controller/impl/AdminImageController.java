@@ -10,15 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.youthministry.controller.AbstractAdminController;
-import com.youthministry.controller.validator.GroupValidator;
-import com.youthministry.domain.Group;
+import com.youthministry.controller.validator.ImageValidator;
+import com.youthministry.domain.Image;
 
 @Controller
-public class AdminGroupController extends AbstractAdminController {
-	
+public class AdminImageController extends AbstractAdminController {
+
 	@Override
-	@RequestMapping(value={"/admin/creategroup"},method=RequestMethod.POST)
-	public String handleCreate(@ModelAttribute(value="group") Object object, BindingResult errors, Model map) {
+	@RequestMapping(value={"/admin/createimage"},method=RequestMethod.POST)
+	public String handleCreate(@ModelAttribute(value="image") Object object, BindingResult errors,
+			Model map) {
 		map.addAttribute("users", UserService.getUsers());
 		map.addAttribute("groups", GroupService.getGroups());
 		map.addAttribute("contentItems", PageContentService.getAllPageContent());
@@ -26,49 +27,51 @@ public class AdminGroupController extends AbstractAdminController {
 		map.addAttribute("roles", RoleService.getRoles());
 		map.addAttribute("pages", PageService.getPages());
 		map.addAttribute("images", ImageService.getAll());
-		Group group = (Group) object;
-		this.setValidator(new GroupValidator());
-		this.getValidator().validate(group, errors);
+		Image image = (Image) object;
+		this.setValidator(new ImageValidator());
+		this.getValidator().validate(image, errors);
 		if(! errors.hasErrors()) {
 			try {
-				GroupService.addGroup(group);
+				ImageService.create(image);
 				return "redirect:/admin";
 			} catch(ConstraintViolationException cve) {
-				errors.rejectValue("groupName", "groupName.duplicate", "This group name is already in use.");
-				System.out.println(cve.getConstraintName());
+				errors.rejectValue("imageName", "imageName.unknownError","An error occurred while processing your request.");
 			}
 		}
 		return "admin";
 	}
 	
 	@Override
-	@RequestMapping(value={"/admin/updategroup/{id}"},method=RequestMethod.POST)
-	public String handleUpdate(@PathVariable String id, @ModelAttribute(value="group") Object object, BindingResult errors, Model map) {
+	@RequestMapping(value={"/admin/updateimage/{id}"},method=RequestMethod.POST)
+	public String handleUpdate(@PathVariable String id, @ModelAttribute(value="image") Object object, BindingResult errors,
+			Model map) {
 		map.addAttribute("users", UserService.getUsers());
 		map.addAttribute("groups", GroupService.getGroups());
 		map.addAttribute("contentItems", PageContentService.getAllPageContent());
 		map.addAttribute("events", EventService.getEvents());
 		map.addAttribute("roles", RoleService.getRoles());
 		map.addAttribute("pages", PageService.getPages());
-		Group group = (Group) object;
-		this.setValidator(new GroupValidator());
-		this.getValidator().validate(group, errors);
-		group.setGroupId(Long.parseLong(id));
+		map.addAttribute("images", ImageService.getAll());
+		Image image = (Image) object;
+		image.setImageId(Long.parseLong(id));
+		this.setValidator(new ImageValidator());
+		this.getValidator().validate(image, errors);
 		if(! errors.hasErrors()) {
 			try {
-				GroupService.updateGroup(group);
+				ImageService.create(image);
 				return "redirect:/admin";
 			} catch(ConstraintViolationException cve) {
-				errors.rejectValue("groupName", "groupName.duplicate", "This group name is already in use.");
-				System.out.println(cve.getConstraintName());
+				errors.rejectValue("imageName", "imageName.unknownError","An error occurred while processing your request.");
 			}
 		}
 		return "admin";
 	}
 	
 	@Override
-	public String handleDelete(String id) {
+	@RequestMapping(value={"/admin/deleteimage"},method=RequestMethod.POST)
+	public String handleDelete(@PathVariable String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }

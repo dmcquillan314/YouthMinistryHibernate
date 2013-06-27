@@ -15,6 +15,7 @@ import com.youthministry.domain.Role;
 import com.youthministry.domain.TextEntry;
 import com.youthministry.domain.User;
 import com.youthministry.service.GroupService;
+import com.youthministry.service.ImageService;
 import com.youthministry.service.UserService;
 import com.youthministry.service.PageService;
 import com.youthministry.service.PageContentService;
@@ -35,6 +36,8 @@ public abstract class AbstractAdminController {
 	protected EventService EventService;
 	@Autowired
 	protected RoleService RoleService;
+	@Autowired
+	protected ImageService ImageService;
 	
 	protected Validator validator;
 
@@ -64,7 +67,7 @@ public abstract class AbstractAdminController {
 	public Image getImage() {
 		return new Image();
 	}
-	@ModelAttribute(value="textEntry")
+	@ModelAttribute(value="pageContent")
 	public TextEntry getTextEntry() {
 		return new TextEntry();
 	}

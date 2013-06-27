@@ -21,9 +21,6 @@ public class GroupValidator implements Validator {
 		if (group.getGroupName() == null || "".equals(group.getGroupName())) {
 			errors.rejectValue("groupName","groupName.required", "Invalid group name.");
 		}
-		if(group.getGroupName().length() < 6) {
-			errors.rejectValue("groupName", "groupName.minLength", "Group name must be at least 6 characters.");
-		}
 	}
 
 }

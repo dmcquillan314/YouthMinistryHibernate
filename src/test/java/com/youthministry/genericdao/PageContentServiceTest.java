@@ -75,15 +75,6 @@ public class PageContentServiceTest {
 		images.add(image2);
 		pageContent.setImages(images);
 		
-		Group group = new Group();
-		Group group2 = new Group();
-		group.setGroupName("test case group name");
-		group2.setGroupName("test case group name 2");
-		ArrayList<Group> groups = new ArrayList<Group>();
-		groups.add(group);
-		groups.add(group2);
-		pageContent.setGroups(groups);
-		
 		PageContentService.addPageContent(pageContent);
 		
 		return pageContent.getPageContentId();

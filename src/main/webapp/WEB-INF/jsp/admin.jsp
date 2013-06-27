@@ -91,9 +91,148 @@
 		</fieldset>
 		<button type="submit">Create Group</button>
 	</form:form>
+	
+	<h4>Manage images</h4>
+	<c:forEach items="${images}" var="image">
+		<form:form action="/admin/updateimage/${image.imageId}" method="POST" commandName="image">
+			<div class="formInfo">
+				<form:errors path="*" />
+			</div>
+			
+			<fieldset>
+				<form:label path="imageName">
+				Image Name
+				<form:errors path="imageName" cssClass="error" />
+				</form:label>
+				<form:input path="imageName" value="${image.imageName}" />
+				<form:label path="pathToImage">
+				Image Path
+				<form:errors path="pathToImage" cssClass="error" />
+				</form:label>
+				<form:input path="pathToImage" value="${image.pathToImage}" />
+				<form:label path="altText">
+				Image Alt Text
+				<form:errors path="altText" cssClass="error" />
+				</form:label>
+				<form:input path="altText" value="${image.altText}" />
+				<form:label path="titleText">
+				Image Title
+				<form:errors path="titleText" cssClass="error" />
+				</form:label>
+				<form:input path="titleText" value="${image.titleText}" />
+			</fieldset>
+			<button type="submit">Update Image</button>
+		</form:form>		
+	</c:forEach>
+	
+	<form:form action="/admin/createimage" method="POST" commandName="image">
+		<div class="formInfo">
+			<form:errors path="*" />
+		</div>
+		
+		<fieldset>
+			<form:label path="imageName">
+			Image Name
+			<form:errors path="imageName" cssClass="error" />
+			</form:label>
+			<form:input path="imageName" />
+			<form:label path="pathToImage">
+			Image Path
+			<form:errors path="pathToImage" cssClass="error" />
+			</form:label>
+			<form:input path="pathToImage" />
+			<form:label path="altText">
+			Image Alt Text
+			<form:errors path="altText" cssClass="error" />
+			</form:label>
+			<form:input path="altText" />
+			<form:label path="titleText">
+			Image Title
+			<form:errors path="titleText" cssClass="error" />
+			</form:label>
+			<form:input path="titleText" />
+		</fieldset>
+		<button type="submit">Create Image</button>
+	</form:form>	
+		
 	<h4>Manage content items</h4>
 	
-	TODO 
+	<c:forEach items="${contentItems}" var="contentItem">
+		<form:form action="/admin/updatepagecontent/${contentItem.pageContentId}" method="POST" commandName="pageContent">
+			<div class="formInfo">
+				<form:errors path="*" />
+			</div>
+	
+			<fieldset>
+				<form:label path="pageContentName">
+				Page Content Name 
+				<form:errors path="pageContentName" cssClass="error" />
+				</form:label>
+				<form:input path="pageContentName" />
+				<form:label path="images">
+				Images  
+				<form:errors path="images" cssClass="error" />
+				</form:label>				
+				<form:select cssClass="ImageSelect" path="images" multiple="true">
+					<c:forEach items="${images}" var="image">
+						<c:set var="selected" value="false"/>
+						<c:forEach items="${pageContent.images}" var="pImage">
+							<c:if test="${image.imageId == pImage.imageId}">
+								<c:set var="selected" value="true"/>
+							</c:if>
+						</c:forEach>
+						<option value="${image.imageId}" ${selected ? "selected" : ""}>${image.imageName}</option>
+					</c:forEach>
+				</form:select>				
+												
+				<form:label path="contentTitle">
+				Content Title 
+				<form:errors path="contentTitle" cssClass="error" />
+				</form:label>
+				<form:input path="contentTitle" />
+				
+				<form:label path="contentBody">
+				Content Body 
+				<form:errors path="contentBody" cssClass="error" />
+				</form:label>
+				<form:input path="contentBody" />
+			</fieldset>
+			<button type="submit">Update Page Content</button>		
+		</form:form>
+	</c:forEach>
+	
+	<form:form action="/admin/createpagecontent" method="POST" commandName="pageContent">
+		<div class="formInfo">
+			<form:errors path="*" />
+		</div>
+
+		<fieldset>
+			<form:label path="pageContentName">
+			Page Content Name 
+			<form:errors path="pageContentName" cssClass="error" />
+			</form:label>
+			<form:input path="pageContentName" />
+			<form:label path="images">
+			Images  
+			<form:errors path="images" cssClass="error" />
+			</form:label>				
+				<form:select id="imageSelect" path="images" multiple="true"
+					items="${images}" itemLabel="imageName" itemValue="imageId" />
+
+			<form:label path="contentTitle">
+			Content Title 
+			<form:errors path="contentTitle" cssClass="error" />
+			</form:label>
+			<form:input path="contentTitle" />
+			
+			<form:label path="contentBody">
+			Content Body 
+			<form:errors path="contentBody" cssClass="error" />
+			</form:label>
+
+		</fieldset>
+		<button type="submit">Create Page Content</button>		
+	</form:form>
 	
 	
 	<h5>Manage events</h5>

@@ -52,6 +52,9 @@
 	<bean id="PageContentService" class="com.youthministry.service.impl.PageContentServiceImpl">
 		<property name="pageContentDao" ref="pageContentDao" />
 	</bean>
+	<bean id="ImageService" class="com.youthministry.service.impl.ImageServiceImpl">
+		<property name="imageDao" ref="imageDao" />
+	</bean>
 	<bean id="PageService" class="com.youthministry.service.impl.PageServiceImpl">
 		<property name="pageDao" ref="pageDao" />
 	</bean>
@@ -128,6 +131,18 @@
 	        <bean parent="abstractDaoTarget">
 	            <constructor-arg>
 	                <value>com.youthministry.domain.Role</value>
+	            </constructor-arg>
+	        </bean>
+	    </property>
+	</bean>	
+	<bean id="imageDao" parent="abstractDao">
+	    <property name="proxyInterfaces">
+	        <value>com.youthministry.dao.ImageDao</value>
+	    </property>
+	    <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.youthministry.domain.Image</value>
 	            </constructor-arg>
 	        </bean>
 	    </property>
