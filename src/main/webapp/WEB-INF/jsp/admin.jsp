@@ -229,6 +229,7 @@
 			Content Body 
 			<form:errors path="contentBody" cssClass="error" />
 			</form:label>
+			<form:input path="contentBody" />
 
 		</fieldset>
 		<button type="submit">Create Page Content</button>		
