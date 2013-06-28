@@ -155,7 +155,7 @@
 		<button type="submit">Create Image</button>
 	</form:form>	
 		
-	<%-- <h4>Manage content items</h4>
+	<h4>Manage content items</h4>
 	
 	<c:forEach items="${contentItems}" var="contentItem">
 		<form:form action="/admin/updatepagecontent/${contentItem.pageContentId}" method="POST" commandName="pageContent">
@@ -168,7 +168,7 @@
 				Page Content Name 
 				<form:errors path="pageContentName" cssClass="error" />
 				</form:label>
-				<form:input path="pageContentName" />
+				<form:input path="pageContentName" value="${contentItem.pageContentName}" />
 				<form:label path="images">
 				Images  
 				<form:errors path="images" cssClass="error" />
@@ -176,7 +176,7 @@
 				<form:select cssClass="ImageSelect" path="images" multiple="true">
 					<c:forEach items="${images}" var="image">
 						<c:set var="selected" value="false"/>
-						<c:forEach items="${pageContent.images}" var="pImage">
+						<c:forEach items="${contentItem.images}" var="pImage">
 							<c:if test="${image.imageId == pImage.imageId}">
 								<c:set var="selected" value="true"/>
 							</c:if>
@@ -189,17 +189,17 @@
 				Content Title 
 				<form:errors path="contentTitle" cssClass="error" />
 				</form:label>
-				<form:input path="contentTitle" />
+				<form:input path="contentTitle" value="${contentItem.contentTitle}" />
 				
 				<form:label path="contentBody">
 				Content Body 
 				<form:errors path="contentBody" cssClass="error" />
 				</form:label>
-				<form:input path="contentBody" />
+				<form:input path="contentBody" value="${contentItem.contentBody}" />
 			</fieldset>
 			<button type="submit">Update Page Content</button>		
 		</form:form>
-	</c:forEach>--%>
+	</c:forEach>
 	
 	<form:form action="/admin/createpagecontent" method="POST" commandName="pageContent">
 		<div class="formInfo">
@@ -285,9 +285,18 @@
 				Country <form:errors path="location.country" cssClass="error"/>
 				</form:label>
 				<form:input path="location.country" value="${event.location.country}" />
-				<c:if test="${not empty groups}">
 	        	Event group <form:errors path="event.groups" cssClass="error" />
-				</c:if>
+				<form:select cssClass="groupSelect" path="event.groups" multiple="true">
+					<c:forEach items="${groups}" var="group">
+						<c:set var="selected" value="false"/>
+						<c:forEach items="${event.groups}" var="eGroup">
+							<c:if test="${group.groupId == eGroup.groupId}">
+								<c:set var="selected" value="true"/>
+							</c:if>
+						</c:forEach>
+						<option value="${group.groupId}" ${selected ? "selected" : ""}>${group.groupName}</option>
+					</c:forEach>
+				</form:select>				
 			</fieldset>
 			<button type="submit">Update event</button>
 		</form:form>

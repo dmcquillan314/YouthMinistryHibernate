@@ -52,7 +52,7 @@ public class GenericDaoHibernateImpl<T, PK extends Serializable> implements Gene
 
     public void update(T o)
     {
-        getSession().update(o);
+        getSession().merge(o);
     }
 
     public void delete(T o)

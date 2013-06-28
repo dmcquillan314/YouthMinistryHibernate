@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -26,7 +27,7 @@ public class AdminUserController extends AbstractAdminController {
 		
 	@Override
 	@RequestMapping(value={"/admin/updateuser/{id}"},method=RequestMethod.POST)
-	public String handleUpdate(String id, Object object, BindingResult errors,
+	public String handleUpdate(@PathVariable String id, @ModelAttribute(value="user") Object object, BindingResult errors,
 			Model map) { 
 		map.addAttribute("users", UserService.getUsers());
 		map.addAttribute("groups", GroupService.getGroups());

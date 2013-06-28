@@ -94,53 +94,21 @@ public class AdminPageContentController extends AbstractAdminController {
 	
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) throws Exception {
-		binder.registerCustomEditor(Collection.class, "groups", new CustomCollectionEditor(Collection.class) {
+		binder.registerCustomEditor(Collection.class, "images", new CustomCollectionEditor(Collection.class) {
 			protected Object convertElement(Object element) {
-				if(element instanceof Group) {
-					System.out.println("Converting from Group to Group: " + element);
+				if(element instanceof Image) {
+					System.out.println("Converting from Image to Image: " + element);
 					return element;
 				}
 				if(element instanceof String || element instanceof Long) {
-					Group group = GroupService.getGroupById(Long.parseLong((String) element));
-					System.out.println("Looking up group for id " + element + ": " + group);
-					return group;
+					Image image = ImageService.read( Long.parseLong((String) element) );
+					System.out.println("Looking up image for id " + element + ": " + image);
+					return image;
 				}
 				System.out.println("Don't know what to do with: " + element);
 				return null;
 			}
 		});
-	}
-	@ModelAttribute(value="user")
-	public User getUser() {
-		return new User();
-	}
-	@ModelAttribute(value="group")
-	public Group getGroup() {
-		return new Group();
-	}
-	@ModelAttribute(value="image")
-	public Image getImage() {
-		return new Image();
-	}
-	@ModelAttribute(value="textEntry")
-	public TextEntry getTextEntry() {
-		return new TextEntry();
-	}
-	@ModelAttribute(value="event")
-	public Event getEvent() {
-		return new Event();
-	}
-	@ModelAttribute(value="eventLocation")
-	public EventLocation getEventLocation() {
-		return new EventLocation();
-	}
-	@ModelAttribute(value="role")
-	public Role getRole() {
-		return new Role();
-	}
-	@ModelAttribute(value="page")
-	public Page getPage() {
-		return new Page();
 	}
 		
 }

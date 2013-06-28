@@ -16,4 +16,6 @@ public interface PageService {
 	public Page getPageById(Long id);
 	
 	public List<Page> getPages();
+	
+	public Page findByUrl(String url);
 }

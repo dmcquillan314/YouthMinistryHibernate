@@ -23,8 +23,12 @@ import org.hibernate.annotations.FetchMode;
 
 @NamedQueries({
 	@NamedQuery(
-		name = "Page.findAll",
-		query = "from PAGE"
+			name = "Page.findAll",
+			query = "from PAGE"
+	),
+	@NamedQuery(
+			name = "Page.findByUrl",
+			query = "from PAGE where pageUrl = :pageUrl"
 	)
 })
 @Entity(name="PAGE")
@@ -39,7 +43,7 @@ public class Page {
 	@Column(name="PAGE_NAME")
 	private String pageName;
 	
-	@Column(name="PAGE_URL")
+	@Column(name="PAGE_URL", unique=true)
 	private String pageUrl;
 	
 	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.EAGER)

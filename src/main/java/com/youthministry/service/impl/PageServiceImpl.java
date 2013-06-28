@@ -52,5 +52,10 @@ public class PageServiceImpl implements PageService {
 		// TODO Auto-generated method stub
 		return getPageDao().findAll();
 	}
+
+	@Override
+	public Page findByUrl(String url) {
+		return getPageDao().findByUrl(url).get(0);
+	}
 	
 }

@@ -11,6 +11,7 @@ import com.youthministry.domain.EventLocation;
 import com.youthministry.domain.Group;
 import com.youthministry.domain.Image;
 import com.youthministry.domain.Page;
+import com.youthministry.domain.PageContent;
 import com.youthministry.domain.Role;
 import com.youthministry.domain.TextEntry;
 import com.youthministry.domain.User;
@@ -68,8 +69,8 @@ public abstract class AbstractAdminController {
 		return new Image();
 	}
 	@ModelAttribute(value="pageContent")
-	public TextEntry getTextEntry() {
-		return new TextEntry();
+	public PageContent getPageContent() {
+		return new PageContent();
 	}
 	@ModelAttribute(value="event")
 	public Event getEvent() {

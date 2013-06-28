@@ -7,4 +7,5 @@ import com.youthministry.genericdao.GenericDao;
 
 public interface PageDao extends GenericDao<Page, Long> {
 	List<Page> findAll();
+	List<Page> findByUrl(String url);
 }
