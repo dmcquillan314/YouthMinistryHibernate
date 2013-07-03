@@ -9,17 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.youthministry.domain.Group;
-import com.youthministry.domain.PageContent;
+import com.youthministry.domain.Content;
 import com.youthministry.domain.User;
 import com.youthministry.domain.Image;
-import com.youthministry.domain.TextEntry;
 import com.youthministry.domain.Event;
 import com.youthministry.domain.Role;
 import com.youthministry.domain.Page;
 import com.youthministry.domain.EventLocation;
 import com.youthministry.service.EventService;
 import com.youthministry.service.GroupService;
-import com.youthministry.service.PageContentService;
+import com.youthministry.service.ContentService;
 import com.youthministry.service.PageService;
 import com.youthministry.service.RoleService;
 import com.youthministry.service.UserService;
@@ -35,7 +34,7 @@ public class AdminController {
 	@Autowired
 	protected UserService UserService;
 	@Autowired
-	protected PageContentService PageContentService;
+	protected ContentService PageContentService;
 	@Autowired
 	protected EventService EventService;
 	@Autowired
@@ -69,8 +68,8 @@ public class AdminController {
 		return new Image();
 	}
 	@ModelAttribute(value="pageContent")
-	public PageContent getPageContent() {
-		return new PageContent();
+	public Content getPageContent() {
+		return new Content();
 	}
 	@ModelAttribute(value="event")
 	public Event getEvent() {

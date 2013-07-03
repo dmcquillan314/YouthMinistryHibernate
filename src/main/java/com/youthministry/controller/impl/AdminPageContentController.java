@@ -2,12 +2,10 @@ package com.youthministry.controller.impl;
 
 import java.util.Collection;
 import org.hibernate.exception.ConstraintViolationException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomCollectionEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Validator;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,23 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.youthministry.controller.AbstractAdminController;
-import com.youthministry.controller.validator.GroupValidator;
 import com.youthministry.controller.validator.PageContentValidator;
-import com.youthministry.domain.Event;
-import com.youthministry.domain.EventLocation;
-import com.youthministry.domain.Group;
 import com.youthministry.domain.Image;
-import com.youthministry.domain.Page;
-import com.youthministry.domain.PageContent;
-import com.youthministry.domain.Role;
-import com.youthministry.domain.TextEntry;
-import com.youthministry.domain.User;
-import com.youthministry.service.GroupService;
-import com.youthministry.service.UserService;
-import com.youthministry.service.PageContentService;
-import com.youthministry.service.EventService;
-import com.youthministry.service.RoleService;
-import com.youthministry.service.PageService;
+import com.youthministry.domain.Content;
 
 @Controller
 public class AdminPageContentController extends AbstractAdminController {
@@ -47,7 +31,7 @@ public class AdminPageContentController extends AbstractAdminController {
 		map.addAttribute("roles", RoleService.getRoles());
 		map.addAttribute("pages", PageService.getPages());
 		map.addAttribute("images", ImageService.getAll());
-		PageContent pageContent = (PageContent) object;
+		Content pageContent = (Content) object;
 		pageContent.setPageContentId(Long.parseLong(id));
 		this.setValidator(new PageContentValidator());
 		this.getValidator().validate(pageContent, errors);
@@ -72,7 +56,7 @@ public class AdminPageContentController extends AbstractAdminController {
 		map.addAttribute("events", EventService.getEvents());
 		map.addAttribute("roles", RoleService.getRoles());
 		map.addAttribute("pages", PageService.getPages());
-		PageContent pageContent = (PageContent) object;
+		Content pageContent = (Content) object;
 		this.setValidator(new PageContentValidator());
 		this.getValidator().validate(pageContent, errors);
 		if(! errors.hasErrors()) {

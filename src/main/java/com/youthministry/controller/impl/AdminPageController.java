@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.youthministry.domain.Page;
 import com.youthministry.domain.Group;
-import com.youthministry.domain.PageContent;
+import com.youthministry.domain.Content;
 import com.youthministry.controller.AbstractAdminController;
 import com.youthministry.controller.validator.PageValidator;
 
@@ -84,12 +84,12 @@ public class AdminPageController extends AbstractAdminController {
 	protected void initBinder(WebDataBinder binder) throws Exception {
 		binder.registerCustomEditor(Collection.class, "contentItems", new CustomCollectionEditor(Collection.class) {
 			protected Object convertElement(Object element) {
-				if(element instanceof PageContent) {
+				if(element instanceof Content) {
 					System.out.println("Converting from Page Content to String: " + element);
 					return element;
 				}
 				if(element instanceof String || element instanceof Long) {
-					PageContent pageContent = PageContentService.getPageContentById(Long.parseLong((String) element));
+					Content pageContent = PageContentService.getPageContentById(Long.parseLong((String) element));
 					System.out.println("Looking up Page Content for id " + element + ": " + pageContent);
 					return pageContent;
 				}
