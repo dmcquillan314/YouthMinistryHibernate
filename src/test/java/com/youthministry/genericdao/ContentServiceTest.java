@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.youthministry.service.EventService;
 import com.youthministry.service.GroupService;
-import com.youthministry.service.PageContentService;
+import com.youthministry.service.ContentService;
 import com.youthministry.service.PageService;
 import com.youthministry.service.RoleService;
 import com.youthministry.service.UserService;
@@ -27,9 +27,8 @@ import com.youthministry.domain.Group;
 import com.youthministry.domain.Image;
 import com.youthministry.domain.Location;
 import com.youthministry.domain.Page;
-import com.youthministry.domain.PageContent;
+import com.youthministry.domain.Content;
 import com.youthministry.domain.Role;
-import com.youthministry.domain.TextEntry;
 import com.youthministry.domain.User;
 import com.youthministry.domain.UserProfile;
 
@@ -37,7 +36,7 @@ import com.youthministry.domain.UserProfile;
 @ContextConfiguration(locations = { "root-context.xml"}) 
 @TransactionConfiguration
 @Transactional
-public class PageContentServiceTest {
+public class ContentServiceTest {
 	@Autowired
 	protected GroupService GroupService;
 	@Autowired
@@ -45,7 +44,7 @@ public class PageContentServiceTest {
 	@Autowired
 	protected UserService UserService;
 	@Autowired
-	protected PageContentService PageContentService;
+	protected ContentService PageContentService;
 	@Autowired
 	protected EventService EventService;
 	@Autowired
@@ -54,10 +53,10 @@ public class PageContentServiceTest {
 	@Autowired
 	protected UserDao userDao;
 
-    final Logger logger = LoggerFactory.getLogger(PageContentServiceTest.class);
+    final Logger logger = LoggerFactory.getLogger(ContentServiceTest.class);
     
 	public Long testCreatePageContent() {
-		PageContent pageContent = new PageContent();
+		Content pageContent = new Content();
 		pageContent.setPageContentName("test case page name");
 		pageContent.setContentTitle("test case content title");
 		pageContent.setContentBody("test case content body");
@@ -83,14 +82,14 @@ public class PageContentServiceTest {
 	@Test
 	public void testReadPageContent() {
 		
-		PageContent pageContent = PageContentService.getPageContentById(testCreatePageContent());
+		Content pageContent = PageContentService.getPageContentById(testCreatePageContent());
 	
 	}
 	
 	@Test
 	public void testUpdatePageContent() {
 		
-		PageContent pageContent = PageContentService.getPageContentById(testCreatePageContent());
+		Content pageContent = PageContentService.getPageContentById(testCreatePageContent());
 		
 		pageContent.setPageContentName("test case page name updated");
 		
@@ -99,7 +98,7 @@ public class PageContentServiceTest {
 	
 	@Test
 	public void testDeletePageContent() {
-		PageContent pageContent = PageContentService.getPageContentById(testCreatePageContent());
+		Content pageContent = PageContentService.getPageContentById(testCreatePageContent());
 		
 		PageContentService.deletePageContent(pageContent);
 		
