@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.OneToMany;
@@ -49,7 +50,7 @@ public class User implements UserDetails,Serializable{
 	@Column(name = "PASSWORD", nullable = true, length = 50)
 	private String password;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="USER_PROFILE_ID")
 	private UserProfile userProfile;
 	

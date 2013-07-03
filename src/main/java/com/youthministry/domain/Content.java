@@ -16,8 +16,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
@@ -26,24 +29,24 @@ import org.hibernate.annotations.FetchMode;
 
 @NamedQueries(
 	@NamedQuery(
-		name = "PageContent.findAll",
-		query = "from PAGE_CONTENT"
+		name = "Content.findAll",
+		query = "from CONTENT"
 	)
 )
-@Entity(name="PAGE_CONTENT")
-@Table(name="PAGE_CONTENT")
+@Entity(name="CONTENT")
+@Table(name="CONTENT")
 @Inheritance (strategy=InheritanceType.JOINED)
-public class PageContent {
+public class Content {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="PAGE_CONTENT_ID")	
+	@Column(name="CONTENT_ID")	
 	private Long pageContentId;
-	@Column(name="PAGE_CONTENT_NAME", nullable=false)
+	@Column(name="CONTENT_NAME", nullable=false)
 	private String pageContentName;
 		
 	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.EAGER)
-	@JoinTable(name = "IMAGE_PAGE_CONTENT",
-	joinColumns = @JoinColumn(name = "PAGE_CONTENT_ID"),
+	@JoinTable(name = "IMAGE_CONTENT",
+	joinColumns = @JoinColumn(name = "CONTENT_ID"),
 	inverseJoinColumns = @JoinColumn(name = "IMAGE_ID"))
 	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)	
 	@Fetch(FetchMode.SELECT)
@@ -51,9 +54,18 @@ public class PageContent {
 	
 	@Column(name="CONTENT_TITLE")
 	private String contentTitle;
+	
 	@Lob
 	@Column(name="CONTENT_BODY")
 	private String contentBody;
+	
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="MENU_ID")
+	private Menu menu;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="RENDERER_ID")
+	private Renderer renderer = new Renderer();
 	
 	public Long getPageContentId() {
 		return pageContentId;
@@ -84,6 +96,12 @@ public class PageContent {
 	}
 	public void setContentBody(String contentBody) {
 		this.contentBody = contentBody;
+	}
+	public Renderer getRenderer() {
+		return renderer;
+	}
+	public void setRenderer(Renderer renderer) {
+		this.renderer = renderer;
 	}
 	
 }

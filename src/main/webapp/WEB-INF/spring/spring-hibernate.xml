@@ -9,16 +9,18 @@
 	<!-- Property Editors -->
 
 	<!-- Beans Declaration -->
-	<bean id="User" class="com.youthministry.domain.User" />
-	<bean id="UserProfile" class="com.youthministry.domain.UserProfile" />
+	<bean id="PageContent" class="com.youthministry.domain.Content" />
 	<bean id="Event" class="com.youthministry.domain.Event" />
 	<bean id="Group" class="com.youthministry.domain.Group" />
-	<bean id="Role" class="com.youthministry.domain.Role" />
-	<bean id="Location" class="com.youthministry.domain.Location" />
 	<bean id="Image" class="com.youthministry.domain.Image" />
-	<bean id="PageContent" class="com.youthministry.domain.PageContent" />
-	<bean id="TextEntry" class="com.youthministry.domain.TextEntry" />
+	<bean id="Location" class="com.youthministry.domain.Location" />
 	<bean id="Page" class="com.youthministry.domain.Page" />
+	<bean id="Renderer" class="com.youthministry.domain.Renderer" />
+	<bean id="Role" class="com.youthministry.domain.Role" />
+	<bean id="Site" class="com.youthministry.domain.Site" />
+	<bean id="Template" class="com.youthministry.domain.Template" />
+	<bean id="User" class="com.youthministry.domain.User" />
+	<bean id="UserProfile" class="com.youthministry.domain.UserProfile" />
 
 	<bean id="finderIntroductionAdvisor" class="com.youthministry.genericdao.finder.impl.FinderIntroductionAdvisor" />
 
@@ -40,49 +42,55 @@
 
 
 	<!-- User Service Declaration -->
-	<bean id="UserService" class="com.youthministry.service.impl.UserServiceImpl">
-		<property name="userDao" ref="userDao" />
-	</bean>
-	<bean id="GroupService" class="com.youthministry.service.impl.GroupServiceImpl">
-		<property name="groupDao" ref="groupDao" />
+	<bean id="PageContentService" class="com.youthministry.service.impl.ContentServiceImpl">
+		<property name="pageContentDao" ref="contentDao" />
 	</bean>
 	<bean id="EventService" class="com.youthministry.service.impl.EventServiceImpl">
 		<property name="eventDao" ref="eventDao" />
 	</bean>
-	<bean id="PageContentService" class="com.youthministry.service.impl.PageContentServiceImpl">
-		<property name="pageContentDao" ref="pageContentDao" />
+	<bean id="GroupService" class="com.youthministry.service.impl.GroupServiceImpl">
+		<property name="groupDao" ref="groupDao" />
 	</bean>
 	<bean id="ImageService" class="com.youthministry.service.impl.ImageServiceImpl">
 		<property name="imageDao" ref="imageDao" />
 	</bean>
+	<bean id="LocationService" class="com.youthministry.service.impl.LocationServiceImpl">
+		<property name="locationDao" ref="locationDao" />
+	</bean>
+	<bean id="MenuService" class="com.youthministry.service.impl.MenuServiceImpl">
+		<property name="menuDao" ref="menuDao" />
+	</bean>
+	<bean id="LinkService" class="com.youthministry.service.impl.LinkServiceImpl">
+		<property name="linkDao" ref="linkDao" />
+	</bean>
 	<bean id="PageService" class="com.youthministry.service.impl.PageServiceImpl">
 		<property name="pageDao" ref="pageDao" />
+	</bean>
+	<bean id="RendererService" class="com.youthministry.service.impl.RendererServiceImpl">
+		<property name="rendererDao" ref="rendererDao" />
 	</bean>
 	<bean id="RoleService" class="com.youthministry.service.impl.RoleServiceImpl">
 		<property name="roleDao" ref="roleDao" />
 	</bean>
+	<bean id="SiteService" class="com.youthministry.service.impl.SiteServiceImpl">
+		<property name="siteDao" ref="siteDao" />
+	</bean>
+	<bean id="TemplateService" class="com.youthministry.service.impl.TemplateServiceImpl">
+		<property name="templateDao" ref="templateDao" />
+	</bean>
+	<bean id="UserService" class="com.youthministry.service.impl.UserServiceImpl">
+		<property name="userDao" ref="userDao" />
+	</bean>
 
 	<!-- DAO Declaration -->
-	<bean id="userDao" parent="abstractDao">
+	<bean id="contentDao" parent="abstractDao">
 	    <property name="proxyInterfaces">
-	        <value>com.youthministry.dao.UserDao</value>
+	        <value>com.youthministry.dao.ContentDao</value>
 	    </property>
 	    <property name="target">
 	        <bean parent="abstractDaoTarget">
 	            <constructor-arg>
-	                <value>com.youthministry.domain.User</value>
-	            </constructor-arg>
-	        </bean>
-	    </property>
-	</bean>	
-	<bean id="groupDao" parent="abstractDao">
-	    <property name="proxyInterfaces">
-	        <value>com.youthministry.dao.GroupDao</value>
-	    </property>
-	    <property name="target">
-	        <bean parent="abstractDaoTarget">
-	            <constructor-arg>
-	                <value>com.youthministry.domain.Group</value>
+	                <value>com.youthministry.domain.Content</value>
 	            </constructor-arg>
 	        </bean>
 	    </property>
@@ -99,14 +107,38 @@
 	        </bean>
 	    </property>
 	</bean>	
-	<bean id="pageContentDao" parent="abstractDao">
+	<bean id="groupDao" parent="abstractDao">
 	    <property name="proxyInterfaces">
-	        <value>com.youthministry.dao.PageContentDao</value>
+	        <value>com.youthministry.dao.GroupDao</value>
 	    </property>
 	    <property name="target">
 	        <bean parent="abstractDaoTarget">
 	            <constructor-arg>
-	                <value>com.youthministry.domain.PageContent</value>
+	                <value>com.youthministry.domain.Group</value>
+	            </constructor-arg>
+	        </bean>
+	    </property>
+	</bean>	
+	<bean id="imageDao" parent="abstractDao">
+	    <property name="proxyInterfaces">
+	        <value>com.youthministry.dao.ImageDao</value>
+	    </property>
+	    <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.youthministry.domain.Image</value>
+	            </constructor-arg>
+	        </bean>
+	    </property>
+	</bean>	
+	<bean id="locationDao" parent="abstractDao">
+	    <property name="proxyInterfaces">
+	        <value>com.youthministry.dao.LocationDao</value>
+	    </property>
+	    <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.youthministry.domain.Location</value>
 	            </constructor-arg>
 	        </bean>
 	    </property>
@@ -123,6 +155,18 @@
 	        </bean>
 	    </property>
 	</bean>	
+	<bean id="rendererDao" parent="abstractDao">
+	    <property name="proxyInterfaces">
+	        <value>com.youthministry.dao.RendererDao</value>
+	    </property>
+	    <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.youthministry.domain.Renderer</value>
+	            </constructor-arg>
+	        </bean>
+	    </property>
+	</bean>	
 	<bean id="roleDao" parent="abstractDao">
 	    <property name="proxyInterfaces">
 	        <value>com.youthministry.dao.RoleDao</value>
@@ -135,14 +179,38 @@
 	        </bean>
 	    </property>
 	</bean>	
-	<bean id="imageDao" parent="abstractDao">
+	<bean id="siteDao" parent="abstractDao">
 	    <property name="proxyInterfaces">
-	        <value>com.youthministry.dao.ImageDao</value>
+	        <value>com.youthministry.dao.SiteDao</value>
 	    </property>
 	    <property name="target">
 	        <bean parent="abstractDaoTarget">
 	            <constructor-arg>
-	                <value>com.youthministry.domain.Image</value>
+	                <value>com.youthministry.domain.Site</value>
+	            </constructor-arg>
+	        </bean>
+	    </property>
+	</bean>	
+	<bean id="templateDao" parent="abstractDao">
+	    <property name="proxyInterfaces">
+	        <value>com.youthministry.dao.TemplateDao</value>
+	    </property>
+	    <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.youthministry.domain.Template</value>
+	            </constructor-arg>
+	        </bean>
+	    </property>
+	</bean>	
+	<bean id="userDao" parent="abstractDao">
+	    <property name="proxyInterfaces">
+	        <value>com.youthministry.dao.UserDao</value>
+	    </property>
+	    <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.youthministry.domain.User</value>
 	            </constructor-arg>
 	        </bean>
 	    </property>
@@ -167,9 +235,11 @@
 				<value>com.youthministry.domain.Page</value>
 				<value>com.youthministry.domain.Image</value>
 				<value>com.youthministry.domain.Location</value>
-				<value>com.youthministry.domain.PageContent</value>
+				<value>com.youthministry.domain.Content</value>
+				<value>com.youthministry.domain.Renderer</value>
+				<value>com.youthministry.domain.Template</value>
+				<value>com.youthministry.domain.Site</value>
 				<value>com.youthministry.domain.Role</value>
-				<value>com.youthministry.domain.TextEntry</value>
 				<value>com.youthministry.domain.User</value>
 				<value>com.youthministry.domain.UserProfile</value>
 			</list>
