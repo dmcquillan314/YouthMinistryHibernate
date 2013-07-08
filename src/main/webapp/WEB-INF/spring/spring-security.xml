@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/security"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
@@ -30,27 +29,32 @@
 		<custom-filter ref="socialAuthenticationFilter" before="PRE_AUTH_FILTER" />
 	</http>
  
-	<beans:bean id="customEncoder" class="com.youthministry.security.CustomPasswordEncoder" />
 	<beans:bean id="customUserService"
 		class="com.youthministry.security.CustomUserDetailService" >
 	</beans:bean>
 
 	<authentication-manager alias="authenticationManager" >
 		<authentication-provider user-service-ref="customUserService">
-			<password-encoder ref="customEncoder" />
+			<password-encoder ref="passwordEncoder" />
+		</authentication-provider>
+		<authentication-provider>
+			<jdbc-user-service id="userDetailsService" 
+					data-source-ref="dataSource" 
+					users-by-username-query="select USERNAME, PASSWORD, true from USER where USERNAME = ?"
+					authorities-by-username-query="select u.USERNAME username, r.ROLE authority from USER_ROLE u_roles, 
+																									 USER u, 
+																									 ROLE r 
+														  where USERNAME = ? group by authority"
+			/>
 		</authentication-provider>
 		<!-- Spring Social Security authentication provider -->
 		<authentication-provider ref="socialAuthenticationProvider" />
 	</authentication-manager>
 
-	<jdbc-user-service id="userDetailsService" 
-					data-source-ref="dataSource" 
-					users-by-username-query="select USERNAME, PASSWORD, true from USER where USERNAME = ?"
-					authorities-by-username-query="select u.USERNAME username, r.ROLE authority from USER_ROLE u_roles, USER u, ROLE r where USERNAME = ? group by authority"/>
 
 	<beans:bean id="textEncryptor" class="org.springframework.security.crypto.encrypt.Encryptors"
 		factory-method="noOpText" />
-		
+
 	<beans:bean id="passwordEncoder" class="org.springframework.security.crypto.password.NoOpPasswordEncoder"
 		factory-method="getInstance" />
 

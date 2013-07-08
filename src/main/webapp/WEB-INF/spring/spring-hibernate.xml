@@ -13,7 +13,9 @@
 	<bean id="Event" class="com.youthministry.domain.Event" />
 	<bean id="Group" class="com.youthministry.domain.Group" />
 	<bean id="Image" class="com.youthministry.domain.Image" />
+	<bean id="Link" class="com.youthministry.domain.Link" />
 	<bean id="Location" class="com.youthministry.domain.Location" />
+	<bean id="Menu" class="com.youthministry.domain.Menu" />
 	<bean id="Page" class="com.youthministry.domain.Page" />
 	<bean id="Renderer" class="com.youthministry.domain.Renderer" />
 	<bean id="Role" class="com.youthministry.domain.Role" />
@@ -131,6 +133,18 @@
 	        </bean>
 	    </property>
 	</bean>	
+	<bean id="linkDao" parent="abstractDao">
+	    <property name="proxyInterfaces">
+	        <value>com.youthministry.dao.LinkDao</value>
+	    </property>
+	    <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.youthministry.domain.Link</value>
+	            </constructor-arg>
+	        </bean>
+	    </property>
+	</bean>	
 	<bean id="locationDao" parent="abstractDao">
 	    <property name="proxyInterfaces">
 	        <value>com.youthministry.dao.LocationDao</value>
@@ -139,6 +153,18 @@
 	        <bean parent="abstractDaoTarget">
 	            <constructor-arg>
 	                <value>com.youthministry.domain.Location</value>
+	            </constructor-arg>
+	        </bean>
+	    </property>
+	</bean>	
+	<bean id="menuDao" parent="abstractDao">
+	    <property name="proxyInterfaces">
+	        <value>com.youthministry.dao.MenuDao</value>
+	    </property>
+	    <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.youthministry.domain.Menu</value>
 	            </constructor-arg>
 	        </bean>
 	    </property>
@@ -234,6 +260,8 @@
 				<value>com.youthministry.domain.Group</value>
 				<value>com.youthministry.domain.Page</value>
 				<value>com.youthministry.domain.Image</value>
+				<value>com.youthministry.domain.Link</value>
+				<value>com.youthministry.domain.Menu</value>
 				<value>com.youthministry.domain.Location</value>
 				<value>com.youthministry.domain.Content</value>
 				<value>com.youthministry.domain.Renderer</value>
