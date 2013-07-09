@@ -10,8 +10,11 @@ import com.youthministry.domain.Event;
 import com.youthministry.domain.EventLocation;
 import com.youthministry.domain.Group;
 import com.youthministry.domain.Image;
+import com.youthministry.domain.Link;
+import com.youthministry.domain.Menu;
 import com.youthministry.domain.Page;
 import com.youthministry.domain.Content;
+import com.youthministry.domain.Renderer;
 import com.youthministry.domain.Role;
 import com.youthministry.domain.User;
 import com.youthministry.service.GroupService;
@@ -21,6 +24,9 @@ import com.youthministry.service.PageService;
 import com.youthministry.service.ContentService;
 import com.youthministry.service.EventService;
 import com.youthministry.service.RoleService;
+import com.youthministry.service.RendererService;
+import com.youthministry.service.MenuService;
+import com.youthministry.service.LinkService;
 
 public abstract class AbstractAdminController {
 
@@ -38,6 +44,12 @@ public abstract class AbstractAdminController {
 	protected RoleService RoleService;
 	@Autowired
 	protected ImageService ImageService;
+	@Autowired
+	protected RendererService RendererService;
+	@Autowired
+	protected MenuService MenuService;
+	@Autowired
+	protected LinkService LinkService;
 	
 	protected Validator validator;
 
@@ -66,6 +78,18 @@ public abstract class AbstractAdminController {
 	@ModelAttribute(value="image")
 	public Image getImage() {
 		return new Image();
+	}
+	@ModelAttribute(value="link")
+	public Link getLink() {
+		return new Link();
+	}
+	@ModelAttribute(value="menu")
+	public Menu getMenu() {
+		return new Menu();
+	}
+	@ModelAttribute(value="renderer")
+	public Renderer getRenderer() {
+		return new Renderer();
 	}
 	@ModelAttribute(value="pageContent")
 	public Content getPageContent() {

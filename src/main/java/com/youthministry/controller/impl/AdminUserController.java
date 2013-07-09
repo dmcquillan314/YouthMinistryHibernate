@@ -36,6 +36,9 @@ public class AdminUserController extends AbstractAdminController {
 		map.addAttribute("roles", RoleService.getRoles());
 		map.addAttribute("pages", PageService.getPages());
 		map.addAttribute("images", ImageService.getAll());
+		map.addAttribute("renderers", RendererService.getAll());
+		map.addAttribute("menus", MenuService.getAll());
+		map.addAttribute("links", LinkService.getAll());
 		User user = (User) object;
 		user.setUserId(Long.parseLong(id));
 		if(!errors.hasErrors()) {

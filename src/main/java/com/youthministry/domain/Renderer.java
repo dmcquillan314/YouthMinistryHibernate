@@ -5,9 +5,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-@Entity(name="RENDERER")
+@NamedQueries({
+	@NamedQuery(
+		name = "Renderer.findByName",
+		query = "from Renderer r where r.rendererName = :name"
+	),
+	@NamedQuery(
+		name = "Renderer.findAll",
+		query = "from Renderer"
+	)
+})
+@Entity
 @Table(name="RENDERER")
 public class Renderer {
 

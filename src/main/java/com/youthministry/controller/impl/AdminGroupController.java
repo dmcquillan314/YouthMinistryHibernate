@@ -26,6 +26,9 @@ public class AdminGroupController extends AbstractAdminController {
 		map.addAttribute("roles", RoleService.getRoles());
 		map.addAttribute("pages", PageService.getPages());
 		map.addAttribute("images", ImageService.getAll());
+		map.addAttribute("renderers", RendererService.getAll());
+		map.addAttribute("menus", MenuService.getAll());
+		map.addAttribute("links", LinkService.getAll());
 		Group group = (Group) object;
 		this.setValidator(new GroupValidator());
 		this.getValidator().validate(group, errors);
@@ -50,6 +53,9 @@ public class AdminGroupController extends AbstractAdminController {
 		map.addAttribute("events", EventService.getEvents());
 		map.addAttribute("roles", RoleService.getRoles());
 		map.addAttribute("pages", PageService.getPages());
+		map.addAttribute("renderers", RendererService.getAll());
+		map.addAttribute("menus", MenuService.getAll());
+		map.addAttribute("links", LinkService.getAll());
 		Group group = (Group) object;
 		this.setValidator(new GroupValidator());
 		this.getValidator().validate(group, errors);
