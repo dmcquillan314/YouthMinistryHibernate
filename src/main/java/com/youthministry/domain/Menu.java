@@ -14,13 +14,25 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-@Entity(name="MENU")
+@NamedQueries({
+	@NamedQuery(
+		name = "Menu.findByName",
+		query = "from Menu m where m.menuName = :name"
+	),
+	@NamedQuery(
+		name = "Menu.findAll",
+		query = "from Menu"
+	)
+})
+@Entity
 @Table(name="MENU")
 public class Menu {
 

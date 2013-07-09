@@ -1,5 +1,7 @@
 package com.youthministry.service.impl;
 
+import java.util.List;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import com.youthministry.dao.RendererDao;
@@ -41,6 +43,11 @@ public class RendererServiceImpl implements RendererService {
 	@Override
 	public void delete(Renderer renderer) {
 		getRendererDao().delete(renderer);
+	}
+
+	@Override
+	public List<Renderer> getAll() {
+		return getRendererDao().findAll();
 	}
 
 }

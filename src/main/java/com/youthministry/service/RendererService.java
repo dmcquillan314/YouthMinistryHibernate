@@ -1,5 +1,7 @@
 package com.youthministry.service;
 
+import java.util.List;
+
 import com.youthministry.domain.Renderer;
 
 public interface RendererService {
@@ -8,5 +10,5 @@ public interface RendererService {
 	public Renderer read(Long id);
 	public void update(Renderer renderer);
 	public void delete(Renderer renderer);
-	
+	public List<Renderer> getAll();
 }

@@ -5,11 +5,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.youthministry.domain.Group;
 import com.youthministry.domain.Content;
+import com.youthministry.domain.Link;
+import com.youthministry.domain.Menu;
+import com.youthministry.domain.Renderer;
 import com.youthministry.domain.User;
 import com.youthministry.domain.Image;
 import com.youthministry.domain.Event;
@@ -23,6 +27,9 @@ import com.youthministry.service.PageService;
 import com.youthministry.service.RoleService;
 import com.youthministry.service.UserService;
 import com.youthministry.service.ImageService;
+import com.youthministry.service.RendererService;
+import com.youthministry.service.MenuService;
+import com.youthministry.service.LinkService;
 
 @Controller
 public class AdminController {
@@ -41,6 +48,12 @@ public class AdminController {
 	protected RoleService RoleService;
 	@Autowired
 	protected ImageService ImageService;
+	@Autowired
+	protected RendererService RendererService;
+	@Autowired
+	protected MenuService MenuService;
+	@Autowired
+	protected LinkService LinkService;
 	
 	protected Validator validator;
 	
@@ -53,7 +66,24 @@ public class AdminController {
 		map.addAttribute("roles", RoleService.getRoles());
 		map.addAttribute("pages", PageService.getPages());
 		map.addAttribute("images", ImageService.getAll());
+		map.addAttribute("renderers", RendererService.getAll());
+		map.addAttribute("menus", MenuService.getAll());
+		map.addAttribute("links", LinkService.getAll());
 		return "admin";
+	}
+	@RequestMapping(value={"/admin/manage/{component}"},method=RequestMethod.GET)
+	public String adminManage(@PathVariable String component, Model map) {
+		map.addAttribute("users", UserService.getUsers());
+		map.addAttribute("groups", GroupService.getGroups());
+		map.addAttribute("contentItems", PageContentService.getAllPageContent());
+		map.addAttribute("events", EventService.getEvents());
+		map.addAttribute("roles", RoleService.getRoles());
+		map.addAttribute("pages", PageService.getPages());
+		map.addAttribute("images", ImageService.getAll());
+		map.addAttribute("renderers", RendererService.getAll());
+		map.addAttribute("menus", MenuService.getAll());
+		map.addAttribute("links", LinkService.getAll());
+		return "admin" + "/" + component;
 	}
 	@ModelAttribute(value="user")
 	public User getUser() {
@@ -86,5 +116,17 @@ public class AdminController {
 	@ModelAttribute(value="page")
 	public Page getPage() {
 		return new Page();
+	}
+	@ModelAttribute(value="link")
+	public Link getLink() {
+		return new Link();
+	}
+	@ModelAttribute(value="menu")
+	public Menu getMenu() {
+		return new Menu();
+	}
+	@ModelAttribute(value="renderer")
+	public Renderer getRenderer() {
+		return new Renderer();
 	}
 }

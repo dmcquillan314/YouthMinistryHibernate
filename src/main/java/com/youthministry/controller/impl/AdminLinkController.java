@@ -11,14 +11,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.youthministry.controller.AbstractAdminController;
 import com.youthministry.controller.validator.ImageValidator;
+import com.youthministry.controller.validator.LinkValidator;
 import com.youthministry.domain.Image;
+import com.youthministry.domain.Link;
 
 @Controller
-public class AdminImageController extends AbstractAdminController {
+public class AdminLinkController extends AbstractAdminController {
 
 	@Override
-	@RequestMapping(value={"/admin/createimage"},method=RequestMethod.POST)
-	public String handleCreate(@ModelAttribute(value="image") Object object, BindingResult errors,
+	@RequestMapping(value={"/admin/updatelink/{id}"},method=RequestMethod.POST)
+	public String handleUpdate(@PathVariable String id, @ModelAttribute(value="link") Object object, BindingResult errors,
 			Model map) {
 		map.addAttribute("users", UserService.getUsers());
 		map.addAttribute("groups", GroupService.getGroups());
@@ -30,12 +32,12 @@ public class AdminImageController extends AbstractAdminController {
 		map.addAttribute("renderers", RendererService.getAll());
 		map.addAttribute("menus", MenuService.getAll());
 		map.addAttribute("links", LinkService.getAll());
-		Image image = (Image) object;
-		this.setValidator(new ImageValidator());
-		this.getValidator().validate(image, errors);
+		Link link = (Link) object;
+		this.setValidator(new LinkValidator());
+		this.getValidator().validate(link, errors);
 		if(! errors.hasErrors()) {
 			try {
-				ImageService.create(image);
+				LinkService.create(link);
 				return "redirect:/admin";
 			} catch(ConstraintViolationException cve) {
 				errors.rejectValue("imageName", "imageName.unknownError","An error occurred while processing your request.");
@@ -43,11 +45,10 @@ public class AdminImageController extends AbstractAdminController {
 		}
 		return "admin";
 	}
-	
+
 	@Override
-	@RequestMapping(value={"/admin/updateimage/{id}"},method=RequestMethod.POST)
-	public String handleUpdate(@PathVariable String id, @ModelAttribute(value="image") Object object, BindingResult errors,
-			Model map) {
+	@RequestMapping(value={"/admin/createlink"},method=RequestMethod.POST)
+	public String handleCreate(@ModelAttribute(value="link") Object object, BindingResult errors, Model map) {
 		map.addAttribute("users", UserService.getUsers());
 		map.addAttribute("groups", GroupService.getGroups());
 		map.addAttribute("contentItems", PageContentService.getAllPageContent());
@@ -58,13 +59,12 @@ public class AdminImageController extends AbstractAdminController {
 		map.addAttribute("renderers", RendererService.getAll());
 		map.addAttribute("menus", MenuService.getAll());
 		map.addAttribute("links", LinkService.getAll());
-		Image image = (Image) object;
-		image.setImageId(Long.parseLong(id));
-		this.setValidator(new ImageValidator());
-		this.getValidator().validate(image, errors);
+		Link link = (Link) object;
+		this.setValidator(new LinkValidator());
+		this.getValidator().validate(link, errors);
 		if(! errors.hasErrors()) {
 			try {
-				ImageService.create(image);
+				LinkService.create(link);
 				return "redirect:/admin";
 			} catch(ConstraintViolationException cve) {
 				errors.rejectValue("imageName", "imageName.unknownError","An error occurred while processing your request.");
@@ -72,11 +72,10 @@ public class AdminImageController extends AbstractAdminController {
 		}
 		return "admin";
 	}
-	
+
 	@Override
-	@RequestMapping(value={"/admin/deleteimage"},method=RequestMethod.POST)
-	public String handleDelete(@PathVariable String id) {
-		// TODO Auto-generated method stub
+	@RequestMapping(value={"/admin/deletelink"},method=RequestMethod.POST)
+	public String handleDelete(String id) {
 		return null;
 	}
 
