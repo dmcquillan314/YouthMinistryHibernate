@@ -47,6 +47,9 @@ public class AdminEventController extends AbstractAdminController {
 		map.addAttribute("roles", RoleService.getRoles());
 		map.addAttribute("pages", PageService.getPages());
 		map.addAttribute("images", ImageService.getAll());
+		map.addAttribute("renderers", RendererService.getAll());
+		map.addAttribute("menus", MenuService.getAll());
+		map.addAttribute("links", LinkService.getAll());
 		EventLocation eventLocation = (EventLocation) object;
 		this.setValidator(new EventValidator());
 		this.getValidator().validate(eventLocation, errors);
@@ -74,6 +77,9 @@ public class AdminEventController extends AbstractAdminController {
 		map.addAttribute("roles", RoleService.getRoles());
 		map.addAttribute("pages", PageService.getPages());
 		map.addAttribute("images", ImageService.getAll());
+		map.addAttribute("renderers", RendererService.getAll());
+		map.addAttribute("menus", MenuService.getAll());
+		map.addAttribute("links", LinkService.getAll());
 		EventLocation eventLocation = (EventLocation) object;
 		this.setValidator(new EventValidator());
 		this.getValidator().validate(eventLocation, errors);

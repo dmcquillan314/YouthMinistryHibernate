@@ -85,6 +85,14 @@
 		%>
 		
 		<% 
+			if (request.getParameter("main_menu") != null) {
+		%>
+			<jsp:include page="<%= \"/WEB-INF/jsp\" + request.getParameter(\"main_menu\") %>"/>
+		<%  
+			}
+		%>
+		
+		<% 
 			if (request.getParameter("content") != null) {
 		%>
 			<jsp:include page="<%= \"/WEB-INF/jsp\" + request.getParameter(\"content\") %>"/>
