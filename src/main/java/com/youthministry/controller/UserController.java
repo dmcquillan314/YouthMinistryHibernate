@@ -38,6 +38,8 @@ public class UserController {
 		model.put("events", EventService.getEvents());
 		if(pageUrl != null && !"".equals(pageUrl)) {
 			model.put("page", PageService.findByUrl("/" + pageUrl));
+		} else {
+			model.put("page", pageUrl);
 		}
 		return new ModelAndView("view", "model", model);
 	}

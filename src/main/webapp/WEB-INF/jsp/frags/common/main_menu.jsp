@@ -7,6 +7,7 @@
 		<a href="<c:url value="/admin/manage/menus" />">Menus</a>
 		<a href="<c:url value="/admin/manage/pages" />">Pages</a>
 		<a href="<c:url value="/admin/manage/renderers" />">Renderers</a>
+		<a href="<c:url value="/admin/manage/media" />">Media</a>
 		<a href="<c:url value="/j_spring_security_logout" />">Logout</a>
 	</nav>
 </div>

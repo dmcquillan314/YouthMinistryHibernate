@@ -27,34 +27,34 @@ import org.hibernate.annotations.FetchMode;
 
 @NamedQueries(
 	@NamedQuery(
-		name = "Content.findAll",
-		query = "from CONTENT"
+		name = "PageContent.findAll",
+		query = "from PAGE_CONTENT"
 	)
 )
-@Entity(name="CONTENT")
-@Table(name="CONTENT")
+@Entity(name="PAGE_CONTENT")
+@Table(name="PAGE_CONTENT")
 @Inheritance (strategy=InheritanceType.JOINED)
-public class Content {
+public class PageContent {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="CONTENT_ID")	
+	@Column(name="PAGE_CONTENT_ID")	
 	private Long pageContentId;
-	@Column(name="CONTENT_NAME", nullable=false)
+	@Column(name="PAGE_CONTENT_NAME", nullable=false)
 	private String pageContentName;
 		
 	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.EAGER)
-	@JoinTable(name = "IMAGE_CONTENT",
-	joinColumns = @JoinColumn(name = "CONTENT_ID"),
+	@JoinTable(name = "IMAGE_PAGE_CONTENT",
+	joinColumns = @JoinColumn(name = "PAGE_CONTENT_ID"),
 	inverseJoinColumns = @JoinColumn(name = "IMAGE_ID"))
 	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)	
 	@Fetch(FetchMode.SELECT)
 	private Collection<Image> images = new ArrayList<Image>();
 	
-	@Column(name="CONTENT_TITLE")
+	@Column(name="PAGE_CONTENT_TITLE")
 	private String contentTitle;
 	
 	@Lob
-	@Column(name="CONTENT_BODY")
+	@Column(name="PAGE_CONTENT_BODY")
 	private String contentBody;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
