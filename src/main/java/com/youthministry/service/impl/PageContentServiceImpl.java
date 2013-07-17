@@ -6,50 +6,50 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.youthministry.dao.ContentDao;
-import com.youthministry.domain.Content;
+import com.youthministry.dao.PageContentDao;
+import com.youthministry.domain.PageContent;
 import com.youthministry.genericdao.GenericDao;
-import com.youthministry.service.ContentService;
+import com.youthministry.service.PageContentService;
 
 @Transactional(readOnly=true)
-public class ContentServiceImpl implements ContentService {
+public class PageContentServiceImpl implements PageContentService {
 
-	private ContentDao pageContentDao;
+	private PageContentDao pageContentDao;
 	
-	public void setPageContentDao(ContentDao pageContentDao) {
+	public void setPageContentDao(PageContentDao pageContentDao) {
 		this.pageContentDao = pageContentDao;
 	}
 	
-	public ContentDao getPageContentDao() {
+	public PageContentDao getPageContentDao() {
 		return pageContentDao;
 	}
 	
 	@Transactional(readOnly=true)
 	@Override
-	public Content getPageContentById(Long id) {
-		return (Content) getPageContentDao().read(id);
+	public PageContent getPageContentById(Long id) {
+		return (PageContent) getPageContentDao().read(id);
 	}
 	
 	@Transactional(readOnly=false)
 	@Override
-	public void addPageContent(Content pageContent) {
+	public void addPageContent(PageContent pageContent) {
 		getPageContentDao().create(pageContent);
 	}
 
 	@Transactional(readOnly=false)
 	@Override
-	public void updatePageContent(Content pageContent) {
+	public void updatePageContent(PageContent pageContent) {
 		getPageContentDao().update(pageContent);
 	}
 
 	@Transactional(readOnly=false)
 	@Override
-	public void deletePageContent(Content pageContent) {
+	public void deletePageContent(PageContent pageContent) {
 		getPageContentDao().delete(pageContent);
 	}
 
 	@Override
-	public List<Content> getAllPageContent() {
+	public List<PageContent> getAllPageContent() {
 		// TODO Auto-generated method stub
 		return getPageContentDao().findAll();
 	}	

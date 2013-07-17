@@ -9,7 +9,7 @@
 	<!-- Property Editors -->
 
 	<!-- Beans Declaration -->
-	<bean id="PageContent" class="com.youthministry.domain.Content" />
+	<bean id="PageContent" class="com.youthministry.domain.PageContent" />
 	<bean id="Event" class="com.youthministry.domain.Event" />
 	<bean id="Group" class="com.youthministry.domain.Group" />
 	<bean id="Image" class="com.youthministry.domain.Image" />
@@ -44,7 +44,7 @@
 
 
 	<!-- User Service Declaration -->
-	<bean id="PageContentService" class="com.youthministry.service.impl.ContentServiceImpl">
+	<bean id="PageContentService" class="com.youthministry.service.impl.PageContentServiceImpl">
 		<property name="pageContentDao" ref="contentDao" />
 	</bean>
 	<bean id="EventService" class="com.youthministry.service.impl.EventServiceImpl">
@@ -87,12 +87,12 @@
 	<!-- DAO Declaration -->
 	<bean id="contentDao" parent="abstractDao">
 	    <property name="proxyInterfaces">
-	        <value>com.youthministry.dao.ContentDao</value>
+	        <value>com.youthministry.dao.PageContentDao</value>
 	    </property>
 	    <property name="target">
 	        <bean parent="abstractDaoTarget">
 	            <constructor-arg>
-	                <value>com.youthministry.domain.Content</value>
+	                <value>com.youthministry.domain.PageContent</value>
 	            </constructor-arg>
 	        </bean>
 	    </property>
@@ -248,7 +248,7 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/YouthMinistry" />
 		<property name="username" value="root" />
-		<property name="password" value="" />
+		<property name="password" value="snow314eagle159" />
 	</bean>
 	<!-- Session Factory Declaration -->
 	<bean id="SessionFactory"
@@ -263,7 +263,7 @@
 				<value>com.youthministry.domain.Link</value>
 				<value>com.youthministry.domain.Menu</value>
 				<value>com.youthministry.domain.Location</value>
-				<value>com.youthministry.domain.Content</value>
+				<value>com.youthministry.domain.PageContent</value>
 				<value>com.youthministry.domain.Renderer</value>
 				<value>com.youthministry.domain.Template</value>
 				<value>com.youthministry.domain.Site</value>

@@ -74,7 +74,7 @@ public class Page {
 		inverseJoinColumns = @JoinColumn(name = "PAGE_CONTENT_ID"))
 	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)	
 	@Fetch(FetchMode.SELECT)
-	private Collection<Content> contentItems = new ArrayList<Content>();
+	private Collection<PageContent> contentItems = new ArrayList<PageContent>();
 	
 	@Column(name="PARENT_PAGE_ID")
 	private Long parentPageId;
@@ -164,14 +164,14 @@ public class Page {
 	/**
 	 * @return the contentItems
 	 */
-	public Collection<Content> getContentItems() {
+	public Collection<PageContent> getContentItems() {
 		return contentItems;
 	}
 
 	/**
 	 * @param contentItems the contentItems to set
 	 */
-	public void setContentItems(Collection<Content> contentItems) {
+	public void setContentItems(Collection<PageContent> contentItems) {
 		this.contentItems = contentItems;
 	}
 
