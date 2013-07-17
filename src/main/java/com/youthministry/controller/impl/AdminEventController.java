@@ -28,7 +28,7 @@ import com.youthministry.domain.Image;
 import com.youthministry.domain.User;
 import com.youthministry.service.GroupService;
 import com.youthministry.service.UserService;
-import com.youthministry.service.ContentService;
+import com.youthministry.service.PageContentService;
 import com.youthministry.service.EventService;
 import com.youthministry.service.RoleService;
 import com.youthministry.service.PageService;

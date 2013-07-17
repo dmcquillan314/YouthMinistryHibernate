@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.youthministry.controller.AbstractAdminController;
 import com.youthministry.controller.validator.PageContentValidator;
 import com.youthministry.domain.Image;
-import com.youthministry.domain.Content;
+import com.youthministry.domain.PageContent;
 
 @Controller
 public class AdminPageContentController extends AbstractAdminController {
@@ -34,7 +34,7 @@ public class AdminPageContentController extends AbstractAdminController {
 		map.addAttribute("renderers", RendererService.getAll());
 		map.addAttribute("menus", MenuService.getAll());
 		map.addAttribute("links", LinkService.getAll());
-		Content pageContent = (Content) object;
+		PageContent pageContent = (PageContent) object;
 		pageContent.setPageContentId(Long.parseLong(id));
 		this.setValidator(new PageContentValidator());
 		this.getValidator().validate(pageContent, errors);
@@ -62,7 +62,7 @@ public class AdminPageContentController extends AbstractAdminController {
 		map.addAttribute("renderers", RendererService.getAll());
 		map.addAttribute("menus", MenuService.getAll());
 		map.addAttribute("links", LinkService.getAll());
-		Content pageContent = (Content) object;
+		PageContent pageContent = (PageContent) object;
 		this.setValidator(new PageContentValidator());
 		this.getValidator().validate(pageContent, errors);
 		if(! errors.hasErrors()) {
