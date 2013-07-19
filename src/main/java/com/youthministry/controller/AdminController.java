@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.youthministry.controller.upload.FileUpload;
+import com.youthministry.domain.File;
 import com.youthministry.domain.Group;
 import com.youthministry.domain.PageContent;
 import com.youthministry.domain.Link;
@@ -30,6 +32,7 @@ import com.youthministry.service.ImageService;
 import com.youthministry.service.RendererService;
 import com.youthministry.service.MenuService;
 import com.youthministry.service.LinkService;
+import com.youthministry.service.FileService;
 
 @Controller
 public class AdminController {
@@ -54,6 +57,8 @@ public class AdminController {
 	protected MenuService MenuService;
 	@Autowired
 	protected LinkService LinkService;
+	@Autowired
+	protected FileService FileService;
 	
 	protected Validator validator;
 	
@@ -128,5 +133,9 @@ public class AdminController {
 	@ModelAttribute(value="renderer")
 	public Renderer getRenderer() {
 		return new Renderer();
+	}
+	@ModelAttribute("document")
+	public FileUpload getFileUpload() {
+		return new FileUpload();
 	}
 }

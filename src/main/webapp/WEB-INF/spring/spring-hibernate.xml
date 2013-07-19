@@ -11,6 +11,7 @@
 	<!-- Beans Declaration -->
 	<bean id="PageContent" class="com.youthministry.domain.PageContent" />
 	<bean id="Event" class="com.youthministry.domain.Event" />
+	<bean id="File" class="com.youthministry.domain.File" />
 	<bean id="Group" class="com.youthministry.domain.Group" />
 	<bean id="Image" class="com.youthministry.domain.Image" />
 	<bean id="Link" class="com.youthministry.domain.Link" />
@@ -49,6 +50,9 @@
 	</bean>
 	<bean id="EventService" class="com.youthministry.service.impl.EventServiceImpl">
 		<property name="eventDao" ref="eventDao" />
+	</bean>
+	<bean id="FileService" class="com.youthministry.service.impl.FileServiceImpl">
+		<property name="fileDao" ref="fileDao" />
 	</bean>
 	<bean id="GroupService" class="com.youthministry.service.impl.GroupServiceImpl">
 		<property name="groupDao" ref="groupDao" />
@@ -105,6 +109,18 @@
 	        <bean parent="abstractDaoTarget">
 	            <constructor-arg>
 	                <value>com.youthministry.domain.Event</value>
+	            </constructor-arg>
+	        </bean>
+	    </property>
+	</bean>	
+	<bean id="fileDao" parent="abstractDao">
+	    <property name="proxyInterfaces">
+	        <value>com.youthministry.dao.upload.FileDao</value>
+	    </property>
+	    <property name="target">
+	        <bean parent="abstractDaoTarget">
+	            <constructor-arg>
+	                <value>com.youthministry.domain.File</value>
 	            </constructor-arg>
 	        </bean>
 	    </property>
@@ -257,17 +273,18 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>com.youthministry.domain.Event</value>
+				<value>com.youthministry.domain.File</value>
 				<value>com.youthministry.domain.Group</value>
-				<value>com.youthministry.domain.Page</value>
 				<value>com.youthministry.domain.Image</value>
 				<value>com.youthministry.domain.Link</value>
-				<value>com.youthministry.domain.Menu</value>
 				<value>com.youthministry.domain.Location</value>
+				<value>com.youthministry.domain.Menu</value>
+				<value>com.youthministry.domain.Page</value>
 				<value>com.youthministry.domain.PageContent</value>
 				<value>com.youthministry.domain.Renderer</value>
-				<value>com.youthministry.domain.Template</value>
-				<value>com.youthministry.domain.Site</value>
 				<value>com.youthministry.domain.Role</value>
+				<value>com.youthministry.domain.Site</value>
+				<value>com.youthministry.domain.Template</value>
 				<value>com.youthministry.domain.User</value>
 				<value>com.youthministry.domain.UserProfile</value>
 			</list>

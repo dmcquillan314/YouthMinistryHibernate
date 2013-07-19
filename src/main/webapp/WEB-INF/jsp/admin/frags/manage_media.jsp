@@ -10,20 +10,20 @@
 </c:if>
 
         
-<form:form modelAttribute="uploadItem" action="/upload" method="post"
-	enctype="multipart/form-data">
-            <fieldset>
-		                
-		<legend>Upload Fields</legend>
-		                                       
-		<form:label for="name" path="name">Name</form:label>
-		<br />                     
-		<form:input path="name" />
-		                    
-		<form:label for="fileData" path="fileData">File</form:label>
-		<br />                     
-		<form:input path="fileData" type="file" />
-		                    <input type="submit" />                   
-		            
+<form:form method="post" action="/admin/uploadmedia" commandName="document" enctype="multipart/form-data">
+	<fieldset>
+		<form:errors path="*" cssClass="error"/>
+		
+		<form:label path="fileName">File name</form:label>
+		<form:input path="fileName" />
+		
+		<form:label path="fileDescription">File detail</form:label>
+		<form:textarea path="fileDescription" />
+	
+		<form:label path="fileData">File</form:label>
+		<form:input type="file" path="fileData" name="file" id="file" />
+		
+		<input type="submit" value="Upload File"/>
 	</fieldset>
 </form:form>
+

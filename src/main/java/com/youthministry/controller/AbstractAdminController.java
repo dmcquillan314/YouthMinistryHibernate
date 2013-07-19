@@ -6,6 +6,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import com.youthministry.controller.upload.FileUpload;
 import com.youthministry.domain.Event;
 import com.youthministry.domain.EventLocation;
 import com.youthministry.domain.Group;
@@ -110,6 +111,10 @@ public abstract class AbstractAdminController {
 	@ModelAttribute(value="page")
 	public Page getPage() {
 		return new Page();
+	}
+	@ModelAttribute("document")
+	public FileUpload getFileUpload() {
+		return new FileUpload();
 	}
 	
 }
