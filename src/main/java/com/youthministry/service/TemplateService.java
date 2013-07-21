@@ -1,12 +1,12 @@
 package com.youthministry.service;
 
-import com.youthministry.domain.Template;
+import com.youthministry.domain.Layout;
 
 public interface TemplateService {
 
-	public void create(Template template);
-	public Template read(Long id);
-	public void update(Template temmplate);
-	public void delete(Template template);
+	public void create(Layout template);
+	public Layout read(Long id);
+	public void update(Layout temmplate);
+	public void delete(Layout template);
 	
 }

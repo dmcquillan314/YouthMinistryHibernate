@@ -21,7 +21,7 @@
 	<bean id="Renderer" class="com.youthministry.domain.Renderer" />
 	<bean id="Role" class="com.youthministry.domain.Role" />
 	<bean id="Site" class="com.youthministry.domain.Site" />
-	<bean id="Template" class="com.youthministry.domain.Template" />
+	<bean id="Template" class="com.youthministry.domain.Layout" />
 	<bean id="User" class="com.youthministry.domain.User" />
 	<bean id="UserProfile" class="com.youthministry.domain.UserProfile" />
 
@@ -240,7 +240,7 @@
 	    <property name="target">
 	        <bean parent="abstractDaoTarget">
 	            <constructor-arg>
-	                <value>com.youthministry.domain.Template</value>
+	                <value>com.youthministry.domain.Layout</value>
 	            </constructor-arg>
 	        </bean>
 	    </property>
@@ -284,7 +284,7 @@
 				<value>com.youthministry.domain.Renderer</value>
 				<value>com.youthministry.domain.Role</value>
 				<value>com.youthministry.domain.Site</value>
-				<value>com.youthministry.domain.Template</value>
+				<value>com.youthministry.domain.Layout</value>
 				<value>com.youthministry.domain.User</value>
 				<value>com.youthministry.domain.UserProfile</value>
 			</list>

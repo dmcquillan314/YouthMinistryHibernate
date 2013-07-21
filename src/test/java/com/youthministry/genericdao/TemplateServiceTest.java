@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.youthministry.domain.Template;
+import com.youthministry.domain.Layout;
 import com.youthministry.service.TemplateService;
 
 
@@ -25,7 +25,7 @@ public class TemplateServiceTest {
 	final Logger logger = LoggerFactory.getLogger(TemplateServiceTest.class);
 
 	public Long testCreateRenderer() {
-		Template template = new Template();
+		Layout template = new Layout();
 		template.setTemplateName("test");
 		
 		TemplateService.create(template);
@@ -35,13 +35,13 @@ public class TemplateServiceTest {
 	@Test
 	public void testReadRenderer() {
 		Long id = testCreateRenderer();
-		Template template = TemplateService.read(id);
+		Layout template = TemplateService.read(id);
 	}
 	
 	@Test
 	public void testUpdateRenderer() {
 		Long id = testCreateRenderer();
-		Template template = TemplateService.read(id);
+		Layout template = TemplateService.read(id);
 		template.setTemplateName("test name");
 		TemplateService.update(template);
 	}
@@ -49,7 +49,7 @@ public class TemplateServiceTest {
 	@Test
 	public void testDeleteRenderer() {
 		Long id = testCreateRenderer();
-		Template template = TemplateService.read(id);
+		Layout template = TemplateService.read(id);
 		TemplateService.delete(template);
 	}
 

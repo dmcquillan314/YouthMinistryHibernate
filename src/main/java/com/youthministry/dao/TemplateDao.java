@@ -1,8 +1,8 @@
 package com.youthministry.dao;
 
-import com.youthministry.domain.Template;
+import com.youthministry.domain.Layout;
 import com.youthministry.genericdao.GenericDao;
 
-public interface TemplateDao extends GenericDao<Template, Long> {
+public interface TemplateDao extends GenericDao<Layout, Long> {
 
 }
