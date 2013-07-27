@@ -7,19 +7,25 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-@Entity(name="COLUMN")
-@Table(name="COLUMN")
+@Entity(name="COL")
+@Table(name="COL")
 public class Col {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="COL_ID")
 	private Long columnId;
 	
@@ -29,11 +35,7 @@ public class Col {
 	@Column(name="COL_DESC")
 	private String columnDesc;
 	
-	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.EAGER)
-	@JoinTable(name = "COL_ROW",
-		joinColumns = @JoinColumn(name = "COL_ID"),
-		inverseJoinColumns = @JoinColumn(name = "ROW_ID"))
-	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)	
+	@OneToMany (targetEntity = Row.class, cascade =  CascadeType.ALL)
 	@Fetch(FetchMode.SELECT)
 	private Collection<Row> rows = new ArrayList<Row>();
 

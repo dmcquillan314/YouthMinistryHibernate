@@ -14,12 +14,21 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+@NamedQueries({
+	@NamedQuery(
+		name = "Layout.findAll",
+		query = "from LAYOUT"
+	)
+})
 @Entity(name="LAYOUT")
 @Table(name="LAYOUT")
 public class Layout {
@@ -36,11 +45,7 @@ public class Layout {
 	@Lob
 	private String layoutDescription;
 	
-	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.EAGER)
-	@JoinTable(name = "LAYOUT_ROW",
-		joinColumns = @JoinColumn(name = "LAYOUT_ID"),
-		inverseJoinColumns = @JoinColumn(name = "ROW_ID"))
-	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)	
+	@OneToMany (targetEntity = Row.class, cascade =  CascadeType.ALL)
 	@Fetch(FetchMode.SELECT)
 	private Collection<Row> rows = new ArrayList<Row>();
 
