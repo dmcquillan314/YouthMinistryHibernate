@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link href="<c:url value="/static/common/css/compiled.css"/>" type="text/css" rel="stylesheet" />
 </head>
 <body> 
 	<form action="<c:url value="/signin/authenticate"/>" id="signin" method="POST">
