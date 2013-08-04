@@ -1,152 +1,102 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<web-app
-        xmlns="http://java.sun.com/xml/ns/javaee"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
-                            http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-        id="yourpackagename.yourwebproject" version="2.5">
-    <display-name>YouthMinistry</display-name>
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-    <!-- Spring Framework Configuration -->
+    
+    <display-name>spring-security-starter</display-name>
+    
+    <description>Roo generated spring-security-starter application</description>
+
+    
+    <!-- Enable escaping of form submission contents -->
+    <context-param>
+        <param-name>defaultHtmlEscape</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>
-            classpath:spring/root-context.xml
-        </param-value>
+        <param-value>classpath*:META-INF/spring/applicationContext*.xml</param-value>
     </context-param>
-
-
-    <!-- Filter Configurations -->
-    <!-- UTF-8 encoding filter -->
+    
     <filter>
-		<filter-name>encodingFilter</filter-name>
-		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-		<init-param>
-			<param-name>encoding</param-name>
-			<param-value>UTF-8</param-value>
-		</init-param>
-		<init-param>
-			<param-name>forceEncoding</param-name>
-			<param-value>true</param-value>
-		</init-param>
-	</filter>
-	<filter-mapping>
-		<filter-name>encodingFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-	<filter>
-		<filter-name>springSecurityFilterChain</filter-name>
-		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>springSecurityFilterChain</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-	<filter>
-		<filter-name>hiddenHttpMethodFilter</filter-name>
-		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>hiddenHttpMethodFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-
-
-    <!-- Web App Dispatcher -->
-    <servlet>
-        <servlet-name>dispatcherServlet</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
         <init-param>
-            <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:spring/spring-webapp-servlet.xml</param-value>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
         </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
 
-    <servlet-mapping>
-        <servlet-name>dispatcherServlet</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
+    <filter>
+        <filter-name>HttpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
 
-
-    <!-- Mentioning the Context Loader Listener class of Spring Framework as a listener -->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter>
+        <filter-name>SpringOpenSessionInViewFilter</filter-name>
+        <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>HttpMethodFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    
+    
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>SpringOpenSessionInViewFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    <!-- Creates the Spring Container shared by all Servlets and Filters -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-
-
-    <!-- Error Handling -->
-    <!-- Mapping a lot of errors to Bad Request -->
+    
+    <!-- Handles Spring requests -->
+    <servlet>
+        <servlet-name>spring-security-starter</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>WEB-INF/spring/webmvc-config.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>spring-security-starter</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    
+    <session-config>
+        <session-timeout>10</session-timeout>
+    </session-config>
+    
     <error-page>
-        <error-code>400</error-code>
-        <location>/api/errors/400</location>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/uncaughtException</location>
     </error-page>
-    <error-page>
-        <error-code>402</error-code>
-        <location>/api/errors/400</location>
-    </error-page>
-    <error-page>
-        <error-code>403</error-code>
-        <location>/api/errors/400</location>
-    </error-page>
-    <error-page>
-        <error-code>406</error-code>
-        <location>/api/errors/400</location>
-    </error-page>
-    <error-page>
-        <error-code>407</error-code>
-        <location>/api/errors/400</location>
-    </error-page>
-    <error-page>
-        <error-code>409</error-code>
-        <location>/api/errors/400</location>
-    </error-page>
-    <error-page>
-        <error-code>410</error-code>
-        <location>/api/errors/400</location>
-    </error-page>
-    <error-page>
-        <error-code>411</error-code>
-        <location>/api/errors/400</location>
-    </error-page>
-    <error-page>
-        <error-code>412</error-code>
-        <location>/api/errors/400</location>
-    </error-page>
-
-
-    <!-- Other properly handled errors -->
-    <error-page>
-        <error-code>401</error-code>
-        <location>/api/errors/401</location>
-    </error-page>
+    
     <error-page>
         <error-code>404</error-code>
-        <location>/api/errors/404</location>
+        <location>/resourceNotFound</location>
     </error-page>
-    <error-page>
-        <error-code>405</error-code>
-        <location>/api/errors/405</location>
-    </error-page>
-    <error-page>
-        <error-code>408</error-code>
-        <location>/api/errors/408</location>
-    </error-page>
-    <error-page>
-        <error-code>415</error-code>
-        <location>/api/errors/415</location>
-    </error-page>
-    <error-page>
-        <error-code>500</error-code>
-        <location>/api/errors/500</location>
-    </error-page>
-    <error-page>
-        <error-code>501</error-code>
-        <location>/api/errors/501</location>
-    </error-page>
-    <error-page>
-        <error-code>503</error-code>
-        <location>/api/errors/503</location>
-    </error-page>
-
 </web-app>
