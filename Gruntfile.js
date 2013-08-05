@@ -22,10 +22,10 @@ module.exports = function( grunt ) {
 
 		// Assign directories.
 		dir: {
-			static: 'src/main/webapp/static',
-			staticTarget: 'target/deep-dish-cms/static',
+			static: 'src/main',
+			staticTarget: 'src/main/webapp/static',
 			js: {
-				common: '<%= dir.static %>/common/js',
+				common: '<%= dir.static %>/js',
 				commonTarget: '<%= dir.staticTarget %>/common/js',
 				mobile: '',
 				mobileTarget: ''
@@ -155,7 +155,7 @@ module.exports = function( grunt ) {
 		compass: {
 			options: {
 				require: 'susy',
-				cssDir: 'target/deep-dish-cms/static/',
+				cssDir: 'src/main/webapp/static/',
 				sassDir: 'src/main/scss/',
 				imagesDir: 'src/main/webapp/',
 				fontsDir: '/static/common/font/',
