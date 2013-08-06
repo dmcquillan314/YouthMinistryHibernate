@@ -5,12 +5,11 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
-    <beans:bean id="customUserService" class="com.youthministry.security.CustomUserDetailService" >
-	</beans:bean>
-
 	<authentication-manager alias="authenticationManager" >
-		<authentication-provider user-service-ref="customUserService">
-			<password-encoder ref="passwordEncoder" />
+		<authentication-provider user-service-ref="UserService">
+			<password-encoder ref="passwordEncoder" >
+			    <salt-source user-property="username" />
+		    </password-encoder>
 		</authentication-provider>
 	</authentication-manager>
     
@@ -25,14 +24,15 @@
 		<intercept-url pattern="/**" access="permitAll" />
 		<intercept-url pattern="/auth/**" access="permitAll" />
 		<intercept-url pattern="/disconnect/facebook" access="permitAll" />
-        <remember-me key="mySecondSecretWordThatShouldBeHidden" user-service-ref="customUserService" />
+        <remember-me key="mySecondSecretWordThatShouldBeHidden" user-service-ref="UserService" />
     </http>
 
     <global-method-security secured-annotations="enabled" pre-post-annotations="enabled" />
 
     <!-- Configure Authentication mechanism -->
 
-    <beans:bean name="passwordEncoder" class="org.springframework.security.crypto.password.StandardPasswordEncoder">
-        <beans:constructor-arg name="secret" value="myVerySecretWordThatShouldBeSomewhereHidden"/>
+    <beans:bean name="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder">
+        <beans:constructor-arg value="256" />
+        <beans:property name="iterations" value="1000" />
     </beans:bean>
 </beans:beans>
