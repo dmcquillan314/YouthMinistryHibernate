@@ -18,6 +18,6 @@
 		c:_1-ref="socialUsersDetailService" />
 
 	<bean id="socialUsersDetailService" class="com.youthministry.social.security.SimpleSocialUsersDetailService"
-		c:_-ref="userDetailsService" />
+		c:_-ref="UserService" />
 
 </beans>

@@ -11,8 +11,13 @@
 			    <salt-source user-property="username" />
 		    </password-encoder>
 		</authentication-provider>
+		
+		<!-- Spring Social Security authentication provider -->
+		<authentication-provider ref="socialAuthenticationProvider" />
 	</authentication-manager>
-    
+
+	<http pattern="/static/**" security="none"/>
+	
     <!-- HTTP security configurations -->
     <http auto-config="true" use-expressions="true">
 		<form-login login-page="/signin" default-target-url="/home" login-processing-url="/signin/authenticate" authentication-failure-url="/signin?error=bad_credentials"/>		
@@ -25,6 +30,9 @@
 		<intercept-url pattern="/auth/**" access="permitAll" />
 		<intercept-url pattern="/disconnect/facebook" access="permitAll" />
         <remember-me key="mySecondSecretWordThatShouldBeHidden" user-service-ref="UserService" />
+
+		<!--  Spring Social Security authentication filter -->
+		<custom-filter ref="socialAuthenticationFilter" before="PRE_AUTH_FILTER" />
     </http>
 
     <global-method-security secured-annotations="enabled" pre-post-annotations="enabled" />
@@ -35,4 +43,7 @@
         <beans:constructor-arg value="256" />
         <beans:property name="iterations" value="1000" />
     </beans:bean>
+    
+    <beans:bean id="textEncryptor" class="org.springframework.security.crypto.encrypt.Encryptors" factory-method="noOpText" />
+    
 </beans:beans>
