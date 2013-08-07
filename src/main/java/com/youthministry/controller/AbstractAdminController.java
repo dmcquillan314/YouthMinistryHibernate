@@ -6,10 +6,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import com.youthministry.controller.layout.impl.LayoutHelper;
+import com.youthministry.controller.upload.FileUpload;
 import com.youthministry.domain.Event;
 import com.youthministry.domain.EventLocation;
 import com.youthministry.domain.Group;
 import com.youthministry.domain.Image;
+import com.youthministry.domain.Layout;
 import com.youthministry.domain.Link;
 import com.youthministry.domain.Menu;
 import com.youthministry.domain.Page;
@@ -27,6 +30,7 @@ import com.youthministry.service.RoleService;
 import com.youthministry.service.RendererService;
 import com.youthministry.service.MenuService;
 import com.youthministry.service.LinkService;
+import com.youthministry.service.LayoutService;
 
 public abstract class AbstractAdminController {
 
@@ -50,6 +54,8 @@ public abstract class AbstractAdminController {
 	protected MenuService MenuService;
 	@Autowired
 	protected LinkService LinkService;
+	@Autowired
+	protected LayoutService LayoutService;
 	
 	protected Validator validator;
 
@@ -110,6 +116,14 @@ public abstract class AbstractAdminController {
 	@ModelAttribute(value="page")
 	public Page getPage() {
 		return new Page();
+	}
+	@ModelAttribute(value="document")
+	public FileUpload getFileUpload() {
+		return new FileUpload();
+	}
+	@ModelAttribute(value="layout")
+	public LayoutHelper getLayout() {
+		return new LayoutHelper();
 	}
 	
 }

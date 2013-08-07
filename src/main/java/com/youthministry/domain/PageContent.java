@@ -33,7 +33,6 @@ import org.hibernate.annotations.FetchMode;
 )
 @Entity(name="PAGE_CONTENT")
 @Table(name="PAGE_CONTENT")
-@Inheritance (strategy=InheritanceType.JOINED)
 public class PageContent {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

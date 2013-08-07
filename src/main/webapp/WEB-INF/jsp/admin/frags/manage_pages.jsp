@@ -52,6 +52,12 @@
 				items="${contentItems}" itemLabel="pageContentName"
 				itemValue="pageContentId" />
 		</c:if>
+		<c:if test="${not empty pages}">
+        	Parent Page <form:errors path="parentPageId" cssClass="error" />
+			<form:select id="parentPageSelect" path="parentPageId"
+				items="${pages}" itemLabel="pageName"
+				itemValue="pageId" />
+		</c:if>
 		<button type="submit">Create page</button>
 	</fieldset>
 </form:form>

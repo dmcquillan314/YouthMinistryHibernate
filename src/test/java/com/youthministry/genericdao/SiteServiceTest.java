@@ -14,7 +14,7 @@ import com.youthministry.domain.Site;
 import com.youthministry.service.SiteService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "root-context.xml"}) 
+@ContextConfiguration(locations = { "classpath*:META-INF/spring/applicationContext*.xml"}) 
 @TransactionConfiguration
 @Transactional
 public class SiteServiceTest {

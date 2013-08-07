@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.stereotype.Component;
@@ -24,6 +25,8 @@ import com.youthministry.service.RoleService;
 @Controller
 public class LoginController {
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	@Autowired
 	private UserService UserService;
 	@Autowired
@@ -66,7 +69,7 @@ public class LoginController {
 	private User createUser(SignupForm form, BindingResult formBinding) {
 		User user = new User();
 		user.setUsername(form.getUsername());
-		user.setPassword(form.getPassword());
+		user.setPassword(passwordEncoder.encodePassword(form.getPassword(), form.getUsername()));
 
 		UserProfile userProfile = new UserProfile();
 		userProfile.setFirstName(form.getFirstName());

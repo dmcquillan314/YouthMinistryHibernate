@@ -17,7 +17,7 @@ import com.youthministry.service.GroupService;
 import com.youthministry.domain.Group;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "root-context.xml"}) 
+@ContextConfiguration(locations = { "classpath*:META-INF/spring/applicationContext*.xml"}) 
 @TransactionConfiguration
 @Transactional
 public class GroupServiceTest {

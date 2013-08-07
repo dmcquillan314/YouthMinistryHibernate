@@ -16,7 +16,7 @@ import com.youthministry.domain.User;
 import com.youthministry.domain.UserProfile;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "root-context.xml"}) 
+@ContextConfiguration(locations = { "classpath*:META-INF/spring/applicationContext*.xml"}) 
 @TransactionConfiguration
 @Transactional
 public class UserServiceTest {

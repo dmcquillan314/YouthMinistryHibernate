@@ -27,6 +27,7 @@ import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.util.DigestUtils;
 
 @NamedQueries({
 	@NamedQuery(
@@ -47,7 +48,7 @@ public class User implements UserDetails,Serializable{
 	private Long userId;
 	@Column(name = "USERNAME", unique=true, nullable = false, length = 50)
 	private String username;
-	@Column(name = "PASSWORD", nullable = true, length = 50)
+	@Column(name = "PASSWORD", nullable = true, length = 255)
 	private String password;
 	
 	@ManyToOne(cascade=CascadeType.ALL)

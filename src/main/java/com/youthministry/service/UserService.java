@@ -2,9 +2,15 @@ package com.youthministry.service;
 
 import java.util.List;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.context.ContextLoader;
+
 import com.youthministry.domain.User;
 
-public interface UserService {
+public interface UserService extends UserDetailsService {
 	 
     /**
      * Add User
@@ -41,4 +47,7 @@ public interface UserService {
      * @return List - User list
      */
     public List<User> getUsers();
+    
+	@Override
+	public UserDetails loadUserByUsername(String username);
 }

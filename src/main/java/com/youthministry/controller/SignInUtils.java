@@ -21,7 +21,6 @@ public class SignInUtils {
 	 * Programmatically signs in the user with the given the user ID.
 	 */
 	public static void signin(String userId) {
-		// TODO: change third param to use custom getAuthorities method in customUserDetailsService
 		ApplicationContext context = ContextLoader.getCurrentWebApplicationContext();
 		UserService userService = (UserService)context.getBean("UserService");
 		User user = userService.getByUsername(userId);

@@ -66,7 +66,7 @@ public class Page {
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="TEMPLATE_ID")
-	private Template pageTemplate = new Template();
+	private Layout pageTemplate = new Layout();
 
 	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.EAGER)
 	@JoinTable(name = "PAGE_PAGE_CONTENT",
@@ -111,11 +111,11 @@ public class Page {
 		this.pageKeywords = pageKeywords;
 	}
 
-	public Template getPageTemplate() {
+	public Layout getPageTemplate() {
 		return pageTemplate;
 	}
 
-	public void setPageTemplate(Template pageTemplate) {
+	public void setPageTemplate(Layout pageTemplate) {
 		this.pageTemplate = pageTemplate;
 	}
 

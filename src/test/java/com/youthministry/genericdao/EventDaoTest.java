@@ -20,7 +20,7 @@ import com.youthministry.domain.Group;
 import com.youthministry.domain.Location;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "root-context.xml"}) 
+@ContextConfiguration(locations = { "classpath*:META-INF/spring/applicationContext*.xml"}) 
 @TransactionConfiguration
 @Transactional
 public class EventDaoTest {

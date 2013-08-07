@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link href="<c:url value="/static/common/css/compiled.css"/>" type="text/css" rel="stylesheet" />
 </head>
 <body> 
 	<form action="<c:url value="/signin/authenticate"/>" id="signin" method="POST">
@@ -53,5 +54,5 @@
 	<p>(Uses SocialAuthenticationFilter)</p>
 
 	<!-- FACEBOOK SIGNIN -->
-    <p><a href="<c:url value="/auth/facebook"/>"><img src="<c:url value="/resources/social/facebook/sign-in-with-facebook.png"/>" border="0"/></a><br/></p></body>
+    <p><a href="<c:url value="/auth/facebook"/>">Connect with facebook</a><br/></p></body>
 </html>
