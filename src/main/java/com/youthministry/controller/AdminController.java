@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.youthministry.controller.layout.impl.LayoutHelper;
+import com.youthministry.controller.upload.FileUpload;
+import com.youthministry.domain.File;
 import com.youthministry.domain.Group;
+import com.youthministry.domain.Layout;
 import com.youthministry.domain.PageContent;
 import com.youthministry.domain.Link;
 import com.youthministry.domain.Menu;
@@ -22,6 +26,7 @@ import com.youthministry.domain.Page;
 import com.youthministry.domain.EventLocation;
 import com.youthministry.service.EventService;
 import com.youthministry.service.GroupService;
+import com.youthministry.service.LayoutService;
 import com.youthministry.service.PageContentService;
 import com.youthministry.service.PageService;
 import com.youthministry.service.RoleService;
@@ -30,6 +35,7 @@ import com.youthministry.service.ImageService;
 import com.youthministry.service.RendererService;
 import com.youthministry.service.MenuService;
 import com.youthministry.service.LinkService;
+import com.youthministry.service.FileService;
 
 @Controller
 public class AdminController {
@@ -54,6 +60,10 @@ public class AdminController {
 	protected MenuService MenuService;
 	@Autowired
 	protected LinkService LinkService;
+	@Autowired
+	protected FileService FileService;
+	@Autowired
+	protected LayoutService LayoutService;
 	
 	protected Validator validator;
 	
@@ -69,6 +79,7 @@ public class AdminController {
 		map.addAttribute("renderers", RendererService.getAll());
 		map.addAttribute("menus", MenuService.getAll());
 		map.addAttribute("links", LinkService.getAll());
+		map.addAttribute("layouts", LayoutService.findAll());
 		return "admin";
 	}
 	@RequestMapping(value={"/admin/manage/{component}"},method=RequestMethod.GET)
@@ -83,6 +94,7 @@ public class AdminController {
 		map.addAttribute("renderers", RendererService.getAll());
 		map.addAttribute("menus", MenuService.getAll());
 		map.addAttribute("links", LinkService.getAll());
+		map.addAttribute("layouts", LayoutService.findAll());
 		return "admin" + "/" + component;
 	}
 	@ModelAttribute(value="user")
@@ -128,5 +140,13 @@ public class AdminController {
 	@ModelAttribute(value="renderer")
 	public Renderer getRenderer() {
 		return new Renderer();
+	}
+	@ModelAttribute("document")
+	public FileUpload getFileUpload() {
+		return new FileUpload();
+	}
+	@ModelAttribute(value="layout")
+	public LayoutHelper getLayout() {
+		return new LayoutHelper();
 	}
 }

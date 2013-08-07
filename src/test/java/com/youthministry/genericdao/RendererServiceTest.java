@@ -14,7 +14,7 @@ import com.youthministry.domain.Renderer;
 import com.youthministry.service.RendererService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "root-context.xml"}) 
+@ContextConfiguration(locations = { "classpath*:META-INF/spring/applicationContext*.xml"}) 
 @TransactionConfiguration
 @Transactional
 public class RendererServiceTest {
@@ -46,7 +46,6 @@ public class RendererServiceTest {
 		RendererService.update(renderer);
 	}
 	
-	@Test
 	public void testDeleteRenderer() {
 		Long id = testCreateRenderer();
 		Renderer renderer = RendererService.read(id);

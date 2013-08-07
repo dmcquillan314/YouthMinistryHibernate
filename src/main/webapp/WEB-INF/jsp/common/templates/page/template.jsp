@@ -62,7 +62,8 @@
 		%>
 		<% 
 		 	}
-		%>	
+		%>
+		<link rel="stylesheet" type="text/css" href="${ pageContext.request.contextPath }/static/common/css/compiled.css" />
 	</head>
 	
 <%-- note: primary browser detection done with css_browser_selector.js, except ie9, for which it does not detect a version --%>
@@ -107,5 +108,6 @@
 		<%  
 			}
 		%>
+		<script type="text/javascript" src="<c:url value="/static/common/js/compiled.js" />"></script>
 	</body>
 </html>

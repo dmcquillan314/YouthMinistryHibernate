@@ -31,7 +31,7 @@ public class UserController {
 		return new ModelAndView("view", "model", model);
 	}
 	
-	@RequestMapping(value={"/{pageUrl}"})
+	//@RequestMapping(value={"/{pageUrl}"}) move this to a resource resolver
 	public ModelAndView groupView(HttpServletRequest request, @PathVariable String pageUrl) {
 		System.out.println(request.getServletPath());
 		Map<String, Object> model = new HashMap<String, Object>();

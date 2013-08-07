@@ -1,0 +1,22 @@
+{
+  "name": "deep-dish-cms",
+  "title": "Deep Dish CMS",
+  "version": "0.1.0-alpha",
+  "description": "Deep Dish Development Content Management System",
+  "devDependencies": {
+    "grunt": "0.4.1",
+    "grunt-banner": "0.1.4",
+    "grunt-contrib-compass": "0.1.1rc8",
+    "grunt-contrib-concat": "0.3.0",
+    "grunt-contrib-jshint": "0.4.3",
+    "grunt-contrib-jst": "0.5.0",
+    "grunt-contrib-watch": "0.4.3",
+    "grunt-gcc": "0.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/dmcquillan314/YouthMinistryHibernate.git"
+  },
+  "author": "Dan McQuillan",
+  "license": "public"
+}
