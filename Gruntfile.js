@@ -22,10 +22,10 @@ module.exports = function( grunt ) {
 
 		// Assign directories.
 		dir: {
-			static: 'src/main',
+			static: 'src/main/webapp/static',
 			staticTarget: 'src/main/webapp/static',
 			js: {
-				common: '<%= dir.static %>/js',
+				common: 'src/main/js',
 				commonTarget: '<%= dir.staticTarget %>/common/js',
 				mobile: '',
 				mobileTarget: ''
@@ -62,13 +62,15 @@ module.exports = function( grunt ) {
 					'console',
 					'Modernizr',
 					'$',
-					'ddcms'
+					'deepdishcms',
+					'YT'
 				],
 				globals: {
 					_: true,
 					jQuery: true,
-					Ember: true,
-					requirejs: true
+					Backbone: true,
+					requirejs: true,
+					youtubeProxy: true
 				}
 			}
 		},
@@ -77,7 +79,7 @@ module.exports = function( grunt ) {
 		jst: {
 			compile: {
 				options: {
-					namespace: 'ddcms',
+					namespace: 'deepdishcms',
 					processName: function(filename) {
 						var name = filename.split( '/' ).pop();
 						return name.substr( 0, name.lastIndexOf( '.' ) );
@@ -105,24 +107,26 @@ module.exports = function( grunt ) {
 				},
 				src: [ // Lib order is important.
 					'<%= dir.js.common %>/lib/underscore.js',
-					'<%= dir.js.common %>/lib/handlebars-1.0.0-rc.4.js',
 					'<%= dir.js.common %>/lib/jquery-1.9.1.js',
-					'<%= dir.js.common %>/lib/ember-1.0.0-rc.6.js',
+					'<%= dir.js.common %>/lib/backbone.js',
 					'<%= dir.js.common %>/main.js',
+					'<%= dir.js.common %>/component/**/model/*.js',
+					'<%= dir.js.common %>/component/**/collection/*.js',
+					'<%= dir.js.common %>/component/**/view/*.js'
 				],
 				dest: '<%= dir.js.commonTarget %>/compiled.js',
 				nonull: true // Warn on missing files.
 			},
-            polyfill: {
-                src: [ '<%= dir.js.common %>/lib/polyfill/*.js' ],
-                dest: '<%= dir.js.commonTarget %>/polyfills.js',
-                nonull: true
-	        },
-	        plugin: {
-	                src: [ '<%= dir.js.common %>/lib/plugin/*.js' ],
-	                dest: '<%= dir.js.commonTarget %>/plugins.js',
-	                nonull: true
-	        }
+			polyfill: {
+				src: [ '<%= dir.js.common %>/lib/polyfill/*.js' ],
+				dest: '<%= dir.js.commonTarget %>/polyfills.js',
+				nonull: true
+			},
+			plugin: {
+				src: [ '<%= dir.js.common %>/lib/plugin/*.js' ],
+				dest: '<%= dir.js.commonTarget %>/plugins.js',
+				nonull: true
+			}
 		},
 
 		// Minify JavaScript.
@@ -135,20 +139,20 @@ module.exports = function( grunt ) {
 				src: ['<%= dir.js.commonTarget %>/compiled.js'],
 				dest: '<%= dir.js.commonTarget %>/compiled.min.js'
 			},
-            polyfill: {
-                options: {
-                        compilation_level: 'SIMPLE_OPTIMIZATIONS'
-                },
-                src: ['<%= dir.js.commonTarget %>/polyfills.js'],
-                dest: '<%= dir.js.commonTarget %>/polyfills.min.js'
-	        },
-	        plugin: {
-	                options: {
-	                        compilation_level: 'SIMPLE_OPTIMIZATIONS'
-	                },
-	                src: ['<%= dir.js.commonTarget %>/plugins.js'],
-	                dest: '<%= dir.js.commonTarget %>/plugins.min.js'
-	        }
+			polyfill: {
+				options: {
+					compilation_level: 'SIMPLE_OPTIMIZATIONS'
+				},
+				src: ['<%= dir.js.commonTarget %>/polyfills.js'],
+				dest: '<%= dir.js.commonTarget %>/polyfills.min.js'
+			},
+			plugin: {
+				options: {
+					compilation_level: 'SIMPLE_OPTIMIZATIONS'
+				},
+				src: ['<%= dir.js.commonTarget %>/plugins.js'],
+				dest: '<%= dir.js.commonTarget %>/plugins.min.js'
+			}
 		},
 
 		// Compile CSS.

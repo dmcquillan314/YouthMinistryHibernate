@@ -108,6 +108,8 @@
 		<%  
 			}
 		%>
-		<script type="text/javascript" src="<c:url value="/static/common/js/compiled.js" />"></script>
+        <script type="text/javascript" src="<c:url value="/static/common/js/modernizr-2.6.2-respond-1.1.0.min.js" />"></script>
+        <script type="text/javascript" src="<c:url value="/static/common/js/templates.js" />"></script>
+        <script type="text/javascript" src="<c:url value="/static/common/js/compiled.js" />"></script>
 	</body>
 </html>

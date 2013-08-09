@@ -1,0 +1,219 @@
+// Module: common/base/typography
+// Headings, body text, lists, and more for a versatile and durable typography system.
+// -----------------------------------------------------------------------------------
+
+
+
+// Type mixins
+// ---------------------------------------------------------------
+@mixin ellipsis( $r: 1 ) {
+    max-height: rhythm( $r );
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: break-word;
+}
+
+
+// Body text
+// ---------------------------------------------------------------
+p {
+    //font-family: sans();
+    font-size: $base-font-size;
+    line-height: $base-line-height;
+    margin: 0 0 $base-line-height / 2;
+
+    small {
+        font-size: $base-font-size - 2;
+    }
+}
+
+
+// Headings
+// ---------------------------------------------------------------
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    text-rendering: optimizelegibility; // Fix the character spacing for headings
+
+    & + .border-block hr {
+        margin-top: 0.75em;
+        margin-bottom: 0.75em;
+    }
+}
+
+h1 {
+    line-height: $base-line-height * 2;
+
+    small {
+    }
+}
+
+h2 {
+    line-height: $base-line-height * 2;
+
+    small {
+    }
+}
+
+h3 {
+    line-height: $base-line-height * 1.5;
+
+    small {
+    }
+}
+
+h4, h5, h6 {
+    line-height: $base-line-height;
+}
+
+h4 {
+
+    small {
+    }
+}
+
+h5 {
+}
+
+h6 {
+    text-transform: uppercase;
+}
+
+
+// Lists
+// ---------------------------------------------------------------
+ul, ol {
+    margin: 0 0 $base-line-height / 2 25px;
+    padding: 0;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+    margin-bottom: 0;
+}
+
+ul {
+    list-style: disc;
+}
+
+ol {
+    list-style: decimal;
+}
+
+li {
+    line-height: $base-line-height;
+}
+
+ul.unstyled {
+    list-style: none;
+    margin-left: 0;
+}
+
+// Description Lists
+dl {
+    margin-bottom: $base-line-height;
+}
+
+dt, dd {
+    line-height: $base-line-height;
+}
+
+dt {
+}
+
+dd {
+    margin-left: $base-line-height / 2;
+}
+
+
+// Horizontal rules
+// ---------------------------------------------------------------
+hr {
+}
+
+// Emphasis
+// ---------------------------------------------------------------
+strong, b {
+}
+em {
+}
+.muted {
+}
+
+
+// Abbreviations and acronyms
+// ---------------------------------------------------------------
+abbr {
+    cursor: help;
+    font-size: 90%;
+    text-transform: uppercase;
+}
+
+
+// Blockquotes
+// ---------------------------------------------------------------
+blockquote {
+    //border-left: 5px solid $grayLighter;
+    margin: 0 0 $base-line-height;
+    padding: 0 0 0 15px;
+
+    p {
+        @include font-shorthand( 16px, 300, $base-line-height * 1.25 );
+        margin-bottom: 0;
+    }
+
+    small {
+        display: block;
+        line-height: $base-line-height;
+
+        &:before {
+            content: '\2014 \00A0';
+        }
+    }
+
+    // Float right with text-align: right
+    &.pull-right {
+        border-left: 0;
+        float: right;
+        padding-left: 0;
+        padding-right: 15px;
+
+        p, small {
+            text-align: right;
+        }
+    }
+}
+
+
+// Quotes
+// ---------------------------------------------------------------
+q:before, q:after, blockquote:before, blockquote:after {
+    content: "";
+}
+
+
+// Addresses
+// ---------------------------------------------------------------
+address {
+    display: block;
+    font-style: normal;
+    line-height: $base-line-height;
+    margin-bottom: $base-line-height;
+}
+
+
+// Messaging
+// ---------------------------------------------------------------
+.error {
+}
+
+
+// Misc
+// ---------------------------------------------------------------
+small {
+    font-size: 100%;
+}
+
+cite {
+    font-style: normal;
+}

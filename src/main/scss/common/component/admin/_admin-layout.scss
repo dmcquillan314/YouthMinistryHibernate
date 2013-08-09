@@ -1,0 +1,36 @@
+&.layout {
+
+    .layout-information {
+        .layout-name {
+
+        }
+        .layout-description {
+
+        }
+    }
+
+    .layout-grid-view {
+        .layout-column {
+
+            $widths: (one-col, two-col, three-col,
+                    four-col, five-col, six-col,
+                    seven-col, eight-col, nine-col,
+                    ten-col, eleven-col, twelve-col,
+                    thirteen-col, fourteen-col, fifteen-col,
+                    sixteen-col );
+
+            @for $i from 0 to length($widths) {
+                &.#{nth($widths, $i+1)} {
+                    @if $i == length($widths) {
+                        @include span-columns( $i omega, $total-columns );
+                    } @else {
+                        @include span-columns( $i, $total-columns );
+                    }
+                }
+            }
+        }
+        .layout-row {
+
+        }
+    }
+}

@@ -1,0 +1,17 @@
+// General type configuration.
+// NOTE: Avoid changing or overriding settings in this file.
+// ---------------------------------------------------------
+
+$base-font-size             : 16px;
+$base-line-height           : 20px;
+$round-to-nearest-half-line : true;
+
+@include establish-baseline;
+
+@mixin enable-font-feature-settings {
+    -moz-font-feature-settings      : "liga=1";
+    -ms-font-feature-settings       : "liga";
+    -webkit-font-feature-settings   : "liga";
+    -o-font-feature-settings        : "liga";
+    font-feature-settings           : "liga";
+}

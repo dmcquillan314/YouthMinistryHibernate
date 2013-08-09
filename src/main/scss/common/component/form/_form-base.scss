@@ -1,0 +1,39 @@
+form {
+    position: relative;
+
+    fieldset {
+        legend {
+        }
+
+
+    }
+
+}
+
+.input-style {
+    @include appearance( none );
+    display: block;
+    float: none;
+    font-size: 1.125em;
+    margin: 0;
+    padding: 0.167em 0.500em;
+    width: 100%;
+
+    &.placeholder {
+    }
+}
+
+.toggle-button {
+    position: relative;
+}
+
+textarea {
+    @extend .input-style;
+}
+
+p {
+    & ~ textarea {
+        margin-top: 1em;
+    }
+}
+
