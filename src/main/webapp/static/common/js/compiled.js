@@ -12573,11 +12573,17 @@ deepdishcms.LayoutView = Backbone.View.extend({
     addRowColListeners: function() {
         $( '.add-column' ).on( 'click', this.addColumn );
         $( '.add-row' ).on( 'click', this.addRow );
+        $( '.delete-column' ).on( 'click', this.addColumn );
+        $( '.delete-row' ).on( 'click', this.addRow );
+        $( '.update-column' ).on( 'click', this.addColumn );
     },
 
     removeRowColListeners: function() {
-        $( '.add-column' ).off( 'click', this.addColumn );
-        $( '.add-row' ).off( 'click', this.addRow );
+        $( '.add-column' ).off( 'click' );
+        $( '.add-row' ).off( 'click' );
+        $( '.delete-column' ).off( 'click' );
+        $( '.delete-row' ).off( 'click' );
+        $( '.update-column' ).off( 'click' );
     },
 
     createGrid: function() {
@@ -12603,10 +12609,32 @@ deepdishcms.LayoutView = Backbone.View.extend({
     addColumn: function( e ) {
         this.removeRowColListeners();
 
-        var colEl = this.colTemplate( { colClass: this.classArray[ parseInt( $( e.target ).siblings( '.column-width' ).val(), 10 ) - 1 ] } );
-        $( e.target ).siblings('.layout-row-columns').append( colEl );
-
+        if( this.checkRow( e ) ) {
+            var colEl = this.colTemplate( { colClass: this.classArray[ parseInt( $( e.target ).siblings( '.column-width' ).val(), 10 ) - 1 ] } );
+            $( e.target ).siblings('.layout-row-columns').append( colEl );
+        } else {
+            this.addRowError( e );
+        }
         this.addRowColListeners();
-    }
+    },
 
+    deleteRow: function( e ) {
+        console.log( e );
+    },
+
+    deleteColumn: function( e ) {
+        console.log( e );
+    },
+
+    updateColumn: function( e ) {
+        console.log( e );
+    },
+
+    checkRow: function( e ) {
+        console.log( e );
+    },
+
+    addRowError: function( e ) {
+        console.log( e );
+    }
 });

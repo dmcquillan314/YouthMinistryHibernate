@@ -1,0 +1,24 @@
+@include grid-settings( 16, 40px, 20px, 10px ) {
+    .wrap {
+        @include enable-font-feature-settings;
+        font-size: $base-font-size;
+        line-height: $base-line-height;
+        margin: 0;
+        @include container; // Set this element as the grid container
+
+        :target & {
+            @include susy-grid-background(); // Mixin to generate visual grid for testing
+        }
+
+        @for $i from 0 to length($widths) {
+            & .#{nth($widths, $i+1)} {
+                @if $i+1 == length($widths) {
+                    @include span-columns( $i+1 omega, $total-columns );
+                } @else {
+                    @include span-columns( $i+1, $total-columns );
+                }
+            }
+        }
+
+    }
+}

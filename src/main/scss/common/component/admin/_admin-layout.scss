@@ -8,29 +8,38 @@
 
         }
     }
+    @include grid-settings( 16, 29px, 8px, 4 ) {
+        .layout-grid-view {
+            @include enable-font-feature-settings;
+            margin: 0;
+            @include container; // Set this element as the grid container
+            margin-left: 0;
+            margin-right: 0;
 
-    .layout-grid-view {
-        .layout-column {
+            :target & {
+                @include susy-grid-background(); // Mixin to generate visual grid for testing
+            }
 
-            $widths: (one-col, two-col, three-col,
-                    four-col, five-col, six-col,
-                    seven-col, eight-col, nine-col,
-                    ten-col, eleven-col, twelve-col,
-                    thirteen-col, fourteen-col, fifteen-col,
-                    sixteen-col );
+            .layout-column {
 
-            @for $i from 0 to length($widths) {
-                &.#{nth($widths, $i+1)} {
-                    @if $i == length($widths) {
-                        @include span-columns( $i omega, $total-columns );
-                    } @else {
-                        @include span-columns( $i, $total-columns );
+                min-height: 110px;
+                max-height: 110px;
+                height: 110px;
+                background-color: $gray-light;
+
+                @for $i from 0 to length($widths) {
+                    &.#{nth($widths, $i+1)} {
+                        @if $i+1 == length($widths) {
+                            @include span-columns( $i+1 omega, $total-columns );
+                        } @else {
+                            @include span-columns( $i+1, $total-columns );
+                        }
                     }
                 }
             }
-        }
-        .layout-row {
-
+            .layout-row {
+                border: 1px solid $green;
+            }
         }
     }
 }
