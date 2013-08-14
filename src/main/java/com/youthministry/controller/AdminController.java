@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.youthministry.controller.layout.impl.LayoutHelper;
 import com.youthministry.controller.upload.FileUpload;
-import com.youthministry.domain.File;
 import com.youthministry.domain.Group;
 import com.youthministry.domain.Layout;
 import com.youthministry.domain.PageContent;
@@ -146,7 +144,7 @@ public class AdminController {
 		return new FileUpload();
 	}
 	@ModelAttribute(value="layout")
-	public LayoutHelper getLayout() {
-		return new LayoutHelper();
+	public Layout getLayout() {
+		return new Layout();
 	}
 }

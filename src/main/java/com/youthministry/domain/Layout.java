@@ -48,7 +48,11 @@ public class Layout {
 	@OneToMany (targetEntity = Row.class, cascade =  CascadeType.ALL)
 	@Fetch(FetchMode.SELECT)
 	private Collection<Row> rows = new ArrayList<Row>();
-
+	
+	@Column(name="LAYOUT_JSON")
+	@Lob
+	private String layoutJSON;
+	
 	public Long getLayoutId() {
 		return layoutId;
 	}
@@ -79,6 +83,14 @@ public class Layout {
 
 	public void setRows(Collection<Row> rows) {
 		this.rows = rows;
+	}
+
+	public String getLayoutJSON() {
+		return layoutJSON;
+	}
+
+	public void setLayoutJSON(String layoutJSON) {
+		this.layoutJSON = layoutJSON;
 	}
 
 }

@@ -20,11 +20,18 @@
                 @include susy-grid-background(); // Mixin to generate visual grid for testing
             }
 
+            .layout-column-rows {
+                @include span-columns( 16 omega, $total-columns );
+            }
+
+            .layout-row-columns {
+                @include span-columns( 16 omega, $total-columns );
+            }
+
             .layout-column {
 
+                @include leader( 0.5 );
                 min-height: 110px;
-                max-height: 110px;
-                height: 110px;
                 background-color: $gray-light;
 
                 @for $i from 0 to length($widths) {
@@ -36,9 +43,19 @@
                         }
                     }
                 }
+
+                &.omega {
+                    @include omega;
+                }
             }
             .layout-row {
-                border: 1px solid $green;
+                @include span-columns( 16 omega, $total-columns );
+                border: 2px solid $gray;
+                padding: 10px;
+
+                & .column-width {
+                    @include span-columns( 3 omega, $total-columns)
+                }
             }
         }
     }

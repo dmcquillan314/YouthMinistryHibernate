@@ -554,118 +554,133 @@ textarea {
   background-clip: content-box;
 }
 /* line 23, ../../../../scss/common/component/admin/_admin-layout.scss */
-.admin.layout .layout-grid-view .layout-column {
-  min-height: 110px;
-  max-height: 110px;
-  height: 110px;
-  background-color: #bcbdbc;
+.admin.layout .layout-grid-view .layout-column-rows {
+  width: 100%;
+  float: right;
+  margin-right: 0;
+  *margin-left: -8px;
+  display: inline;
+}
+/* line 27, ../../../../scss/common/component/admin/_admin-layout.scss */
+.admin.layout .layout-grid-view .layout-row-columns {
+  width: 100%;
+  float: right;
+  margin-right: 0;
+  *margin-left: -8px;
+  display: inline;
 }
 /* line 31, ../../../../scss/common/component/admin/_admin-layout.scss */
+.admin.layout .layout-grid-view .layout-column {
+  margin-top: 0.625em;
+  min-height: 110px;
+  background-color: #bcbdbc;
+}
+/* line 38, ../../../../scss/common/component/admin/_admin-layout.scss */
 .admin.layout .layout-grid-view .layout-column.one-col {
   width: 4.96575%;
   float: left;
   margin-right: 1.36986%;
   display: inline;
 }
-/* line 31, ../../../../scss/common/component/admin/_admin-layout.scss */
+/* line 38, ../../../../scss/common/component/admin/_admin-layout.scss */
 .admin.layout .layout-grid-view .layout-column.two-col {
   width: 11.30137%;
   float: left;
   margin-right: 1.36986%;
   display: inline;
 }
-/* line 31, ../../../../scss/common/component/admin/_admin-layout.scss */
+/* line 38, ../../../../scss/common/component/admin/_admin-layout.scss */
 .admin.layout .layout-grid-view .layout-column.three-col {
   width: 17.63699%;
   float: left;
   margin-right: 1.36986%;
   display: inline;
 }
-/* line 31, ../../../../scss/common/component/admin/_admin-layout.scss */
+/* line 38, ../../../../scss/common/component/admin/_admin-layout.scss */
 .admin.layout .layout-grid-view .layout-column.four-col {
   width: 23.9726%;
   float: left;
   margin-right: 1.36986%;
   display: inline;
 }
-/* line 31, ../../../../scss/common/component/admin/_admin-layout.scss */
+/* line 38, ../../../../scss/common/component/admin/_admin-layout.scss */
 .admin.layout .layout-grid-view .layout-column.five-col {
   width: 30.30822%;
   float: left;
   margin-right: 1.36986%;
   display: inline;
 }
-/* line 31, ../../../../scss/common/component/admin/_admin-layout.scss */
+/* line 38, ../../../../scss/common/component/admin/_admin-layout.scss */
 .admin.layout .layout-grid-view .layout-column.six-col {
   width: 36.64384%;
   float: left;
   margin-right: 1.36986%;
   display: inline;
 }
-/* line 31, ../../../../scss/common/component/admin/_admin-layout.scss */
+/* line 38, ../../../../scss/common/component/admin/_admin-layout.scss */
 .admin.layout .layout-grid-view .layout-column.seven-col {
   width: 42.97945%;
   float: left;
   margin-right: 1.36986%;
   display: inline;
 }
-/* line 31, ../../../../scss/common/component/admin/_admin-layout.scss */
+/* line 38, ../../../../scss/common/component/admin/_admin-layout.scss */
 .admin.layout .layout-grid-view .layout-column.eight-col {
   width: 49.31507%;
   float: left;
   margin-right: 1.36986%;
   display: inline;
 }
-/* line 31, ../../../../scss/common/component/admin/_admin-layout.scss */
+/* line 38, ../../../../scss/common/component/admin/_admin-layout.scss */
 .admin.layout .layout-grid-view .layout-column.nine-col {
   width: 55.65068%;
   float: left;
   margin-right: 1.36986%;
   display: inline;
 }
-/* line 31, ../../../../scss/common/component/admin/_admin-layout.scss */
+/* line 38, ../../../../scss/common/component/admin/_admin-layout.scss */
 .admin.layout .layout-grid-view .layout-column.ten-col {
   width: 61.9863%;
   float: left;
   margin-right: 1.36986%;
   display: inline;
 }
-/* line 31, ../../../../scss/common/component/admin/_admin-layout.scss */
+/* line 38, ../../../../scss/common/component/admin/_admin-layout.scss */
 .admin.layout .layout-grid-view .layout-column.eleven-col {
   width: 68.32192%;
   float: left;
   margin-right: 1.36986%;
   display: inline;
 }
-/* line 31, ../../../../scss/common/component/admin/_admin-layout.scss */
+/* line 38, ../../../../scss/common/component/admin/_admin-layout.scss */
 .admin.layout .layout-grid-view .layout-column.twelve-col {
   width: 74.65753%;
   float: left;
   margin-right: 1.36986%;
   display: inline;
 }
-/* line 31, ../../../../scss/common/component/admin/_admin-layout.scss */
+/* line 38, ../../../../scss/common/component/admin/_admin-layout.scss */
 .admin.layout .layout-grid-view .layout-column.thirteen-col {
   width: 80.99315%;
   float: left;
   margin-right: 1.36986%;
   display: inline;
 }
-/* line 31, ../../../../scss/common/component/admin/_admin-layout.scss */
+/* line 38, ../../../../scss/common/component/admin/_admin-layout.scss */
 .admin.layout .layout-grid-view .layout-column.fourteen-col {
   width: 87.32877%;
   float: left;
   margin-right: 1.36986%;
   display: inline;
 }
-/* line 31, ../../../../scss/common/component/admin/_admin-layout.scss */
+/* line 38, ../../../../scss/common/component/admin/_admin-layout.scss */
 .admin.layout .layout-grid-view .layout-column.fifteen-col {
   width: 93.66438%;
   float: left;
   margin-right: 1.36986%;
   display: inline;
 }
-/* line 31, ../../../../scss/common/component/admin/_admin-layout.scss */
+/* line 38, ../../../../scss/common/component/admin/_admin-layout.scss */
 .admin.layout .layout-grid-view .layout-column.sixteen-col {
   width: 100%;
   float: right;
@@ -673,9 +688,30 @@ textarea {
   *margin-left: -8px;
   display: inline;
 }
-/* line 40, ../../../../scss/common/component/admin/_admin-layout.scss */
+/* line 47, ../../../../scss/common/component/admin/_admin-layout.scss */
+.admin.layout .layout-grid-view .layout-column.omega {
+  float: right;
+  margin-right: 0;
+  *margin-left: -8px;
+  display: inline;
+}
+/* line 51, ../../../../scss/common/component/admin/_admin-layout.scss */
 .admin.layout .layout-grid-view .layout-row {
-  border: 1px solid #69be28;
+  width: 100%;
+  float: right;
+  margin-right: 0;
+  *margin-left: -8px;
+  display: inline;
+  border: 2px solid #616365;
+  padding: 10px;
+}
+/* line 56, ../../../../scss/common/component/admin/_admin-layout.scss */
+.admin.layout .layout-grid-view .layout-row .column-width {
+  width: 17.63699%;
+  float: right;
+  margin-right: 0;
+  *margin-left: -8px;
+  display: inline;
 }
 
 /* line 1, ../../../../scss/common/component/form/_form-base.scss */

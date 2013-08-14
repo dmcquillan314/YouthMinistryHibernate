@@ -13,8 +13,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
@@ -75,6 +73,8 @@ public class Page {
 	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)	
 	@Fetch(FetchMode.SELECT)
 	private Collection<PageContent> contentItems = new ArrayList<PageContent>();
+	
+	
 	
 	@Column(name="PARENT_PAGE_ID")
 	private Long parentPageId;

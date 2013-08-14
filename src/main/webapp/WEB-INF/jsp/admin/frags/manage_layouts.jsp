@@ -17,6 +17,14 @@
 				<input type="text" placeholder="Layout Description" id="layout-description" />
 			</div>
 		</div>
+
+		<div class="errors-container">
+			
+		</div>
+
+		<div class="layout-main-controls">
+			<a href="#" class="add-row">Add row</a>
+		</div>	
 		<div class="layout-grid-view">
 
 		</div>

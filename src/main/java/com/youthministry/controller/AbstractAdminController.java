@@ -122,8 +122,8 @@ public abstract class AbstractAdminController {
 		return new FileUpload();
 	}
 	@ModelAttribute(value="layout")
-	public LayoutHelper getLayout() {
-		return new LayoutHelper();
+	public Layout getLayout() {
+		return new Layout();
 	}
 	
 }

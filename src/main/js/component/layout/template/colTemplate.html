@@ -1,7 +1,5 @@
-<div class="layout-column <%= colClass %>">
-    <a href="#" class="add-row">Add row</a>
-
-    <div class="layout-column-rows">
-
-    </div>
+<div class="layout-column <%= colClass %>" data-col-width="<%= colWidth %>">
+    <input type="text" class="column-width" value="<%= colWidth %>" />
+    <a href="#" class="update-column">Update</a>
+    <a href="#" class="delete-column">Delete</a>
 </div>
