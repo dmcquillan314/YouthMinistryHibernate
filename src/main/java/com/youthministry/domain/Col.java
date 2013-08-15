@@ -16,11 +16,8 @@ public class Col {
 	@Column(name="COL_ID")
 	private Long columnId;
 	
-	@Column(name="COL_NAME")
-	private String columnName;
-	
-	@Column(name="COL_DESC")
-	private String columnDesc;
+	@Column(name="COL_WIDTH")
+	private String columnWidth;
 
 	public Long getColumnId() {
 		return columnId;
@@ -30,20 +27,18 @@ public class Col {
 		this.columnId = columnId;
 	}
 
-	public String getColumnName() {
-		return columnName;
+	/**
+	 * @return the columnWidth
+	 */
+	public String getColumnWidth() {
+		return columnWidth;
 	}
 
-	public void setColumnName(String columnName) {
-		this.columnName = columnName;
-	}
-
-	public String getColumnDesc() {
-		return columnDesc;
-	}
-
-	public void setColumnDesc(String columnDesc) {
-		this.columnDesc = columnDesc;
+	/**
+	 * @param columnWidth the columnWidth to set
+	 */
+	public void setColumnWidth(String columnWidth) {
+		this.columnWidth = columnWidth;
 	}
 
 }

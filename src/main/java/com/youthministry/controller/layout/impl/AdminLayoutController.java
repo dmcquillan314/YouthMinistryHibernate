@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.youthministry.controller.AbstractAdminController;
 import com.youthministry.domain.Layout;
 
@@ -20,11 +21,13 @@ public class AdminLayoutController extends AbstractAdminController {
 	public String handleUpdate(@PathVariable String id, @ModelAttribute(value="layout") Object object, BindingResult errors,
 			Model map) {
 		map.addAttribute("layouts", LayoutService.findAll());
-		LayoutHelper layout = (LayoutHelper) object;
-		//layout.setLayoutId(Long.parseLong(id));
+		Layout layout = (Layout) object;
+		LayoutHelper layoutHelper = new LayoutHelper();
+		layout = layoutHelper.parseJSON( layout );
+		layout.setLayoutId(Long.parseLong(id));
 		if(! errors.hasErrors()) {
 			try {
-				//LayoutService.update(layout);
+				LayoutService.update(layout);
 				return "redirect:/admin/manage/layouts";
 			} catch(ConstraintViolationException cve) {
 			}
@@ -35,13 +38,16 @@ public class AdminLayoutController extends AbstractAdminController {
 	@Override
 	@RequestMapping(value={"/admin/createlayout"},method=RequestMethod.POST)
 	public String handleCreate(@ModelAttribute(value="layout") Object object, BindingResult errors, Model map) {
-		map.addAttribute("layouts", LayoutService.findAll());
-		LayoutHelper layout = (LayoutHelper) object;
+		map.addAttribute("layouts", LayoutService.findAll());		
+		Layout layout = (Layout) object;
+		LayoutHelper layoutHelper = new LayoutHelper();
+		layout = layoutHelper.parseJSON( layout );
 		if(! errors.hasErrors()) {
 			try {
-				//LayoutService.create(layout);
+				LayoutService.create(layout);
 				return "redirect:/admin/manage/layouts";
 			} catch(ConstraintViolationException cve) {
+				
 			}
 		}
 		return "admin";

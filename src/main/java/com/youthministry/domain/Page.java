@@ -5,21 +5,16 @@ import java.util.ArrayList;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
 
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -62,19 +57,9 @@ public class Page {
 	@Lob
 	private String pageKeywords;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="TEMPLATE_ID")
-	private Layout pageTemplate = new Layout();
-
-	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.EAGER)
-	@JoinTable(name = "PAGE_PAGE_CONTENT",
-		joinColumns = @JoinColumn(name = "PAGE_ID"),
-		inverseJoinColumns = @JoinColumn(name = "PAGE_CONTENT_ID"))
-	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)	
+	@OneToMany (targetEntity = PageRow.class, cascade =  CascadeType.ALL)
 	@Fetch(FetchMode.SELECT)
-	private Collection<PageContent> contentItems = new ArrayList<PageContent>();
-	
-	
+	private Collection<PageRow> rows = new ArrayList<PageRow>();
 	
 	@Column(name="PARENT_PAGE_ID")
 	private Long parentPageId;
@@ -109,14 +94,6 @@ public class Page {
 
 	public void setPageKeywords(String pageKeywords) {
 		this.pageKeywords = pageKeywords;
-	}
-
-	public Layout getPageTemplate() {
-		return pageTemplate;
-	}
-
-	public void setPageTemplate(Layout pageTemplate) {
-		this.pageTemplate = pageTemplate;
 	}
 
 	/**
@@ -159,20 +136,6 @@ public class Page {
 	 */
 	public void setPageUrl(String pageUrl) {
 		this.pageUrl = pageUrl;
-	}
-
-	/**
-	 * @return the contentItems
-	 */
-	public Collection<PageContent> getContentItems() {
-		return contentItems;
-	}
-
-	/**
-	 * @param contentItems the contentItems to set
-	 */
-	public void setContentItems(Collection<PageContent> contentItems) {
-		this.contentItems = contentItems;
 	}
 
 	public Long getParentPageId() {
