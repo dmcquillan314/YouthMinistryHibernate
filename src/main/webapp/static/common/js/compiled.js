@@ -1,3 +1,7 @@
+/*! Deep Dish CMS - v0.1.0-alpha - Built: 2013-08-20 8:59:20 PM CST
+*   Copyright (c) 2013 Dan McQuillan All Rights Reserved.
+*/
+
 'use strict';
 // Source: src/main/js/lib/underscore.js
 //     Underscore.js 1.4.4

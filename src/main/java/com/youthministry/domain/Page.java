@@ -57,9 +57,9 @@ public class Page {
 	@Lob
 	private String pageKeywords;
 	
-	@OneToMany (targetEntity = PageRow.class, cascade =  CascadeType.ALL)
+	@OneToMany (targetEntity = Row.class, cascade =  CascadeType.ALL)
 	@Fetch(FetchMode.SELECT)
-	private Collection<PageRow> rows = new ArrayList<PageRow>();
+	private Collection<Row> rows = new ArrayList<Row>();
 	
 	@Column(name="PARENT_PAGE_ID")
 	private Long parentPageId;
@@ -144,6 +144,20 @@ public class Page {
 
 	public void setParentPageId(Long parentPageId) {
 		this.parentPageId = parentPageId;
+	}
+
+	/**
+	 * @return the rows
+	 */
+	public Collection<Row> getRows() {
+		return rows;
+	}
+
+	/**
+	 * @param rows the rows to set
+	 */
+	public void setRows(Collection<Row> rows) {
+		this.rows = rows;
 	}
 
 }

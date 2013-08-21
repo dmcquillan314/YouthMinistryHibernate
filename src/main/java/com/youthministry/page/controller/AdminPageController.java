@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.youthministry.domain.Layout;
 import com.youthministry.domain.Page;
 import com.youthministry.domain.PageContent;
+import com.youthministry.domain.Row;
 import com.youthministry.page.validator.PageValidator;
 import com.youthministry.service.PageContentService;
 import com.youthministry.service.PageService;
@@ -46,11 +47,12 @@ public class AdminPageController {
 		CANCEL
 	};
 	
-	public static final String PARAM_FINISH = "_finish";
-	public static final String PARAM_CANCEL = "_cancel";
-	public static final String PARAM_TARGET = "_target";
-	public static final String PARAM_PAGE = "_page";
-	public static final String PARAM_SUBMIT = "submit";
+	private static final String PARAM_FINISH = "_finish";
+	private static final String PARAM_CANCEL = "_cancel";
+	private static final String PARAM_TARGET = "_target";
+	private static final String PARAM_PAGE = "_page";
+	private static final String PARAM_SUBMIT = "submit";
+	private static final String PARAM_LAYOUT = "layout";
 	
 	private static ArrayList<String> pages = new ArrayList<String>();
 
@@ -63,17 +65,16 @@ public class AdminPageController {
 	@RequestMapping(method=RequestMethod.GET)
 	public ModelAndView handleManagePage( 
 				@ModelAttribute( "page" ) Page page, 
-				HttpServletRequest request 
+				HttpServletRequest request, ModelAndView modelAndView 
 			) {
-		ModelAndView modelAndView = new ModelAndView();
 		
 		List<Layout> layouts = LayoutService.findAll();
 		
 		if( layouts != null && layouts.size() > 0 ) {
 			modelAndView.addObject("layouts", layouts);
 		}
-
-		modelAndView.setViewName("admin/pages/pages");
+		
+		modelAndView.setViewName(this.getPages().get( 0 ) );
 		return modelAndView;
 	}
 	
@@ -85,26 +86,34 @@ public class AdminPageController {
 			@RequestParam( value=PARAM_TARGET, required=false ) String target,
 			@RequestParam( required=false, value=PARAM_SUBMIT) String submit,
 			HttpServletRequest request,
-			BindingResult errors
+			BindingResult errors,
+			ModelAndView modelAndView
 		) {
 		this.setValidator(new PageValidator());
 
 		SubmitType submitType = SubmitType.valueOf(submit.toUpperCase());
-		ModelAndView modelAndView = new ModelAndView();
+		
+		modelAndView.addObject("curPage", curPage);
+		
+		List<Layout> layouts = LayoutService.findAll();
+		
+		if( layouts != null && layouts.size() > 0 ) {
+			modelAndView.addObject("layouts", layouts);
+		}
 
 		if( submitType == SubmitType.SUBMIT) {
 			switch( Integer.parseInt( curPage )) {
+				case 0:
+					handlePage1Form( request, modelAndView, page, errors );
+					break;
 				case 1:
-					handlePage1Form( modelAndView, page, errors );
+					handlePage2Form( request, modelAndView, page, errors );
 					break;
 				case 2:
-					handlePage2Form( modelAndView, page, errors );
+					handlePage3Form( request, modelAndView, page, errors );
 					break;
 				case 3:
-					handlePage3Form( modelAndView, page, errors );
-					break;
-				case 4:
-					handlePage4Form( modelAndView, page, errors );
+					handlePage4Form( request, modelAndView, page, errors );
 					break;
 			}
 			if( errors.hasErrors() ) {
@@ -118,21 +127,26 @@ public class AdminPageController {
 		return modelAndView;
 	}
 	
-	public void handlePage1Form( ModelAndView modelAndView, Page page, BindingResult errors ) {
-		this.getValidator().validatePage1Form(page, errors);
-	
-	}
-	
-	public void handlePage2Form( ModelAndView modelAndView, Page page, BindingResult errors ) {
-		this.getValidator().validatePage1Form(page, errors);
-		
-	}
-	
-	public void handlePage3Form( ModelAndView modelAndView, Page page, BindingResult errors ) {
+	public void handlePage1Form( HttpServletRequest request, ModelAndView modelAndView, Page page, BindingResult errors ) {
 		this.getValidator().validatePage1Form(page, errors);
 	}
 	
-	public void handlePage4Form( ModelAndView modelAndView, Page page, BindingResult errors ) {
+	public void handlePage2Form( HttpServletRequest request, ModelAndView modelAndView, Page page, BindingResult errors ) {
+		this.getValidator().validatePage2Form(page, errors);
+		String layoutId = request.getParameter(PARAM_LAYOUT);
+		if ( layoutId == null ) {
+			errors.rejectValue("rows", "rows.required", "Layout is required");
+		} else {
+			Layout layout = this.LayoutService.read(Long.parseLong( layoutId.trim() ) );
+			page.setRows(layout.getRows());
+		}
+	}
+	
+	public void handlePage3Form( HttpServletRequest request, ModelAndView modelAndView, Page page, BindingResult errors ) {
+		this.getValidator().validatePage1Form(page, errors);
+	}
+	
+	public void handlePage4Form( HttpServletRequest request, ModelAndView modelAndView, Page page, BindingResult errors ) {
 		this.getValidator().validatePage1Form(page, errors);
 	}
 	

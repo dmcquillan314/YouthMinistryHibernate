@@ -19,6 +19,14 @@
 @import "common/base/typography";
 @import "common/base/layout";
 
+// --------------------
+// Components
+// --------------------
 // Admin CSS
 @import "common/component/admin/admin-base";
+
+// Form CSS
 @import "common/component/form/form-base";
+
+// Button CSS
+@import "common/component/button/button-base";

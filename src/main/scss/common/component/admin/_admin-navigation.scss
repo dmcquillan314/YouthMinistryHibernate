@@ -1,0 +1,16 @@
+& .form-navigation {
+    @include span-columns( $total-columns omega, $total-columns );
+    @include clearfix;
+
+    .nav-block {
+        @include span-columns( 4, $total-columns );
+
+        &.right {
+            @include omega;
+            text-align: right;
+        }
+        & .cancel {
+            margin-right: gutter();
+        }
+    }
+}

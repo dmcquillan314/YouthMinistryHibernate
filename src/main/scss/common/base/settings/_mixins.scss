@@ -122,12 +122,42 @@
     width: image-width( opco-image( $bg-image ) );
 }
 
-// HACK for disabling filter
 // :root pseudo selector was not implemented until ie9 hence will target ie9
 @mixin disable-filter-ie9 {
     :root & {
         -ms-filter: none !important;
         filter: none !important;
     }
+}
+
+@mixin primary-button( $button-primary: $button-color-primary, $button-secondary: $button-color-secondary, $button-text-color: $white ) {
+    @include background-image( linear-gradient( top,  $button-primary 0%, $button-secondary 100% ) );
+    @include filter-gradient( $button-primary, $button-secondary, vertical );
+    @include box-shadow( rgba( 0, 0, 0, 0.3 ) 0px 0px 3px );
+    @include disable-filter-ie9;
+    border: 2px solid $white;
+    background-color: $button-primary;
+    color: $button-text-color;
+    font-size: 1em;
+    line-height: 1.625em;
+    text-align: center;
+
+    &:hover, &:focus, &:active, &.inactive, &:disabled, &[disabled] {
+        @include background-image( none );
+        color: $button-text-color;
+        filter:none;
+    }
+
+    &:hover, &:focus {
+        background-color: darken( $button-primary, 5 );
+    }
+
+    &:active {
+        background-color: darken( $button-primary, 10 );
+    }
+
+    &.inactive, &:disabled, &[disabled] {
+    }
+
 }
 

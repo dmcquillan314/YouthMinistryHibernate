@@ -1,0 +1,31 @@
+& .page {
+
+    .layout-select {
+        position: relative;
+
+        input[type="radio"] {
+            position: absolute;
+            display: none;
+
+            &:checked + .layout {
+                border: 2px solid $green;
+            }
+        }
+
+        .layout {
+            @include inline-block;
+            @include border-radius( 4px );
+            border: 2px solid $white;
+            padding: 5px 5px 3px;
+
+
+            div {
+                background-color: $gray-lighter;
+                min-height: 100px;
+                max-height: 100px;
+                height: 100px;     
+                margin-bottom: gutter();
+            }       
+        }
+    }
+}

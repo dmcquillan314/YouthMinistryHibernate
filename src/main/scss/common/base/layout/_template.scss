@@ -19,6 +19,9 @@
                 }
             }
         }
+        & .omega {
+            @include omega;
+        }
 
     }
 }
