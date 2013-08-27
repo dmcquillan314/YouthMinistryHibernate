@@ -3,7 +3,8 @@ deepdishcms.AppView = Backbone.View.extend({
     el: $( 'body' ),
 
     components: {
-        'layout-component': 'layoutComponent'
+        'layout-component': 'layoutComponent',
+        'page-component': 'pageComponent'
     },
 
     events: {},
@@ -29,5 +30,10 @@ deepdishcms.AppView = Backbone.View.extend({
     layoutComponent: function() {
         var layoutComponent = new deepdishcms.LayoutView();
         layoutComponent.render();
+    },
+
+    pageComponent: function() {
+        var pageComponent = new deepdishcms.PageView();
+        pageComponent.render();
     }
 });

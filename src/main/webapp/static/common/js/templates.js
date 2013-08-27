@@ -39,3 +39,13 @@ __p += '<div class="layout-row">\n    <a href="#" class="add-column">Add column<
 }
 return __p
 };
+
+this["deepdishcms"]["contentTemplate"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<div class="content-item">\n    <dl>\n        <dt>\n            name\n        </dt>\n        <dd>\n            description\n        </dd>\n    </dl>\n</div>';
+
+}
+return __p
+};

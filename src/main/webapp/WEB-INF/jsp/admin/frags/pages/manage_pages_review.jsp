@@ -3,7 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <div class="admin">
 	manage page - review
-	<form:form commandName="page" action="/admin/manage/pages" class="page">
+	<form:form commandName="page" action="/admin/manage/pages" class="page layout">
 		<fieldset>
 			
 			<input type="hidden" name="_cancel" value="2" />

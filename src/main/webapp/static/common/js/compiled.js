@@ -1,7 +1,3 @@
-/*! Deep Dish CMS - v0.1.0-alpha - Built: 2013-08-20 8:59:20 PM CST
-*   Copyright (c) 2013 Dan McQuillan All Rights Reserved.
-*/
-
 'use strict';
 // Source: src/main/js/lib/underscore.js
 //     Underscore.js 1.4.4
@@ -12504,7 +12500,8 @@ deepdishcms.AppView = Backbone.View.extend({
     el: $( 'body' ),
 
     components: {
-        'layout-component': 'layoutComponent'
+        'layout-component': 'layoutComponent',
+        'page-component': 'pageComponent'
     },
 
     events: {},
@@ -12530,6 +12527,11 @@ deepdishcms.AppView = Backbone.View.extend({
     layoutComponent: function() {
         var layoutComponent = new deepdishcms.LayoutView();
         layoutComponent.render();
+    },
+
+    pageComponent: function() {
+        var pageComponent = new deepdishcms.PageView();
+        pageComponent.render();
     }
 });;// Source: src/main/js/component/layout/view/LayoutView.js
 deepdishcms.LayoutView = Backbone.View.extend({
@@ -12710,4 +12712,88 @@ deepdishcms.LayoutView = Backbone.View.extend({
             return parseInt(a, 10) + parseInt(b, 10);
         });
     }
+});;// Source: src/main/js/component/page/view/PageView.js
+deepdishcms.LayoutView = Backbone.View.extend({
+
+    el: $( '.page' ),
+    viewPane: null,
+    contentPage: null,
+
+    initialize: function() {
+        _.bindAll( this, 'addRow', 'addColumn', 'removeRow', 'removeColumn', 'updateColumn' );
+        this.viewPane = this.$el.find( '.layout' );
+        this.contentPane = this.$el.find( '.content-list' );
+
+        /*
+                
+        for (var i=0; i<userNodes.length; i++) {
+            EventHelpers.addEvent(userNodes[i], 'dragstart', userDragStartEvent);
+            EventHelpers.addEvent(userNodes[i], 'dragend', userDragEndEvent);
+        }
+
+        userListNodes = cssQuery('.userList');
+        for (var i=0; i<userListNodes.length; i++) {
+            var userListNode = userListNodes[i];
+            EventHelpers.addEvent(userListNode, 'dragover', userDragOverListEvent);
+            EventHelpers.addEvent(userListNode, 'dragleave', userDragLeaveListEvent);
+            EventHelpers.addEvent(userListNode, 'drop', userDropListEvent); 
+
+        */
+    },
+
+    render: function() {
+        return this;
+    }
+
+/*
+
+    function userDragStartEvent(e) {
+        e.dataTransfer.setData("Text", "draggedUser: " + this.innerHTML);
+        currentlyDraggedNode = this;                
+        currentlyDraggedNode.className = 'draggedUser';
+    }
+    
+    
+    function userDragEndEvent(e) {  
+        currentlyDraggedNode.className = '';
+    }
+    
+    
+    function userDragLeaveListEvent(e){
+        setHelpVisibility(this, false);
+    }
+    
+    function userDropListEvent(e) {
+        *
+         * To ensure that what we are dropping here is from this page
+         *
+        
+        var data = e.dataTransfer.getData("Text");
+        if (data.indexOf("draggedUser: ") != 0) {
+            alert("Only users within this page are draggable.")
+        }
+        
+        currentlyDraggedNode.parentNode.removeChild(currentlyDraggedNode);
+        this.appendChild(currentlyDraggedNode);
+        setHelpVisibility(this, false);
+        userDragEndEvent(e);
+    }
+    
+    function userDragOverListEvent(e) { 
+        
+        setHelpVisibility(this, true);
+        EventHelpers.preventDefault(e);
+    }
+    
+    function setHelpVisibility(node, isVisible) {
+        var helpNodeId = node.id + "Help";
+        var helpNode = document.getElementById(helpNodeId);
+        
+        if (isVisible) {
+            helpNode.className =  'showHelp';
+        } else {
+            helpNode.className =  '';
+        }
+    }
+*/
 });

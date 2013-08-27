@@ -1,3 +1,7 @@
+/*! Deep Dish CMS - v0.1.0-alpha - Built: 2013-08-26 11:04:46 PM CST
+*   Copyright (c) 2013 Dan McQuillan All Rights Reserved.
+*/
+
 /* line 4, ../../../../scss/common/base/settings/_grid.scss */
 .container1 {
   *zoom: 1;
@@ -733,8 +737,8 @@ textarea {
 .admin .page .layout-select input[type="radio"]:checked + .layout {
   border: 2px solid #69be28;
 }
-/* line 15, ../../../../scss/common/component/admin/_admin-page.scss */
-.admin .page .layout-select .layout {
+/* line 16, ../../../../scss/common/component/admin/_admin-page.scss */
+.admin .page .layout {
   display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
@@ -750,7 +754,21 @@ textarea {
   padding: 5px 5px 3px;
 }
 /* line 22, ../../../../scss/common/component/admin/_admin-page.scss */
-.admin .page .layout-select .layout div {
+.admin .page .layout.attach-content {
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  -ms-border-radius: 0px;
+  -o-border-radius: 0px;
+  border-radius: 0px;
+  padding: 0;
+}
+/* line 26, ../../../../scss/common/component/admin/_admin-page.scss */
+.admin .page .layout.attach-content div {
+  min-height: 400px;
+  height: 400px;
+}
+/* line 32, ../../../../scss/common/component/admin/_admin-page.scss */
+.admin .page .layout div {
   background-color: #e6e6e6;
   min-height: 100px;
   max-height: 100px;
